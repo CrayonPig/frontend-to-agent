@@ -42,3 +42,12 @@
 加入可运行代码后，在项目说明中写清环境、运行命令与验证命令，并执行相关检查。
 质量相关实现保留成功样例、失败样例和回归评测；不要用单次成功证明可靠性。
 交付说明包含修改范围、实际完成的验证和未完成项。没有运行过的检查不得声称通过。
+
+## VitePress 站点约定
+
+- 使用 Node.js 22+、npm 和已提交的 package-lock.json；安装命令为 `npm ci`。
+- 开发使用 `npm run docs:dev`；提交前执行 `npm run docs:build`，不得关闭死链检查。
+- 保持编号学习目录；新增文章同步 docs/README.md 和 docs/.vitepress/config.mts 侧边栏。
+- GitHub Pages base 为 `/frontend-to-agent/`，不要随意改为根路径。
+- 不提交 node_modules、.vitepress/cache 或 .vitepress/dist。
+- main 推送自动发布，Pull Request 仅构建。依赖变更同步 lockfile。

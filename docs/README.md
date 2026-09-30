@@ -45,4 +45,6 @@
 
 先完成只读问答的纵向切片，再逐步补充失败注入、检索、质量评测与观测。Agent 阶段允许得出“固定工作流更合适”的结论。
 
-[返回项目首页](../README.md)
+[返回项目首页](https://github.com/CrayonPig/frontend-to-agent)
+
+[站点开发与部署](contributing.md)

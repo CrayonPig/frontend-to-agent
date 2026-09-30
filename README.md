@@ -45,3 +45,18 @@
 每篇内容从具体场景出发，说明前端类比、类比失效的地方、实现思路、失败模式和验收方式。避免术语堆砌和框架目录式学习。
 
 参与编写前请阅读 [AGENTS.md](AGENTS.md)。新增内容应同步更新[学习目录](docs/README.md)，保证链接可访问。
+
+## VitePress 文档站
+
+站点地址（首次部署成功后可访问）：https://CrayonPig.github.io/frontend-to-agent/
+
+使用 Node.js 22+：
+
+```bash
+npm ci
+npm run docs:dev
+npm run docs:build
+npm run docs:preview
+```
+
+站点配置在 `docs/.vitepress/config.mts`。首次使用请在 Settings → Pages → Source 选择 **GitHub Actions**；推送 main 自动发布，PR 仅构建。详见[站点开发与部署](docs/contributing.md)。
