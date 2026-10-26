@@ -9,7 +9,7 @@ hero:
       text: 开始学习
       link: /README
     - theme: alt
-      text: 查看工程经验映射
+      text: 阅读起点第一篇
       link: /00-foundations/01-engineering-map
 features:
   - title: 从熟悉的问题出发
