@@ -3,14 +3,14 @@ layout: home
 hero:
   name: Frontend → Agent
   text: 用前端工程思维理解 AI Engineering
-  tagline: 从稳定性、异常处理、缓存与降级出发，逐步走进 LLM、RAG 与 Agent。让已有的工程经验成为学习新系统的起点。
+  tagline: 42 篇文章围绕同一个合成 Atlas 助手，从任务契约走到调用、评测、检索、工具与按需 Agent。提供无需密钥的本地示例和明确的验证边界。
   actions:
     - theme: brand
       text: 开始学习
       link: /README
     - theme: alt
-      text: 阅读起点第一篇
-      link: /00-foundations/01-engineering-map
+      text: 运行与验收
+      link: /09-integration/42-handoff
 features:
   - title: 从熟悉的问题出发
     details: 请求超时、状态混乱、缓存失效、首屏等待——把处理这些问题的经验带到 AI 应用中。

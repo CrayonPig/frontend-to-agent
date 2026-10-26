@@ -1,0 +1,1067 @@
+{
+  "fixtureVersion": "atlas-fixture-01",
+  "adapter": "atlas-rule-mock-1",
+  "claim": "Checks deterministic fixtures and regression harness, NOT model quality or production readiness.",
+  "holdoutCaveat": "check split is separate from dev, but published and inspectable; not a blind model benchmark.",
+  "runs": [
+    {
+      "caseId": "Q01",
+      "split": "dev",
+      "format": true,
+      "pass": true,
+      "errors": [],
+      "ruleVersion": "assertions-1",
+      "method": "bounded fixture assertions; human review still required",
+      "candidateAnswer": {
+        "kind": "answered",
+        "answer": "使用 AtlasTable 按列展示多条记录。",
+        "sourceIds": [
+          "C-T20"
+        ]
+      },
+      "retrieval": {
+        "candidateIds": [
+          "C-T20",
+          "C-B20",
+          "T-A20"
+        ],
+        "sourceRevisions": [
+          "C-T20@r1",
+          "C-B20@r1",
+          "T-A20@r1"
+        ],
+        "durationMs": 0.2617049999999992
+      },
+      "trace": {
+        "traceId": "3e7b5332-912c-4b83-bd1e-5331c97e574d",
+        "taskId": "Q01",
+        "attempt": 1,
+        "versions": {
+          "fixtureVersion": "atlas-fixture-01",
+          "promptVersion": "not-used",
+          "modelVersion": "not-used",
+          "adapterVersion": "atlas-rule-mock-1"
+        },
+        "events": [
+          {
+            "id": "08cc2ad6-4666-480d-9af7-1150804f406e",
+            "traceId": "3e7b5332-912c-4b83-bd1e-5331c97e574d",
+            "name": "assistant.task",
+            "kind": "span"
+          },
+          {
+            "id": "83c9777a-cad5-4650-8d6a-081d59f01134",
+            "traceId": "3e7b5332-912c-4b83-bd1e-5331c97e574d",
+            "name": "retrieve.docs",
+            "parentId": "08cc2ad6-4666-480d-9af7-1150804f406e",
+            "kind": "span",
+            "durationMs": 0.2617049999999992,
+            "candidateIds": [
+              "C-T20",
+              "C-B20",
+              "T-A20"
+            ],
+            "sourceRevisions": [
+              "C-T20@r1",
+              "C-B20@r1",
+              "T-A20@r1"
+            ]
+          },
+          {
+            "id": "b770ecd9-edf7-4369-96f2-eaa63d022033",
+            "traceId": "3e7b5332-912c-4b83-bd1e-5331c97e574d",
+            "name": "answer.compose",
+            "parentId": "08cc2ad6-4666-480d-9af7-1150804f406e",
+            "kind": "span",
+            "resultKind": "answered",
+            "durationMs": 0.6588940000000036,
+            "sourceIds": [
+              "C-T20"
+            ],
+            "sourceRevisions": [
+              "C-T20@r1"
+            ],
+            "usage": {
+              "inputTokens": null,
+              "outputTokens": null
+            }
+          }
+        ]
+      }
+    },
+    {
+      "caseId": "Q02",
+      "split": "dev",
+      "format": true,
+      "pass": true,
+      "errors": [],
+      "ruleVersion": "assertions-1",
+      "method": "bounded fixture assertions; human review still required",
+      "candidateAnswer": {
+        "kind": "answered",
+        "answer": "rowKey 为必填字符串，指定记录中唯一行标识的字段名，不能省略。",
+        "sourceIds": [
+          "C-T20"
+        ]
+      },
+      "retrieval": {
+        "candidateIds": [
+          "C-T20",
+          "C-B20"
+        ],
+        "sourceRevisions": [
+          "C-T20@r1",
+          "C-B20@r1"
+        ],
+        "durationMs": 0.038610000000005584
+      },
+      "trace": {
+        "traceId": "e7704fa1-a24f-4bdc-9896-da9d535113bb",
+        "taskId": "Q02",
+        "attempt": 1,
+        "versions": {
+          "fixtureVersion": "atlas-fixture-01",
+          "promptVersion": "not-used",
+          "modelVersion": "not-used",
+          "adapterVersion": "atlas-rule-mock-1"
+        },
+        "events": [
+          {
+            "id": "eb2cec6d-87f4-45ad-889f-7dc7824ea6d1",
+            "traceId": "e7704fa1-a24f-4bdc-9896-da9d535113bb",
+            "name": "assistant.task",
+            "kind": "span"
+          },
+          {
+            "id": "bb8a0f58-ded6-445e-a14b-55b623e5537c",
+            "traceId": "e7704fa1-a24f-4bdc-9896-da9d535113bb",
+            "name": "retrieve.docs",
+            "parentId": "eb2cec6d-87f4-45ad-889f-7dc7824ea6d1",
+            "kind": "span",
+            "durationMs": 0.038610000000005584,
+            "candidateIds": [
+              "C-T20",
+              "C-B20"
+            ],
+            "sourceRevisions": [
+              "C-T20@r1",
+              "C-B20@r1"
+            ]
+          },
+          {
+            "id": "332fe3d8-cedd-42e3-b658-3788f35c9378",
+            "traceId": "e7704fa1-a24f-4bdc-9896-da9d535113bb",
+            "name": "answer.compose",
+            "parentId": "eb2cec6d-87f4-45ad-889f-7dc7824ea6d1",
+            "kind": "span",
+            "resultKind": "answered",
+            "durationMs": 0.12508700000000061,
+            "sourceIds": [
+              "C-T20"
+            ],
+            "sourceRevisions": [
+              "C-T20@r1"
+            ],
+            "usage": {
+              "inputTokens": null,
+              "outputTokens": null
+            }
+          }
+        ]
+      }
+    },
+    {
+      "caseId": "Q03",
+      "split": "dev",
+      "format": true,
+      "pass": true,
+      "errors": [],
+      "ruleVersion": "assertions-1",
+      "method": "bounded fixture assertions; human review still required",
+      "candidateAnswer": {
+        "kind": "answered",
+        "answer": "1.4 使用 loading 显示等待图标，另需 disabled 阻止 click；等待参数本身不阻止点击。",
+        "sourceIds": [
+          "C-B14"
+        ]
+      },
+      "retrieval": {
+        "candidateIds": [
+          "C-B14"
+        ],
+        "sourceRevisions": [
+          "C-B14@r1"
+        ],
+        "durationMs": 0.026911999999995828
+      },
+      "trace": {
+        "traceId": "eb2af974-d7eb-403c-9fbd-ab7b0e1388dd",
+        "taskId": "Q03",
+        "attempt": 1,
+        "versions": {
+          "fixtureVersion": "atlas-fixture-01",
+          "promptVersion": "not-used",
+          "modelVersion": "not-used",
+          "adapterVersion": "atlas-rule-mock-1"
+        },
+        "events": [
+          {
+            "id": "bd2dd0e8-8c43-4999-9dc5-713ccbdc0326",
+            "traceId": "eb2af974-d7eb-403c-9fbd-ab7b0e1388dd",
+            "name": "assistant.task",
+            "kind": "span"
+          },
+          {
+            "id": "4b6da0a4-f915-4d6a-9ef9-72a71cc5d91e",
+            "traceId": "eb2af974-d7eb-403c-9fbd-ab7b0e1388dd",
+            "name": "retrieve.docs",
+            "parentId": "bd2dd0e8-8c43-4999-9dc5-713ccbdc0326",
+            "kind": "span",
+            "durationMs": 0.026911999999995828,
+            "candidateIds": [
+              "C-B14"
+            ],
+            "sourceRevisions": [
+              "C-B14@r1"
+            ]
+          },
+          {
+            "id": "200c24cf-7a17-44ec-8f56-59ac4a98ee58",
+            "traceId": "eb2af974-d7eb-403c-9fbd-ab7b0e1388dd",
+            "name": "answer.compose",
+            "parentId": "bd2dd0e8-8c43-4999-9dc5-713ccbdc0326",
+            "kind": "span",
+            "resultKind": "answered",
+            "durationMs": 0.10508999999999702,
+            "sourceIds": [
+              "C-B14"
+            ],
+            "sourceRevisions": [
+              "C-B14@r1"
+            ],
+            "usage": {
+              "inputTokens": null,
+              "outputTokens": null
+            }
+          }
+        ]
+      }
+    },
+    {
+      "caseId": "Q04",
+      "split": "dev",
+      "format": true,
+      "pass": true,
+      "errors": [],
+      "ruleVersion": "assertions-1",
+      "method": "bounded fixture assertions; human review still required",
+      "candidateAnswer": {
+        "kind": "answered",
+        "answer": "1.4 的 loading 在 2.0 改为 pending；disabled 仍单独负责阻止 click。",
+        "sourceIds": [
+          "C-B14",
+          "C-B20"
+        ]
+      },
+      "retrieval": {
+        "candidateIds": [
+          "C-B14",
+          "C-B20",
+          "C-T20"
+        ],
+        "sourceRevisions": [
+          "C-B14@r1",
+          "C-B20@r1",
+          "C-T20@r1"
+        ],
+        "durationMs": 6.643168000000003
+      },
+      "trace": {
+        "traceId": "4b3648e3-91b6-476e-a509-bd9bfd52ddd8",
+        "taskId": "Q04",
+        "attempt": 1,
+        "versions": {
+          "fixtureVersion": "atlas-fixture-01",
+          "promptVersion": "not-used",
+          "modelVersion": "not-used",
+          "adapterVersion": "atlas-rule-mock-1"
+        },
+        "events": [
+          {
+            "id": "31bf06ef-09fb-4e36-a257-46f568539405",
+            "traceId": "4b3648e3-91b6-476e-a509-bd9bfd52ddd8",
+            "name": "assistant.task",
+            "kind": "span"
+          },
+          {
+            "id": "9e701e8e-44bd-4075-bfdf-da31a2f01629",
+            "traceId": "4b3648e3-91b6-476e-a509-bd9bfd52ddd8",
+            "name": "retrieve.docs",
+            "parentId": "31bf06ef-09fb-4e36-a257-46f568539405",
+            "kind": "span",
+            "durationMs": 6.643168000000003,
+            "candidateIds": [
+              "C-B14",
+              "C-B20",
+              "C-T20"
+            ],
+            "sourceRevisions": [
+              "C-B14@r1",
+              "C-B20@r1",
+              "C-T20@r1"
+            ]
+          },
+          {
+            "id": "3e80e1fa-0edd-4484-97a6-3a6191155fe4",
+            "traceId": "4b3648e3-91b6-476e-a509-bd9bfd52ddd8",
+            "name": "answer.compose",
+            "parentId": "31bf06ef-09fb-4e36-a257-46f568539405",
+            "kind": "span",
+            "resultKind": "answered",
+            "durationMs": 6.6951680000000025,
+            "sourceIds": [
+              "C-B14",
+              "C-B20"
+            ],
+            "sourceRevisions": [
+              "C-B14@r1",
+              "C-B20@r1"
+            ],
+            "usage": {
+              "inputTokens": null,
+              "outputTokens": null
+            }
+          }
+        ]
+      }
+    },
+    {
+      "caseId": "Q05",
+      "split": "dev",
+      "format": true,
+      "pass": true,
+      "errors": [],
+      "ruleVersion": "assertions-1",
+      "method": "bounded fixture assertions; human review still required",
+      "candidateAnswer": {
+        "kind": "insufficient_evidence",
+        "reason": "现有资料未说明虚拟滚动或数据量上限，无法确认支持情况。"
+      },
+      "retrieval": {
+        "candidateIds": [
+          "C-T20",
+          "C-B20"
+        ],
+        "sourceRevisions": [
+          "C-T20@r1",
+          "C-B20@r1"
+        ],
+        "durationMs": 0.030692999999999415
+      },
+      "trace": {
+        "traceId": "97be3e7c-f7d1-4d5b-8d88-e59728d1f9f3",
+        "taskId": "Q05",
+        "attempt": 1,
+        "versions": {
+          "fixtureVersion": "atlas-fixture-01",
+          "promptVersion": "not-used",
+          "modelVersion": "not-used",
+          "adapterVersion": "atlas-rule-mock-1"
+        },
+        "events": [
+          {
+            "id": "0b0c64f2-9511-4b62-a0e0-60c1db5ece27",
+            "traceId": "97be3e7c-f7d1-4d5b-8d88-e59728d1f9f3",
+            "name": "assistant.task",
+            "kind": "span"
+          },
+          {
+            "id": "bb0a4236-c31f-436d-b546-76d52b0aaad7",
+            "traceId": "97be3e7c-f7d1-4d5b-8d88-e59728d1f9f3",
+            "name": "retrieve.docs",
+            "parentId": "0b0c64f2-9511-4b62-a0e0-60c1db5ece27",
+            "kind": "span",
+            "durationMs": 0.030692999999999415,
+            "candidateIds": [
+              "C-T20",
+              "C-B20"
+            ],
+            "sourceRevisions": [
+              "C-T20@r1",
+              "C-B20@r1"
+            ]
+          },
+          {
+            "id": "60a365c0-dba2-49a2-86a1-ffa48f7183a2",
+            "traceId": "97be3e7c-f7d1-4d5b-8d88-e59728d1f9f3",
+            "name": "answer.compose",
+            "parentId": "0b0c64f2-9511-4b62-a0e0-60c1db5ece27",
+            "kind": "span",
+            "resultKind": "insufficient_evidence",
+            "durationMs": 0.05131200000000291,
+            "sourceIds": [],
+            "sourceRevisions": [],
+            "usage": {
+              "inputTokens": null,
+              "outputTokens": null
+            }
+          }
+        ]
+      }
+    },
+    {
+      "caseId": "Q06",
+      "split": "dev",
+      "format": true,
+      "pass": true,
+      "errors": [],
+      "ruleVersion": "assertions-1",
+      "method": "bounded fixture assertions; human review still required",
+      "candidateAnswer": {
+        "kind": "insufficient_evidence",
+        "reason": "当前可访问资料不能确定该版本的行为，请补充资料。"
+      },
+      "retrieval": {
+        "candidateIds": [],
+        "sourceRevisions": [],
+        "durationMs": 0.008555999999998676
+      },
+      "trace": {
+        "traceId": "bacb0958-6c12-4933-89f6-5c17c2c11fc5",
+        "taskId": "Q06",
+        "attempt": 1,
+        "versions": {
+          "fixtureVersion": "atlas-fixture-01",
+          "promptVersion": "not-used",
+          "modelVersion": "not-used",
+          "adapterVersion": "atlas-rule-mock-1"
+        },
+        "events": [
+          {
+            "id": "5e2aa00a-53a1-483f-bcd9-df96696b87f8",
+            "traceId": "bacb0958-6c12-4933-89f6-5c17c2c11fc5",
+            "name": "assistant.task",
+            "kind": "span"
+          },
+          {
+            "id": "5c71188e-859a-4d4b-9513-c00e9b51e8cf",
+            "traceId": "bacb0958-6c12-4933-89f6-5c17c2c11fc5",
+            "name": "retrieve.docs",
+            "parentId": "5e2aa00a-53a1-483f-bcd9-df96696b87f8",
+            "kind": "span",
+            "durationMs": 0.008555999999998676,
+            "candidateIds": [],
+            "sourceRevisions": []
+          },
+          {
+            "id": "ce69c6de-8c90-408c-b5c0-faaebad39a31",
+            "traceId": "bacb0958-6c12-4933-89f6-5c17c2c11fc5",
+            "name": "answer.compose",
+            "parentId": "5e2aa00a-53a1-483f-bcd9-df96696b87f8",
+            "kind": "span",
+            "resultKind": "insufficient_evidence",
+            "durationMs": 0.08634099999999734,
+            "sourceIds": [],
+            "sourceRevisions": [],
+            "usage": {
+              "inputTokens": null,
+              "outputTokens": null
+            }
+          }
+        ]
+      }
+    },
+    {
+      "caseId": "Q07",
+      "split": "dev",
+      "format": true,
+      "pass": true,
+      "errors": [],
+      "ruleVersion": "assertions-1",
+      "method": "bounded fixture assertions; human review still required",
+      "candidateAnswer": {
+        "kind": "needs_clarification",
+        "question": "请提供目标产品版本。"
+      },
+      "retrieval": {
+        "candidateIds": [],
+        "sourceRevisions": [],
+        "durationMs": null
+      },
+      "trace": {
+        "traceId": "77899bc5-7b6e-4894-b767-192d42a81cb0",
+        "taskId": "Q07",
+        "attempt": 1,
+        "versions": {
+          "fixtureVersion": "atlas-fixture-01",
+          "promptVersion": "not-used",
+          "modelVersion": "not-used",
+          "adapterVersion": "atlas-rule-mock-1"
+        },
+        "events": [
+          {
+            "id": "9cb0cd20-731e-413b-9aaf-6c69be533693",
+            "traceId": "77899bc5-7b6e-4894-b767-192d42a81cb0",
+            "name": "assistant.task",
+            "kind": "span"
+          },
+          {
+            "id": "09f74438-9e3e-4b46-8e87-6496d142c6d1",
+            "traceId": "77899bc5-7b6e-4894-b767-192d42a81cb0",
+            "name": "answer.compose",
+            "parentId": "9cb0cd20-731e-413b-9aaf-6c69be533693",
+            "kind": "span",
+            "resultKind": "needs_clarification",
+            "durationMs": 0.007256000000005258,
+            "sourceIds": [],
+            "sourceRevisions": [],
+            "usage": {
+              "inputTokens": null,
+              "outputTokens": null
+            }
+          }
+        ]
+      }
+    },
+    {
+      "caseId": "Q08",
+      "split": "dev",
+      "format": true,
+      "pass": true,
+      "errors": [],
+      "ruleVersion": "assertions-1",
+      "method": "bounded fixture assertions; human review still required",
+      "candidateAnswer": {
+        "kind": "forbidden",
+        "message": "没有读取所请求资料的权限。"
+      },
+      "retrieval": {
+        "candidateIds": [],
+        "sourceRevisions": [],
+        "durationMs": null
+      },
+      "trace": {
+        "traceId": "589606ad-11e4-46ed-8306-fb3418750380",
+        "taskId": "Q08",
+        "attempt": 1,
+        "versions": {
+          "fixtureVersion": "atlas-fixture-01",
+          "promptVersion": "not-used",
+          "modelVersion": "not-used",
+          "adapterVersion": "atlas-rule-mock-1"
+        },
+        "events": [
+          {
+            "id": "78243ade-7a46-4146-a0a7-2396b7353c4f",
+            "traceId": "589606ad-11e4-46ed-8306-fb3418750380",
+            "name": "assistant.task",
+            "kind": "span"
+          },
+          {
+            "id": "300ebd0c-63cd-487e-abdf-48555b68db75",
+            "traceId": "589606ad-11e4-46ed-8306-fb3418750380",
+            "name": "answer.compose",
+            "parentId": "78243ade-7a46-4146-a0a7-2396b7353c4f",
+            "kind": "span",
+            "resultKind": "forbidden",
+            "durationMs": 0.005088999999998123,
+            "sourceIds": [],
+            "sourceRevisions": [],
+            "usage": {
+              "inputTokens": null,
+              "outputTokens": null
+            }
+          }
+        ]
+      }
+    },
+    {
+      "caseId": "Q09",
+      "split": "check",
+      "format": true,
+      "pass": true,
+      "errors": [],
+      "ruleVersion": "assertions-1",
+      "method": "bounded fixture assertions; human review still required",
+      "candidateAnswer": {
+        "kind": "insufficient_evidence",
+        "reason": "现有资料未说明虚拟滚动或数据量上限，无法确认支持情况。"
+      },
+      "retrieval": {
+        "candidateIds": [
+          "X-T20",
+          "C-T20",
+          "C-B20"
+        ],
+        "sourceRevisions": [
+          "X-T20@r1",
+          "C-T20@r1",
+          "C-B20@r1"
+        ],
+        "durationMs": 0.03157199999999705
+      },
+      "trace": {
+        "traceId": "cf3fa1c9-8b3b-4608-956c-50a1b392fbe6",
+        "taskId": "Q09",
+        "attempt": 1,
+        "versions": {
+          "fixtureVersion": "atlas-fixture-01",
+          "promptVersion": "not-used",
+          "modelVersion": "not-used",
+          "adapterVersion": "atlas-rule-mock-1"
+        },
+        "events": [
+          {
+            "id": "b1cfa726-0ab4-43ff-b0f7-86ff1bef4f78",
+            "traceId": "cf3fa1c9-8b3b-4608-956c-50a1b392fbe6",
+            "name": "assistant.task",
+            "kind": "span"
+          },
+          {
+            "id": "8fcaaf79-a13c-4f0c-8c4d-cb6a346b46db",
+            "traceId": "cf3fa1c9-8b3b-4608-956c-50a1b392fbe6",
+            "name": "retrieve.docs",
+            "parentId": "b1cfa726-0ab4-43ff-b0f7-86ff1bef4f78",
+            "kind": "span",
+            "durationMs": 0.03157199999999705,
+            "candidateIds": [
+              "X-T20",
+              "C-T20",
+              "C-B20"
+            ],
+            "sourceRevisions": [
+              "X-T20@r1",
+              "C-T20@r1",
+              "C-B20@r1"
+            ]
+          },
+          {
+            "id": "bb7cc02a-a5d2-4205-b653-3dead9551bd5",
+            "traceId": "cf3fa1c9-8b3b-4608-956c-50a1b392fbe6",
+            "name": "answer.compose",
+            "parentId": "b1cfa726-0ab4-43ff-b0f7-86ff1bef4f78",
+            "kind": "span",
+            "resultKind": "insufficient_evidence",
+            "durationMs": 0.04355999999999938,
+            "sourceIds": [],
+            "sourceRevisions": [],
+            "usage": {
+              "inputTokens": null,
+              "outputTokens": null
+            }
+          }
+        ]
+      }
+    },
+    {
+      "caseId": "Q10",
+      "split": "check",
+      "format": true,
+      "pass": true,
+      "errors": [],
+      "ruleVersion": "assertions-1",
+      "method": "bounded fixture assertions; human review still required",
+      "candidateAnswer": {
+        "kind": "answered",
+        "answer": "visibility 只允许 tenant，不允许 public。",
+        "sourceIds": [
+          "A-S20"
+        ]
+      },
+      "retrieval": {
+        "candidateIds": [
+          "A-S20",
+          "A-L20",
+          "C-B20",
+          "C-T20",
+          "T-A20"
+        ],
+        "sourceRevisions": [
+          "A-S20@r1",
+          "A-L20@r1",
+          "C-B20@r1",
+          "C-T20@r1",
+          "T-A20@r1"
+        ],
+        "durationMs": 0.027363000000001136
+      },
+      "trace": {
+        "traceId": "a4afc9f5-d4c3-4ab6-b2c5-257a39dcf9e2",
+        "taskId": "Q10",
+        "attempt": 1,
+        "versions": {
+          "fixtureVersion": "atlas-fixture-01",
+          "promptVersion": "not-used",
+          "modelVersion": "not-used",
+          "adapterVersion": "atlas-rule-mock-1"
+        },
+        "events": [
+          {
+            "id": "f2438449-29b6-41d4-9fbf-7873c1846864",
+            "traceId": "a4afc9f5-d4c3-4ab6-b2c5-257a39dcf9e2",
+            "name": "assistant.task",
+            "kind": "span"
+          },
+          {
+            "id": "bcff8add-3a94-4d65-909e-0e13dd5df37c",
+            "traceId": "a4afc9f5-d4c3-4ab6-b2c5-257a39dcf9e2",
+            "name": "retrieve.docs",
+            "parentId": "f2438449-29b6-41d4-9fbf-7873c1846864",
+            "kind": "span",
+            "durationMs": 0.027363000000001136,
+            "candidateIds": [
+              "A-S20",
+              "A-L20",
+              "C-B20",
+              "C-T20",
+              "T-A20"
+            ],
+            "sourceRevisions": [
+              "A-S20@r1",
+              "A-L20@r1",
+              "C-B20@r1",
+              "C-T20@r1",
+              "T-A20@r1"
+            ]
+          },
+          {
+            "id": "1523438a-7f9b-4564-8dee-380ba9994686",
+            "traceId": "a4afc9f5-d4c3-4ab6-b2c5-257a39dcf9e2",
+            "name": "answer.compose",
+            "parentId": "f2438449-29b6-41d4-9fbf-7873c1846864",
+            "kind": "span",
+            "resultKind": "answered",
+            "durationMs": 0.05472600000000227,
+            "sourceIds": [
+              "A-S20"
+            ],
+            "sourceRevisions": [
+              "A-S20@r1"
+            ],
+            "usage": {
+              "inputTokens": null,
+              "outputTokens": null
+            }
+          }
+        ]
+      }
+    },
+    {
+      "caseId": "Q11",
+      "split": "check",
+      "format": true,
+      "pass": true,
+      "errors": [],
+      "ruleVersion": "assertions-1",
+      "method": "bounded fixture assertions; human review still required",
+      "candidateAnswer": {
+        "kind": "execution_unavailable",
+        "message": "当前助手只解释文档，未创建分享记录。"
+      },
+      "retrieval": {
+        "candidateIds": [],
+        "sourceRevisions": [],
+        "durationMs": null
+      },
+      "trace": {
+        "traceId": "06766458-d21b-44a2-9490-f30da44e6e16",
+        "taskId": "Q11",
+        "attempt": 1,
+        "versions": {
+          "fixtureVersion": "atlas-fixture-01",
+          "promptVersion": "not-used",
+          "modelVersion": "not-used",
+          "adapterVersion": "atlas-rule-mock-1"
+        },
+        "events": [
+          {
+            "id": "7b9a0bf7-a4ed-4fa1-9151-5ed693513150",
+            "traceId": "06766458-d21b-44a2-9490-f30da44e6e16",
+            "name": "assistant.task",
+            "kind": "span"
+          },
+          {
+            "id": "7a4dbe55-1ce3-4b77-adbe-13f5c6aff790",
+            "traceId": "06766458-d21b-44a2-9490-f30da44e6e16",
+            "name": "answer.compose",
+            "parentId": "7b9a0bf7-a4ed-4fa1-9151-5ed693513150",
+            "kind": "span",
+            "resultKind": "execution_unavailable",
+            "durationMs": 0.007090000000005148,
+            "sourceIds": [],
+            "sourceRevisions": [],
+            "usage": {
+              "inputTokens": null,
+              "outputTokens": null
+            }
+          }
+        ]
+      }
+    },
+    {
+      "caseId": "Q12",
+      "split": "check",
+      "format": true,
+      "pass": true,
+      "errors": [],
+      "ruleVersion": "assertions-1",
+      "method": "bounded fixture assertions; human review still required",
+      "candidateAnswer": {
+        "kind": "insufficient_evidence",
+        "reason": "precision 默认 coarse；精度误差没有资料，无法确认一米承诺。"
+      },
+      "retrieval": {
+        "candidateIds": [
+          "A-L20",
+          "C-T20",
+          "C-B20",
+          "T-A20"
+        ],
+        "sourceRevisions": [
+          "A-L20@r1",
+          "C-T20@r1",
+          "C-B20@r1",
+          "T-A20@r1"
+        ],
+        "durationMs": 0.03052600000000183
+      },
+      "trace": {
+        "traceId": "236e9e69-087a-49e6-82be-7408fe0e8afa",
+        "taskId": "Q12",
+        "attempt": 1,
+        "versions": {
+          "fixtureVersion": "atlas-fixture-01",
+          "promptVersion": "not-used",
+          "modelVersion": "not-used",
+          "adapterVersion": "atlas-rule-mock-1"
+        },
+        "events": [
+          {
+            "id": "a710c884-c002-4180-8b45-409e72b69ef6",
+            "traceId": "236e9e69-087a-49e6-82be-7408fe0e8afa",
+            "name": "assistant.task",
+            "kind": "span"
+          },
+          {
+            "id": "e9182de2-3e05-4d5d-a0b8-b8590d180fc5",
+            "traceId": "236e9e69-087a-49e6-82be-7408fe0e8afa",
+            "name": "retrieve.docs",
+            "parentId": "a710c884-c002-4180-8b45-409e72b69ef6",
+            "kind": "span",
+            "durationMs": 0.03052600000000183,
+            "candidateIds": [
+              "A-L20",
+              "C-T20",
+              "C-B20",
+              "T-A20"
+            ],
+            "sourceRevisions": [
+              "A-L20@r1",
+              "C-T20@r1",
+              "C-B20@r1",
+              "T-A20@r1"
+            ]
+          },
+          {
+            "id": "7663178b-c66d-4aed-b6fb-fd781bbe10c7",
+            "traceId": "236e9e69-087a-49e6-82be-7408fe0e8afa",
+            "name": "answer.compose",
+            "parentId": "a710c884-c002-4180-8b45-409e72b69ef6",
+            "kind": "span",
+            "resultKind": "insufficient_evidence",
+            "durationMs": 0.04143799999999942,
+            "sourceIds": [],
+            "sourceRevisions": [],
+            "usage": {
+              "inputTokens": null,
+              "outputTokens": null
+            }
+          }
+        ]
+      }
+    },
+    {
+      "caseId": "Q13",
+      "split": "check",
+      "format": true,
+      "pass": true,
+      "errors": [],
+      "ruleVersion": "assertions-1",
+      "method": "bounded fixture assertions; human review still required",
+      "candidateAnswer": {
+        "kind": "answered",
+        "answer": "demo-aurora 已启用 share，访问范围限租户内。",
+        "sourceIds": [
+          "T-A20"
+        ]
+      },
+      "retrieval": {
+        "candidateIds": [
+          "T-A20",
+          "A-S20",
+          "C-B20",
+          "C-T20"
+        ],
+        "sourceRevisions": [
+          "T-A20@r1",
+          "A-S20@r1",
+          "C-B20@r1",
+          "C-T20@r1"
+        ],
+        "durationMs": 0.02976300000000265
+      },
+      "trace": {
+        "traceId": "730d1aa3-b4f6-4d44-8a06-ea7f3218f0ba",
+        "taskId": "Q13",
+        "attempt": 1,
+        "versions": {
+          "fixtureVersion": "atlas-fixture-01",
+          "promptVersion": "not-used",
+          "modelVersion": "not-used",
+          "adapterVersion": "atlas-rule-mock-1"
+        },
+        "events": [
+          {
+            "id": "b607ee59-9095-486c-8dd8-f1dec1d8fcaf",
+            "traceId": "730d1aa3-b4f6-4d44-8a06-ea7f3218f0ba",
+            "name": "assistant.task",
+            "kind": "span"
+          },
+          {
+            "id": "98fd5e24-2ed3-4e88-9f34-ef2ea1452762",
+            "traceId": "730d1aa3-b4f6-4d44-8a06-ea7f3218f0ba",
+            "name": "retrieve.docs",
+            "parentId": "b607ee59-9095-486c-8dd8-f1dec1d8fcaf",
+            "kind": "span",
+            "durationMs": 0.02976300000000265,
+            "candidateIds": [
+              "T-A20",
+              "A-S20",
+              "C-B20",
+              "C-T20"
+            ],
+            "sourceRevisions": [
+              "T-A20@r1",
+              "A-S20@r1",
+              "C-B20@r1",
+              "C-T20@r1"
+            ]
+          },
+          {
+            "id": "95c49fee-3335-4d60-8e8a-05f7b176cdf2",
+            "traceId": "730d1aa3-b4f6-4d44-8a06-ea7f3218f0ba",
+            "name": "answer.compose",
+            "parentId": "b607ee59-9095-486c-8dd8-f1dec1d8fcaf",
+            "kind": "span",
+            "resultKind": "answered",
+            "durationMs": 0.08624999999999972,
+            "sourceIds": [
+              "T-A20"
+            ],
+            "sourceRevisions": [
+              "T-A20@r1"
+            ],
+            "usage": {
+              "inputTokens": null,
+              "outputTokens": null
+            }
+          }
+        ]
+      }
+    },
+    {
+      "caseId": "Q14",
+      "split": "check",
+      "format": true,
+      "pass": true,
+      "errors": [],
+      "ruleVersion": "assertions-1",
+      "method": "bounded fixture assertions; human review still required",
+      "candidateAnswer": {
+        "kind": "conflicting_evidence",
+        "reason": "同版本同范围的正式资料对 rowKey 必填性存在冲突，需维护者核实。",
+        "sourceIds": [
+          "C-T20-B",
+          "C-T20-A"
+        ]
+      },
+      "retrieval": {
+        "candidateIds": [
+          "C-T20-B",
+          "C-T20-A",
+          "C-B20"
+        ],
+        "sourceRevisions": [
+          "C-T20-B@r1",
+          "C-T20-A@r1",
+          "C-B20@r1"
+        ],
+        "durationMs": 0.0262079999999969
+      },
+      "trace": {
+        "traceId": "f38dff96-074c-4d77-abf3-bec343024a70",
+        "taskId": "Q14",
+        "attempt": 1,
+        "versions": {
+          "fixtureVersion": "atlas-fixture-01",
+          "promptVersion": "not-used",
+          "modelVersion": "not-used",
+          "adapterVersion": "atlas-rule-mock-1"
+        },
+        "events": [
+          {
+            "id": "752176b1-1036-4b91-a271-eb80028c8921",
+            "traceId": "f38dff96-074c-4d77-abf3-bec343024a70",
+            "name": "assistant.task",
+            "kind": "span"
+          },
+          {
+            "id": "77b94656-61f9-4ac5-b68c-fc69d1f3da9e",
+            "traceId": "f38dff96-074c-4d77-abf3-bec343024a70",
+            "name": "retrieve.docs",
+            "parentId": "752176b1-1036-4b91-a271-eb80028c8921",
+            "kind": "span",
+            "durationMs": 0.0262079999999969,
+            "candidateIds": [
+              "C-T20-B",
+              "C-T20-A",
+              "C-B20"
+            ],
+            "sourceRevisions": [
+              "C-T20-B@r1",
+              "C-T20-A@r1",
+              "C-B20@r1"
+            ]
+          },
+          {
+            "id": "4d8ce791-ffcc-4fe7-bb78-4a18e1ad7d1c",
+            "traceId": "f38dff96-074c-4d77-abf3-bec343024a70",
+            "name": "answer.compose",
+            "parentId": "752176b1-1036-4b91-a271-eb80028c8921",
+            "kind": "span",
+            "resultKind": "conflicting_evidence",
+            "durationMs": 0.06471600000000421,
+            "sourceIds": [
+              "C-T20-B",
+              "C-T20-A"
+            ],
+            "sourceRevisions": [
+              "C-T20-B@r1",
+              "C-T20-A@r1"
+            ],
+            "usage": {
+              "inputTokens": null,
+              "outputTokens": null
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "summary": {
+    "total": 14,
+    "passed": 14,
+    "dev": 8,
+    "check": 6
+  }
+}

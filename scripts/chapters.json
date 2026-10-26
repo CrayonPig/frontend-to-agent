@@ -1,0 +1,262 @@
+[
+  {
+    "title": "00 起点：我们要让助手解决什么",
+    "chapters": [
+      {
+        "number": 1,
+        "title": "01 前端经验能带过来，哪些东西需要重新学",
+        "path": "00-foundations/01-engineering-map.md"
+      },
+      {
+        "number": 2,
+        "title": "02 组件文档助手的第一张任务清单",
+        "path": "00-foundations/02-assistant-task-list.md"
+      }
+    ]
+  },
+  {
+    "title": "01 第一次调用：模型究竟给了我们什么",
+    "chapters": [
+      {
+        "number": 3,
+        "title": "03 一次模型调用里发生了什么",
+        "path": "01-first-call/03-model-call.md"
+      },
+      {
+        "number": 4,
+        "title": "04 把第一条请求接进我们的应用",
+        "path": "01-first-call/04-application-request.md"
+      },
+      {
+        "number": 5,
+        "title": "05 Prompt、上下文与输出契约",
+        "path": "01-first-call/05-prompt-contract.md"
+      },
+      {
+        "number": 6,
+        "title": "06 流式回答的状态，不只有 loading",
+        "path": "01-first-call/06-streaming-state.md"
+      }
+    ]
+  },
+  {
+    "title": "02 先让它可检验，再让它更复杂",
+    "chapters": [
+      {
+        "number": 7,
+        "title": "07 答案看起来不错，怎么判断真的变好了",
+        "path": "02-verifiable/07-evaluation.md"
+      },
+      {
+        "number": 8,
+        "title": "08 HTTP 成功之后，还有哪些失败",
+        "path": "02-verifiable/08-failures.md"
+      },
+      {
+        "number": 9,
+        "title": "09 超时、重试与并发：哪些请求可以再来一次",
+        "path": "02-verifiable/09-request-budget.md"
+      },
+      {
+        "number": 10,
+        "title": "10 Trace、Observation、Session：一次任务如何串起来",
+        "path": "02-verifiable/10-trace-model.md"
+      },
+      {
+        "number": 11,
+        "title": "11 接入 Langfuse：从平台配置到第一条观测链路",
+        "path": "02-verifiable/11-langfuse.md"
+      },
+      {
+        "number": 12,
+        "title": "12 自动埋点之外，还需要记录哪些业务动作",
+        "path": "02-verifiable/12-instrumentation.md"
+      }
+    ]
+  },
+  {
+    "title": "03 模型不知道我们的知识，怎么办",
+    "chapters": [
+      {
+        "number": 13,
+        "title": "13 文档放进 Prompt 就够了吗",
+        "path": "03-knowledge/13-knowledge-strategy.md"
+      },
+      {
+        "number": 14,
+        "title": "14 文档入库之前，先决定什么不能丢",
+        "path": "03-knowledge/14-document-units.md"
+      },
+      {
+        "number": 15,
+        "title": "15 先用关键词把组件找到",
+        "path": "03-knowledge/15-keyword-search.md"
+      },
+      {
+        "number": 16,
+        "title": "16 名字不同、意思相近，怎么找到相关资料",
+        "path": "03-knowledge/16-semantic-search.md"
+      },
+      {
+        "number": 17,
+        "title": "17 两路结果都有用，如何合并和重排",
+        "path": "03-knowledge/17-hybrid-rerank.md"
+      }
+    ]
+  },
+  {
+    "title": "04 找到资料之后，仍然可能答错",
+    "chapters": [
+      {
+        "number": 18,
+        "title": "18 带引用的答案，真的有依据吗",
+        "path": "04-grounded/18-evidence.md"
+      },
+      {
+        "number": 19,
+        "title": "19 RAG 评测：没找到，还是找到了却答错",
+        "path": "04-grounded/19-rag-evaluation.md"
+      },
+      {
+        "number": 20,
+        "title": "20 文档更新以后，旧知识怎么退出系统",
+        "path": "04-grounded/20-knowledge-updates.md"
+      },
+      {
+        "number": 21,
+        "title": "21 权限隔离与文档中的恶意指令",
+        "path": "04-grounded/21-security.md"
+      }
+    ]
+  },
+  {
+    "title": "05 文档回答不了的事，交给受控工具",
+    "chapters": [
+      {
+        "number": 22,
+        "title": "22 查询实时信息，为什么需要工具",
+        "path": "05-tools/22-live-tools.md"
+      },
+      {
+        "number": 23,
+        "title": "23 工具描述是给模型看的，执行校验是给系统做的",
+        "path": "05-tools/23-tool-contract.md"
+      },
+      {
+        "number": 24,
+        "title": "24 固定流程能完成的任务，先不要交给 Agent",
+        "path": "05-tools/24-workflow.md"
+      },
+      {
+        "number": 25,
+        "title": "25 从只读到写操作：预览、确认与幂等",
+        "path": "05-tools/25-safe-writes.md"
+      }
+    ]
+  },
+  {
+    "title": "06 哪些任务值得让 Agent 决定下一步",
+    "chapters": [
+      {
+        "number": 26,
+        "title": "26 固定流程的分支越来越多，下一步该由谁决定",
+        "path": "06-agent/26-agent-decision.md"
+      },
+      {
+        "number": 27,
+        "title": "27 一个受限的 Agent 循环",
+        "path": "06-agent/27-bounded-loop.md"
+      },
+      {
+        "number": 28,
+        "title": "28 任务中断以后，如何安全继续",
+        "path": "06-agent/28-recovery.md"
+      },
+      {
+        "number": 29,
+        "title": "29 和固定工作流做一次公平对比",
+        "path": "06-agent/29-comparison.md"
+      },
+      {
+        "number": 30,
+        "title": "30 复盘一次失败的 Agent 任务",
+        "path": "06-agent/30-failure-review.md"
+      }
+    ]
+  },
+  {
+    "title": "07 任务更长之后，需要管理什么",
+    "chapters": [
+      {
+        "number": 31,
+        "title": "31 上下文不是越多越好",
+        "path": "07-capabilities/31-context.md"
+      },
+      {
+        "number": 32,
+        "title": "32 这次任务的状态，和下次还要记住的信息",
+        "path": "07-capabilities/32-memory.md"
+      },
+      {
+        "number": 33,
+        "title": "33 把重复做事的方法整理成 Skill",
+        "path": "07-capabilities/33-skills.md"
+      },
+      {
+        "number": 34,
+        "title": "34 工具越来越多，MCP 解决哪一层的问题",
+        "path": "07-capabilities/34-mcp.md"
+      },
+      {
+        "number": 35,
+        "title": "35 要不要拆成多个 Agent",
+        "path": "07-capabilities/35-multi-agent.md"
+      }
+    ]
+  },
+  {
+    "title": "08 质量稳定之后，再谈系统性优化",
+    "chapters": [
+      {
+        "number": 36,
+        "title": "36 流式更快，不代表任务完成更快",
+        "path": "08-operations/36-latency.md"
+      },
+      {
+        "number": 37,
+        "title": "37 缓存命中以后，答案还能不能用",
+        "path": "08-operations/37-cache.md"
+      },
+      {
+        "number": 38,
+        "title": "38 不是每次调用便宜，而是每次成功任务划算",
+        "path": "08-operations/38-cost.md"
+      },
+      {
+        "number": 39,
+        "title": "39 Prompt 改了，如何知道哪一版影响了结果",
+        "path": "08-operations/39-prompt-versions.md"
+      },
+      {
+        "number": 40,
+        "title": "40 一次变更如何安全上线",
+        "path": "08-operations/40-release.md"
+      }
+    ]
+  },
+  {
+    "title": "09 回到全局：把这些能力重新连起来",
+    "chapters": [
+      {
+        "number": 41,
+        "title": "41 一次问题经过了哪些模块",
+        "path": "09-integration/41-architecture.md"
+      },
+      {
+        "number": 42,
+        "title": "42 如何证明这个知识助手可以交给别人使用",
+        "path": "09-integration/42-handoff.md"
+      }
+    ]
+  }
+]

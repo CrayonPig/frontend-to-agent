@@ -1,0 +1,256 @@
+TAP version 13
+# Subtest: Q01–Q14 independent bounded assertions and structure pass
+ok 1 - Q01–Q14 independent bounded assertions and structure pass
+  ---
+  duration_ms: 11.911298
+  type: 'test'
+  ...
+# Subtest: fluent wrong-version answer fails despite valid structure
+ok 2 - fluent wrong-version answer fails despite valid structure
+  ---
+  duration_ms: 0.15876
+  type: 'test'
+  ...
+# Subtest: scoring admits paraphrase; not full answer equality
+ok 3 - scoring admits paraphrase; not full answer equality
+  ---
+  duration_ms: 0.097472
+  type: 'test'
+  ...
+# Subtest: forbidden docs never become retrieval candidates or context
+ok 4 - forbidden docs never become retrieval candidates or context
+  ---
+  duration_ms: 0.450322
+  type: 'test'
+  ...
+# Subtest: self-declared admin is rejected without hidden metadata
+ok 5 - self-declared admin is rejected without hidden metadata
+  ---
+  duration_ms: 0.781216
+  type: 'test'
+  ...
+# Subtest: injection is present only Q09 and cannot become a citation
+ok 6 - injection is present only Q09 and cannot become a citation
+  ---
+  duration_ms: 0.596275
+  type: 'test'
+  ...
+# Subtest: conflict replaces baseline only Q14
+ok 7 - conflict replaces baseline only Q14
+  ---
+  duration_ms: 0.241064
+  type: 'test'
+  ...
+# Subtest: invalid output types fail
+ok 8 - invalid output types fail
+  ---
+  duration_ms: 0.174838
+  type: 'test'
+  ...
+# Subtest: cache isolates principal and permission epoch
+ok 9 - cache isolates principal and permission epoch
+  ---
+  duration_ms: 0.526553
+  type: 'test'
+  ...
+# Subtest: delete invalidates cache; old update cannot resurrect tombstone
+ok 10 - delete invalidates cache; old update cannot resurrect tombstone
+  ---
+  duration_ms: 0.482611
+  type: 'test'
+  ...
+# Subtest: duplicate update is idempotent; newer revision applies once
+ok 11 - duplicate update is idempotent; newer revision applies once
+  ---
+  duration_ms: 0.240689
+  type: 'test'
+  ...
+# Subtest: cache expires
+ok 12 - cache expires
+  ---
+  duration_ms: 0.178813
+  type: 'test'
+  ...
+# Subtest: tool rejects extra args and unauthorized principal
+ok 13 - tool rejects extra args and unauthorized principal
+  ---
+  duration_ms: 0.393998
+  type: 'test'
+  ...
+# Subtest: workflow version gap stops before tool call
+ok 14 - workflow version gap stops before tool call
+  ---
+  duration_ms: 0.239766
+  type: 'test'
+  ...
+# Subtest: draft preview requires explicit confirmation and binds content
+ok 15 - draft preview requires explicit confirmation and binds content
+  ---
+  duration_ms: 0.731751
+  type: 'test'
+  ...
+# Subtest: confirmation cannot cross identity, policy, expiry or idempotency payload
+ok 16 - confirmation cannot cross identity, policy, expiry or idempotency payload
+  ---
+  duration_ms: 0.27005
+  type: 'test'
+  ...
+# Subtest: persisted receipt resolves uncertain result without duplicate write
+ok 17 - persisted receipt resolves uncertain result without duplicate write
+  ---
+  duration_ms: 14.431783
+  type: 'test'
+  ...
+# Subtest: agent bounds tool count and disallows write intents
+ok 18 - agent bounds tool count and disallows write intents
+  ---
+  duration_ms: 0.802323
+  type: 'test'
+  ...
+# Subtest: agent step and wall time budgets terminate
+ok 19 - agent step and wall time budgets terminate
+  ---
+  duration_ms: 4.911347
+  type: 'test'
+  ...
+# Subtest: resume reuses observation and reauthorizes checkpoint
+ok 20 - resume reuses observation and reauthorizes checkpoint
+  ---
+  duration_ms: 0.77449
+  type: 'test'
+  ...
+# Subtest: trace has parent relation and allowlist export excludes private values
+ok 21 - trace has parent relation and allowlist export excludes private values
+  ---
+  duration_ms: 0.193948
+  type: 'test'
+  ...
+# Subtest: retry only transient errors and honors attempt budget
+ok 22 - retry only transient errors and honors attempt budget
+  ---
+  duration_ms: 0.490093
+  type: 'test'
+  ...
+# Subtest: timeout does not imply remote cancelled; no automatic timeout retry
+ok 23 - timeout does not imply remote cancelled; no automatic timeout retry
+  ---
+  duration_ms: 22.842432
+  type: 'test'
+  ...
+# Subtest: concurrency limit holds across queue handoff
+ok 24 - concurrency limit holds across queue handoff
+  ---
+  duration_ms: 6.902762
+  type: 'test'
+  ...
+# Subtest: memory scopes, expires, and deletes without modifying knowledge
+ok 25 - memory scopes, expires, and deletes without modifying knowledge
+  ---
+  duration_ms: 0.304543
+  type: 'test'
+  ...
+# Subtest: context pins target version and never treats compression as evidence
+ok 26 - context pins target version and never treats compression as evidence
+  ---
+  duration_ms: 0.278783
+  type: 'test'
+  ...
+# Subtest: cost unknown remains unknown and percentiles need samples
+ok 27 - cost unknown remains unknown and percentiles need samples
+  ---
+  duration_ms: 0.188068
+  type: 'test'
+  ...
+# Subtest: prompt versions immutable, label movement gated
+ok 28 - prompt versions immutable, label movement gated
+  ---
+  duration_ms: 0.160537
+  type: 'test'
+  ...
+# Subtest: HTTP boundary rejects forged identity and produces final stream event
+ok 29 - HTTP boundary rejects forged identity and produces final stream event
+  ---
+  duration_ms: 80.920965
+  type: 'test'
+  ...
+# Subtest: trace rejects hidden source identifiers before export
+ok 30 - trace rejects hidden source identifiers before export
+  ---
+  duration_ms: 0.24127
+  type: 'test'
+  ...
+# Subtest: document fact update changes answer and citation revision remains discoverable
+ok 31 - document fact update changes answer and citation revision remains discoverable
+  ---
+  duration_ms: 0.336521
+  type: 'test'
+  ...
+# Subtest: agent rejects invalid budgets and empty finish
+ok 32 - agent rejects invalid budgets and empty finish
+  ---
+  duration_ms: 0.349695
+  type: 'test'
+  ...
+# Subtest: agent reserves synthetic cost before chooser; sync overrun cannot finish
+ok 33 - agent reserves synthetic cost before chooser; sync overrun cannot finish
+  ---
+  duration_ms: 0.187937
+  type: 'test'
+  ...
+# Subtest: context fixture scope excludes Q14 conflict and Q09 injection by default
+ok 34 - context fixture scope excludes Q14 conflict and Q09 injection by default
+  ---
+  duration_ms: 0.135634
+  type: 'test'
+  ...
+# Subtest: negative mutations detect unsupported claims, leak and wrong refusal
+ok 35 - negative mutations detect unsupported claims, leak and wrong refusal
+  ---
+  duration_ms: 0.098499
+  type: 'test'
+  ...
+# Subtest: one preview cannot create duplicate drafts under different keys
+ok 36 - one preview cannot create duplicate drafts under different keys
+  ---
+  duration_ms: 0.291372
+  type: 'test'
+  ...
+# Subtest: observed answer captures actual candidate revisions and never invents retrieval for refusal
+ok 37 - observed answer captures actual candidate revisions and never invents retrieval for refusal
+  ---
+  duration_ms: 0.409345
+  type: 'test'
+  ...
+# Subtest: trace forbids hidden candidates, unknown source and mismatched revision
+ok 38 - trace forbids hidden candidates, unknown source and mismatched revision
+  ---
+  duration_ms: 0.214739
+  type: 'test'
+  ...
+# Subtest: A30 build success cannot establish undocumented virtual scrolling
+ok 39 - A30 build success cannot establish undocumented virtual scrolling
+  ---
+  duration_ms: 0.52162
+  type: 'test'
+  ...
+# Subtest: scripted loop records actual stop reason without claiming model generation
+ok 40 - scripted loop records actual stop reason without claiming model generation
+  ---
+  duration_ms: 0.21889
+  type: 'test'
+  ...
+# Subtest: required comparison and conflict evidence stays atomic under context pressure
+ok 41 - required comparison and conflict evidence stays atomic under context pressure
+  ---
+  duration_ms: 0.356114
+  type: 'test'
+  ...
+1..41
+# tests 41
+# suites 0
+# pass 41
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 228.11985

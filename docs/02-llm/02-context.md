@@ -1,6 +1,6 @@
 # 上下文与 Prompt：管理输入依赖
 
-> 本章为学习导读与实践要求，后续补充可运行实现。
+> 本页保留旧 URL 与原导读练习，作为迁移入口。完整正文已迁至：[05 Prompt、上下文与输出契约](../01-first-call/05-prompt-contract.md)、[31 上下文不是越多越好](../07-capabilities/31-context.md)、[39 Prompt 改了，如何知道哪一版影响了结果](../08-operations/39-prompt-versions.md)。以下是历史导读，不代表当前示例的覆盖范围；运行与验收以新正文为准。
 
 ## 场景与目标
 

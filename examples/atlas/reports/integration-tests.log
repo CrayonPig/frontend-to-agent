@@ -1,0 +1,56 @@
+
+> frontend-to-agent@0.1.0 test
+> node --test examples/atlas/test/*.test.mjs examples/atlas/skills/*.test.mjs
+
+✔ Skill artifact is complete and references resolve; does not test model activation (5.731674ms)
+✔ Q01–Q14 independent bounded assertions and structure pass (12.390723ms)
+✔ fluent wrong-version answer fails despite valid structure (0.158845ms)
+✔ scoring admits paraphrase; not full answer equality (0.097123ms)
+✔ forbidden docs never become retrieval candidates or context (0.496605ms)
+✔ self-declared admin is rejected without hidden metadata (0.244409ms)
+✔ injection is present only Q09 and cannot become a citation (0.650469ms)
+✔ conflict replaces baseline only Q14 (0.359701ms)
+✔ invalid output types fail (0.178771ms)
+✔ cache isolates principal and permission epoch (0.536945ms)
+✔ delete invalidates cache; old update cannot resurrect tombstone (0.486805ms)
+✔ duplicate update is idempotent; newer revision applies once (0.247295ms)
+✔ cache expires (0.211529ms)
+✔ tool rejects extra args and unauthorized principal (0.305174ms)
+✔ workflow version gap stops before tool call (0.153774ms)
+✔ draft preview requires explicit confirmation and binds content (0.664448ms)
+✔ confirmation cannot cross identity, policy, expiry or idempotency payload (0.307401ms)
+✔ persisted receipt resolves uncertain result without duplicate write (10.969054ms)
+✔ agent bounds tool count and disallows write intents (1.010464ms)
+✔ agent step and wall time budgets terminate (5.752245ms)
+✔ resume reuses observation and reauthorizes checkpoint (0.615463ms)
+✔ trace has parent relation and allowlist export excludes private values (0.18477ms)
+✔ retry only transient errors and honors attempt budget (0.574448ms)
+✔ timeout does not imply remote cancelled; no automatic timeout retry (23.35559ms)
+✔ concurrency limit holds across queue handoff (5.938687ms)
+✔ memory scopes, expires, and deletes without modifying knowledge (0.329746ms)
+✔ context pins target version and never treats compression as evidence (0.157655ms)
+✔ cost unknown remains unknown and percentiles need samples (0.148403ms)
+✔ prompt versions immutable, label movement gated (0.150627ms)
+✔ HTTP boundary rejects forged identity and produces final stream event (78.176486ms)
+✔ trace rejects hidden source identifiers before export (0.24272ms)
+✔ document fact update changes answer and citation revision remains discoverable (0.219066ms)
+✔ agent rejects invalid budgets and empty finish (0.300537ms)
+✔ agent reserves synthetic cost before chooser; sync overrun cannot finish (0.432326ms)
+✔ context fixture scope excludes Q14 conflict and Q09 injection by default (0.14917ms)
+✔ negative mutations detect unsupported claims, leak and wrong refusal (0.100771ms)
+✔ one preview cannot create duplicate drafts under different keys (0.166677ms)
+✔ observed answer captures actual candidate revisions and never invents retrieval for refusal (0.546646ms)
+✔ trace forbids hidden candidates, unknown source and mismatched revision (0.181069ms)
+✔ A30 build success cannot establish undocumented virtual scrolling (0.149126ms)
+✔ scripted loop records actual stop reason without claiming model generation (0.261494ms)
+✔ required comparison and conflict evidence stays atomic under context pressure (0.290902ms)
+✔ persisted absolute deadline stops expired resume before any new choice (11.480653ms)
+✔ resume before deadline cannot finish after original deadline (0.796862ms)
+ℹ tests 44
+ℹ suites 0
+ℹ pass 44
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 239.222671

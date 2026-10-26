@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="zh-CN">
+  <meta charset="utf-8" /><meta
+    name="viewport"
+    content="width=device-width,initial-scale=1"
+  /><title>Atlas 合成助手</title>
+  <style>
+    body {
+      font: 16px/1.7 system-ui;
+      max-width: 760px;
+      margin: 4rem auto;
+      padding: 0 20px;
+      background: #f7f7f5;
+      color: #202828;
+    }
+    textarea {
+      width: 100%;
+      min-height: 100px;
+      font: inherit;
+      box-sizing: border-box;
+    }
+    button,
+    select {
+      font: inherit;
+      padding: 8px;
+      margin: 8px 8px 8px 0;
+    }
+    pre {
+      white-space: pre-wrap;
+      padding: 20px;
+      background: white;
+      border: 1px solid #ddd;
+    }
+    small {
+      color: #555;
+    }
+  </style>
+  <h1>Atlas 合成文档助手</h1>
+  <p>
+    固定演示身份 reader-a /
+    demo-aurora。仅识别教程题型，无真实模型、密钥或外部工具。不会分享文档或读取位置。
+  </p>
+  <form id="form">
+    <label
+      >问题<textarea id="question">
+项目是 Atlas UI 1.4，按钮提交中既要显示等待又要阻止点击，怎么设置？</textarea
+      ></label
+    ><label
+      >版本<select id="version">
+        <option>1.4</option>
+        <option>2.0</option>
+        <option>1.8</option>
+        <option value="compare">比较版本</option>
+        <option value="">未指定</option>
+      </select></label
+    ><button>提问</button><button id="stop" type="button">停止等待</button>
+  </form>
+  <p id="status" role="status">就绪</p>
+  <pre id="answer" aria-live="polite"></pre>
+  <small
+    >停止等待不证明远端未执行。此演示只取消读取和展示；输出分块是合成传输，不是供应商
+    token 流。</small
+  >
+  <script type="module">
+    let generation = 0,
+      controller;
+    const status = document.querySelector("#status"),
+      out = document.querySelector("#answer");
+    document.querySelector("#stop").onclick = () => {
+      generation++;
+      controller?.abort();
+      status.textContent = "已停止等待；远端状态不能由本地取消推断。";
+    };
+    document.querySelector("#form").onsubmit = async (e) => {
+      e.preventDefault();
+      controller?.abort();
+      controller = new AbortController();
+      const current = ++generation;
+      out.textContent = "";
+      status.textContent = "等待响应";
+      try {
+        const res = await fetch("/api/ask", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            question: document.querySelector("#question").value,
+            version: document.querySelector("#version").value || null,
+          }),
+          signal: controller.signal,
+        });
+        if (!res.ok) throw Error(`HTTP ${res.status}`);
+        const reader = res.body.getReader(),
+          decoder = new TextDecoder();
+        let buffer = "",
+          complete = false;
+        while (true) {
+          const { value, done } = await reader.read();
+          if (done) break;
+          buffer += decoder.decode(value, { stream: true });
+          let cut;
+          while ((cut = buffer.indexOf("\n")) >= 0) {
+            const event = JSON.parse(buffer.slice(0, cut));
+            buffer = buffer.slice(cut + 1);
+            if (current !== generation) continue;
+            if (event.type === "delta") {
+              status.textContent = "接收中（未完成）";
+              out.textContent += event.text;
+            }
+            if (event.type === "completed") {
+              complete = true;
+              status.textContent = `完成：${event.result.kind} · ${event.requestId}`;
+            }
+          }
+        }
+        if (current === generation && !complete)
+          throw Error("流中断，未收到完成事件");
+      } catch (err) {
+        if (current !== generation) return;
+        status.textContent =
+          err.name === "AbortError"
+            ? "已停止等待"
+            : `失败：${err.message}；上方内容是未完成片段。`;
+      }
+    };
+  </script>
+</html>

@@ -8,12 +8,9 @@
 
 ## 这份指南怎么学
 
-1. 先读[学习地图](docs/README.md)，理解已有经验与新问题的联系。
-2. 阅读起点的[经验迁移](docs/00-foundations/01-engineering-map.md)和[第一张任务清单](docs/00-foundations/02-assistant-task-list.md)，再进入工程基础、LLM、RAG、Agent。
-3. 每章完成一个小练习，留下指标、失败样例和决策记录。
-4. 从起点任务清单开始，持续演进组件文档助手；后续在[综合实践](docs/05-project/01-component-assistant.md)中整合各阶段成果。
+从[任务清单](docs/00-foundations/02-assistant-task-list.md)开始，沿同一个 Atlas 助手逐步引入调用、评测、观测、检索、工具和按需 Agent。[42 篇学习目录](docs/README.md)按 10 个部分组织，每一篇有独立的问题和产出；最后两篇整合已有系统，不重新启动一个项目。
 
-不要求先学模型训练。示例优先采用 TypeScript；需要服务端、存储或检索能力时，解释职责后再引入工具。
+先运行无需密钥的[合成示例](examples/atlas/README.md)，检查任务与边界；再按需求选择真实模型、Elasticsearch、Langfuse 或 MCP 接入。代码与资料全部原创合成，不读取真实用户或公司数据。
 
 ## 从熟悉的问题开始
 
@@ -29,16 +26,35 @@
 
 ## 学习路线
 
-- [00 起点：我们要让助手解决什么](docs/00-foundations/01-engineering-map.md)
-- [01 工程基础：稳定性、异常、缓存、性能、成本、可观测性](docs/README.md#01-工程基础)
-- [02 LLM：调用契约、上下文、评测](docs/README.md#02-llm-工程)
-- [03 RAG：知识处理、检索、回答与权限](docs/README.md#03-rag-工程)
-- [04 Agent：工具契约、执行循环、工作流](docs/README.md#04-agent-工程)
-- [05 综合实践：组件文档助手](docs/05-project/01-component-assistant.md)
+1. 00 起点：定义任务与人工判定。
+2. 01 第一次调用：上下文、服务端接入、契约与流式状态。
+3. 02 可检验的系统：评测、错误、预算与观测。
+4. 03 知识获取：文档单元、关键词、语义与混合检索。
+5. 04 有依据的回答：引用、分层评测、更新与安全。
+6. 05 受控工具：实时只读查询、固定流程和沙箱写入。
+7. 06 按需 Agent：有限决策、预算、恢复、对比和复盘。
+8. 07 长任务治理：上下文、记忆、Skill、MCP 与多 Agent 取舍。
+9. 08 系统运营：延迟、缓存、成本、Prompt 与发布治理。
+10. 09 整合交付：[架构](docs/09-integration/41-architecture.md)与[可复现验收](docs/09-integration/42-handoff.md)。
 
-## 仓库现状
+## 仓库范围与验证
 
-已完成「00 起点：我们要让助手解决什么」的两篇完整文章，包含职责边界、合成文档和可人工判定的任务清单。其余现有章节仍为导读；尚未提供可运行应用或模型实测结果。10 部分、42 篇的新规划将逐步落实，本次不将后续规划计为完成。
+全系列正文与默认合成程序分别验收，逐篇状态见[覆盖矩阵](docs/reviews/coverage.md)，实际命令与阶段结果见[验证记录](docs/reviews/progress.md)。旧导读保留原 URL，并提供[迁移入口](docs/reviews/migration.md)。
+
+合成程序使用确定性规则 mock，支持原始 Q01–Q14、授权检索、结果校验、修订与删除、沙箱确认与幂等、受限循环、检查点和本地观测。它的通过率不是模型质量评估，也不证明真实成本或延迟优势。真实模型、Elasticsearch、Langfuse 上报、MCP 服务和生产身份/事务系统属于可选路径，未由本地测试证明。
+
+使用 Node.js 22+，在仓库根目录运行：
+
+```bash
+npm ci
+npm run docs:check
+npm test
+npm run evaluate
+npm run docs:build
+npm run demo
+```
+
+最后一条启动回环地址上的演示页面 `http://127.0.0.1:8787`。它使用固定合成身份，不是可公网部署的认证系统。评测报告写入 `examples/atlas/reports/baseline.json`，包含候选答案、规则判定和运行版本。新增或替换外部适配器后，必须重新回归。
 
 ## 内容约定
 
@@ -48,7 +64,7 @@
 
 ## VitePress 文档站
 
-站点地址（首次部署成功后可访问）：https://CrayonPig.github.io/frontend-to-agent/
+文档站地址：https://CrayonPig.github.io/frontend-to-agent/
 
 使用 Node.js 22+：
 
@@ -59,4 +75,4 @@ npm run docs:build
 npm run docs:preview
 ```
 
-站点配置在 `docs/.vitepress/config.mts`。首次使用请在 Settings → Pages → Source 选择 **GitHub Actions**；推送 main 自动发布，PR 仅构建。详见[站点开发与部署](docs/contributing.md)。
+站点配置在 `docs/.vitepress/config.mts`。沿用现有 GitHub Pages 工作流：推送 main 自动发布，PR 仅构建。详见[站点开发与部署](docs/contributing.md)。
