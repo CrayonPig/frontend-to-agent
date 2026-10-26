@@ -57,6 +57,10 @@ task-demo-28
 
 上述关系表达的是任务连续性。若需要跨服务传播活动请求上下文，按实际追踪协议传递；若是几小时后恢复，则任务 ID 与检查点关联更能说明事实。记录恢复原因、重用动作数、重新执行动作数与停止原因，不收集模型私密推理来填补缺失状态。
 
+这套关联还要区分两条实际代码路径。本篇的恢复测试运行 `examples/atlas`，检查业务快照、再授权与绝对截止时间；第 27、30 篇的新观测演练运行 `examples/atlas-observability`，包含每轮按状态选择 read_docs、build_status 或 finish 的真正受限循环，检查 SDK 导出的步骤与停止证据。新循环也检查绝对 `deadlineAt`，但尚未实现业务检查点保存与恢复；报告明确 `resumeSupported: false`。`agent-compare` 先运行重复策略，再运行修正策略；后一次即使沿用 taskId、递增 attempt，也是一项独立回归，不是从前一次的 nextStep 继续。不能拿它的新 trace ID 推断旧工具已经执行或没有执行。
+
+将来连接两者时，每次尝试的 trace 可以携带 `taskId`、`attempt`、`checkpointId` 和 `deadlineAt` 摘要，但真实恢复仍读取业务快照。检查点标识用于定位受控记录，不应直接导出含权限材料的完整快照。读取 trace 的权限也不能自动授予继续任务的权限；新一次继续操作仍须重新授权。
+
 ## 做一次真正可控的中断演练
 
 仓库合成运行时的 `saveCheckpoint`、`loadCheckpoint` 与 `runAgent` 支持这个演练：第一轮执行只读构建查询，在 `onCheckpoint` 收到状态后模拟进程退出；第二次加载同一状态，让选择器直接结束。测试断言应同时满足：尝试数增加、已保存 observation 保留、工具调用累计仍为一次。

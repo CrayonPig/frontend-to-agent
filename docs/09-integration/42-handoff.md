@@ -2,7 +2,7 @@
 
 交付时最有价值的问题不是“能不能演示一下”，而是“换一个没参与开发的人，能不能从干净目录重现同样的判断”。开发者知道哪些参数要填、哪些问题暂时别问，这些隐含知识会让一次演示看起来比实际系统可靠。
 
-这篇把 Atlas 助手交给另一位读者。交付对象是完整教程与一个本地合成教学程序：能检查任务结果、授权、更新、工具预算和沙箱恢复；不是接入真实模型、账号系统和生产数据库的在线产品。文档站发布只代表文章可以访问，不代表模型后端已经部署。
+这篇把 Atlas 助手交给另一位读者。交付对象是完整教程、一个无依赖的合成教学程序，以及一个使用真实 Langfuse/OpenTelemetry SDK 的 TypeScript 观测集成包。前者检查任务结果、授权、更新、工具预算和沙箱恢复；后者检查 Prompt 获取、HTTP 模型调用、固定工作流与受限循环的业务链路，以及实际 SDK 导出。它们都不是接入真实账号系统和生产数据库的在线产品。文档站发布只代表文章可以访问，不代表模型后端已经部署。
 
 ## 从空环境开始，而不是从作者的终端开始
 
@@ -63,15 +63,84 @@ curl -N http://127.0.0.1:8787/api/ask \
 
 交付时不要只放成功截图。至少能向接手者展示一份主动拒绝的结果、一份受控中断的恢复记录，以及一份被评测拦下的流畅错误答案。它们说明系统如何承认限制，也给下一次修改提供回归条件。
 
+## 单独验收 TypeScript 观测包
+
+基础程序测试通过后，还要在 `examples/atlas-observability` 中安装该包锁定的依赖、编译和运行测试。根目录的 `npm test` 不能被默认为已经覆盖这个独立包。默认模式使用回环地址上的合成模型/Prompt API，以及接收真实 SDK 导出的本地 OTLP 服务，不需要平台账号或真实密钥。
+
+在仓库根目录进入该包后执行：
+
+```bash
+cd examples/atlas-observability
+npm ci
+npm test
+npm run demo -- all
+```
+
+`npm test` 包含 TypeScript 构建；`demo -- all` 执行本地闭环，但不会自动发布 Prompt 标签。想逐项观察时，先构建并建立版本，再依次运行：
+
+```bash
+npm run build
+npm run seed-prompts
+npm run run -- --prompt-version 1
+npm run compare
+npm run failure
+npm run replay
+```
+
+这些命令的输出在包内 `reports/`。`compare.json` 固定比较 v1/v2 和同一个 A30，`failure.json` 保存故意错误的 v1 结果，`replay.json` 分别保存原输出重新评分和新的 v2 回归。后者不是私密思维重放。每次 CLI 保存对应的 `<command>-otlp.json`、`<command>-spans.json`，也会更新通用 `otlp.json`、`spans.json` 与 `http-contract.json`。例如比较报告应配对 `compare-spans.json`，完整演练应配对 `all-spans.json`；再次运行同一命令仍会覆盖同名文件，归档时需将报告与导出放在一起。
+
+检查完比较记录，若确实要演练本地标签发布，再显式执行 `npm run promote -- --version 2 --confirm`。程序检查报告规则与资料版本、候选版本质量、模板及配置摘要，再修改本地 Prompt API 替身的 production 标签并回读确认。默认不执行这一步，不能把“评测通过”偷换成发布授权。真实模式的同名动作会修改外部项目，必须另有明确授权与配置，不属于这次无账号演练。
+
+这条路径的验收分三层。第一层检查业务：针对 A30 联合任务，在相同授权范围与资料版本下，候选和答案是否满足规则。原始 Q01–Q14 仍由基础程序评测，新包没有声称覆盖所有自然语言任务。第二层检查集成：实际 Prompt 版本是否关联到 generation，业务步骤是否构成正确的父子关系，评分是否能回到候选答案，失败后是否有可读取记录。第三层检查导出：缓冲是否刷新，进程是否优雅关闭，接收端读到的是 SDK 发出的数据而不是人工生成的 JSON。
+
+实际交付证据至少包含以下对象，不用一张截图代替：
+
+| 证据 | 要检查的内容 | 不能证明的内容 |
+| --- | --- | --- |
+| `demo-report.json` / `compare.json` | v1 无依据能力断言失败；v2 保留未知通过；用量与费用未知 | 真实模型质量提升 |
+| 对应命令的 `*-spans.json` / `*-otlp.json` | 同一 trace 中真实父子关系、generation 类型、Prompt 关联与脱敏 | Langfuse 平台已索引或可见 |
+| `failure.json` / `replay.json` | 错误输出可重评，固定版本回归有新执行记录 | 对任意外部状态的确定性重放 |
+| 本地 `promote.json`（仅显式执行后） | 报告门槛、明确确认、标签修改与回读 | 任何真实环境已获发布授权 |
+
+第三层通过后，仍不能写“Langfuse 平台已验收”。真实服务中的项目路由、认证、索引、界面显示、访问权限、保留与删除策略，必须在显式启用真实模式之后验证。本次教学默认不进行这些平台操作，也不调用付费模型。
+
+## 把受限循环与恢复分别交接
+
+SDK 包的新增 TypeScript Agent 循环需要单独验收。固定 A30 的 v1/v2 报告只证明那条预定工作流，不能替动态选择签字。循环验收要检查实际 HTTP 选择器输出了什么动作，执行器接受或拒绝了什么，每一步消耗了哪些预算，以及最终为什么停止。默认的脚本选择器是可控替身，不是“模型已自主解决任务”的证据。在 `examples/atlas-observability` 目录运行：
+
+```bash
+npm run agent-failure
+npm run agent-compare
+npm run agent-run -- --http-selector
+```
+
+前两条默认用脚本选择器，分别演练重复查询构建而耗尽工具预算，以及重复策略和证据优先策略的独立对比。第三条通过实际 HTTP 调用本地动作选择替身，明确选择 `read_docs`、`build_status` 或 `finish`；它没有连接外部模型。需要两种策略都经过 HTTP 边界时，可以再运行 `npm run agent-compare -- --http-selector`，但应先归档脚本模式报告，因为同名命令的文件会更新。
+
+对应产物是 `reports/agent-failure.json`、`agent-compare.json`、`agent-run.json` 及同命令的 `-spans.json`、`-otlp.json`。检查 `selector`、`policy`、`limits`、`steps`、`toolCalls`、`stopReason` 和 `quality`，再按 `traceId` 找到 `agent.task` 下逐步形成的 `agent.step`。`agent.choose` 在 HTTP 模式应为 generation，脚本模式应为 span；两者不能混算模型调用次数。
+
+还要主动给出两种反例：选择器提出不允许的动作，执行器应在调用工具之前拒绝；选择器反复要求继续，循环应因明确预算终止，而不是无限请求。本次生成的本地报告可以作为具体核对样本：
+
+| 实际本地运行 | 步数 / 工具次数 | 停止与结果 |
+| --- | --- | --- |
+| `agent-failure`，脚本重复构建 | 3 / 2 | `tool_budget`，没有最终候选，`quality=null` |
+| `agent-compare` 的证据优先分支 | 3 / 2 | `completed`，`quality.pass=true` |
+| `agent-run -- --http-selector` | 3 / 2 | `completed`，`quality.pass=true`，实际发出本地 HTTP 选择请求 |
+
+这些是合成策略演练，不代表真实模型决策质量。报告的 `syntheticCostUnits` 只用于有界执行，真实用量与费用仍为未知。失败分支没有完成答案，不能把 `quality=null` 改写成“答案评测通过”；它验证的是预算阻止继续执行。
+
+停止本身不等于任务成功，仍需检查最终输出是否满足证据约束。读者应能从报告中的停止原因回到对应步骤的 generation、执行结果和校验记录。
+
+旧 `examples/atlas` 的持久化检查点和沙箱写入回执继续独立存在。不要把“旧包恢复测试通过”和“新包 SDK trace 完整”相加，宣称新的 HTTP Agent 已支持可靠重启恢复。新循环明确报告 `resumeSupported=false`；当前输出文件是事后证据，不能代替执行状态库。真实外部 HTTP 选择器虽有可执行适配路径，本次没有调用外部模型或验证其质量、耗时、费用。
+
 ## 接入外部能力时，验收需要重新开始
 
-第 11 篇的 Langfuse、第 15 篇的 Elasticsearch、第 34 篇的 MCP 都有明确的协议或版本边界。当前默认程序不连接这些服务。真实模型的调用、真实用量和费用同样未由 mock 验证。不能把库安装成功、HTTP 成功或 trace 出现当作完整业务验收。
+第 11 篇的 Langfuse SDK 现在有独立可执行集成路径；第 15 篇的 Elasticsearch、第 34 篇的 MCP 仍是可选外部接入。默认程序不连接真实平台。真实模型的行为、真实用量和费用同样未由本地 HTTP 替身验证。不能把库安装成功、HTTP 成功或 trace 出现当作完整业务验收。
 
 | 可选接入 | 还需要新增的验证 |
 | --- | --- |
 | 真实模型适配器 | 凭证只在服务端；格式、拒答、截断与用量映射；同题多次评测 |
 | Elasticsearch | 实际版本、映射与过滤；同租户/跨租户检索；删除与切换快照 |
-| Langfuse | 首条链路可见；父子关系；导出前脱敏；flush/shutdown；查看和删除权限 |
+| Langfuse 平台 | 对照本地 SDK 导出验证项目内首条链路可见、父子关系与 Prompt 版本；检查认证、查看/导出/删除权限与保留策略 |
 | MCP 工具服务 | 协议版本与能力发现；会话和授权边界；业务参数与结果校验 |
 | 持久化存储 | 原子性、并发、崩溃窗口、回执查询、备份恢复与撤权后的继续执行 |
 

@@ -1,0 +1,418 @@
+[
+  {
+    "name": "authorize",
+    "traceId": "55cf53229ffb5125c9e7de07d2c65309",
+    "spanId": "27852e790f03cdf4",
+    "parentSpanId": "9c67285658e476e6",
+    "attributes": {
+      "langfuse.environment": "atlas-local-demo",
+      "langfuse.release": "atlas-observability-1",
+      "user.id": "reader-a",
+      "session.id": "session-a30-demo",
+      "langfuse.trace.metadata.taskId": "\"A30-compare\"",
+      "langfuse.trace.metadata.runId": "\"55d5063f-efa9-42c4-9087-2b7a2214f471\"",
+      "langfuse.trace.metadata.attempt": "\"1\"",
+      "langfuse.trace.metadata.fixtureVersion": "\"atlas-fixture-01\"",
+      "langfuse.observation.type": "span",
+      "langfuse.observation.output": "{\"policyVersion\":\"policy-1\",\"allowed\":true}"
+    },
+    "status": {
+      "code": 0
+    },
+    "startTimeUnixNano": "1793018266661000000",
+    "endTimeUnixNano": "1793018266661733409",
+    "durationMs": 0.733409
+  },
+  {
+    "name": "authorize",
+    "traceId": "781f55a4aa499b71707dbf44e092c675",
+    "spanId": "7747a1cffd5754d5",
+    "parentSpanId": "c09659d06a992b4a",
+    "attributes": {
+      "langfuse.environment": "atlas-local-demo",
+      "langfuse.release": "atlas-observability-1",
+      "user.id": "reader-a",
+      "session.id": "session-a30-demo",
+      "langfuse.trace.metadata.taskId": "\"A30-compare\"",
+      "langfuse.trace.metadata.runId": "\"234e4d79-8cab-4b30-970d-732264289867\"",
+      "langfuse.trace.metadata.attempt": "\"2\"",
+      "langfuse.trace.metadata.fixtureVersion": "\"atlas-fixture-01\"",
+      "langfuse.observation.type": "span",
+      "langfuse.observation.output": "{\"policyVersion\":\"policy-1\",\"allowed\":true}"
+    },
+    "status": {
+      "code": 0
+    },
+    "startTimeUnixNano": "1793018266662000000",
+    "endTimeUnixNano": "1793018266662444444",
+    "durationMs": 0.444444
+  },
+  {
+    "name": "retrieve.docs",
+    "traceId": "55cf53229ffb5125c9e7de07d2c65309",
+    "spanId": "6e3a39c8e0c17ee7",
+    "parentSpanId": "9c67285658e476e6",
+    "attributes": {
+      "langfuse.environment": "atlas-local-demo",
+      "langfuse.release": "atlas-observability-1",
+      "user.id": "reader-a",
+      "session.id": "session-a30-demo",
+      "langfuse.trace.metadata.taskId": "\"A30-compare\"",
+      "langfuse.trace.metadata.runId": "\"55d5063f-efa9-42c4-9087-2b7a2214f471\"",
+      "langfuse.trace.metadata.attempt": "\"1\"",
+      "langfuse.trace.metadata.fixtureVersion": "\"atlas-fixture-01\"",
+      "langfuse.observation.type": "span",
+      "langfuse.observation.output": "{\"candidateIds\":[\"C-T20\"],\"sourceRevisions\":[\"C-T20@r1\"]}"
+    },
+    "status": {
+      "code": 0
+    },
+    "startTimeUnixNano": "1793018266662000000",
+    "endTimeUnixNano": "1793018266663705605",
+    "durationMs": 1.705605
+  },
+  {
+    "name": "select.evidence",
+    "traceId": "55cf53229ffb5125c9e7de07d2c65309",
+    "spanId": "889b850cdc808d03",
+    "parentSpanId": "9c67285658e476e6",
+    "attributes": {
+      "langfuse.environment": "atlas-local-demo",
+      "langfuse.release": "atlas-observability-1",
+      "user.id": "reader-a",
+      "session.id": "session-a30-demo",
+      "langfuse.trace.metadata.taskId": "\"A30-compare\"",
+      "langfuse.trace.metadata.runId": "\"55d5063f-efa9-42c4-9087-2b7a2214f471\"",
+      "langfuse.trace.metadata.attempt": "\"1\"",
+      "langfuse.trace.metadata.fixtureVersion": "\"atlas-fixture-01\"",
+      "langfuse.observation.type": "span",
+      "langfuse.observation.output": "{\"sourceIds\":[\"C-T20\"]}"
+    },
+    "status": {
+      "code": 0
+    },
+    "startTimeUnixNano": "1793018266664000000",
+    "endTimeUnixNano": "1793018266664153559",
+    "durationMs": 0.153559
+  },
+  {
+    "name": "tool.build_status",
+    "traceId": "55cf53229ffb5125c9e7de07d2c65309",
+    "spanId": "11ac3c8b229ac9df",
+    "parentSpanId": "9c67285658e476e6",
+    "attributes": {
+      "langfuse.environment": "atlas-local-demo",
+      "langfuse.release": "atlas-observability-1",
+      "user.id": "reader-a",
+      "session.id": "session-a30-demo",
+      "langfuse.trace.metadata.taskId": "\"A30-compare\"",
+      "langfuse.trace.metadata.runId": "\"55d5063f-efa9-42c4-9087-2b7a2214f471\"",
+      "langfuse.trace.metadata.attempt": "\"1\"",
+      "langfuse.trace.metadata.fixtureVersion": "\"atlas-fixture-01\"",
+      "langfuse.observation.type": "tool",
+      "langfuse.observation.input": "{\"component\":\"AtlasTable\",\"version\":\"2.0\"}",
+      "langfuse.observation.output": "{\"status\":\"succeeded\",\"buildId\":\"build-demo-20\",\"observedAt\":\"2026-10-26T00:00:00Z\"}"
+    },
+    "status": {
+      "code": 0
+    },
+    "startTimeUnixNano": "1793018266664000000",
+    "endTimeUnixNano": "1793018266664133910",
+    "durationMs": 0.13391
+  },
+  {
+    "name": "retrieve.docs",
+    "traceId": "781f55a4aa499b71707dbf44e092c675",
+    "spanId": "db65a6abd5fa27dc",
+    "parentSpanId": "c09659d06a992b4a",
+    "attributes": {
+      "langfuse.environment": "atlas-local-demo",
+      "langfuse.release": "atlas-observability-1",
+      "user.id": "reader-a",
+      "session.id": "session-a30-demo",
+      "langfuse.trace.metadata.taskId": "\"A30-compare\"",
+      "langfuse.trace.metadata.runId": "\"234e4d79-8cab-4b30-970d-732264289867\"",
+      "langfuse.trace.metadata.attempt": "\"2\"",
+      "langfuse.trace.metadata.fixtureVersion": "\"atlas-fixture-01\"",
+      "langfuse.observation.type": "span",
+      "langfuse.observation.output": "{\"candidateIds\":[\"C-T20\"],\"sourceRevisions\":[\"C-T20@r1\"]}"
+    },
+    "status": {
+      "code": 0
+    },
+    "startTimeUnixNano": "1793018266662000000",
+    "endTimeUnixNano": "1793018266670727376",
+    "durationMs": 8.727376
+  },
+  {
+    "name": "select.evidence",
+    "traceId": "781f55a4aa499b71707dbf44e092c675",
+    "spanId": "89d5fbc8835310db",
+    "parentSpanId": "c09659d06a992b4a",
+    "attributes": {
+      "langfuse.environment": "atlas-local-demo",
+      "langfuse.release": "atlas-observability-1",
+      "user.id": "reader-a",
+      "session.id": "session-a30-demo",
+      "langfuse.trace.metadata.taskId": "\"A30-compare\"",
+      "langfuse.trace.metadata.runId": "\"234e4d79-8cab-4b30-970d-732264289867\"",
+      "langfuse.trace.metadata.attempt": "\"2\"",
+      "langfuse.trace.metadata.fixtureVersion": "\"atlas-fixture-01\"",
+      "langfuse.observation.type": "span",
+      "langfuse.observation.output": "{\"sourceIds\":[\"C-T20\"]}"
+    },
+    "status": {
+      "code": 0
+    },
+    "startTimeUnixNano": "1793018266671000000",
+    "endTimeUnixNano": "1793018266671101116",
+    "durationMs": 0.101116
+  },
+  {
+    "name": "tool.build_status",
+    "traceId": "781f55a4aa499b71707dbf44e092c675",
+    "spanId": "a31c8553a2723704",
+    "parentSpanId": "c09659d06a992b4a",
+    "attributes": {
+      "langfuse.environment": "atlas-local-demo",
+      "langfuse.release": "atlas-observability-1",
+      "user.id": "reader-a",
+      "session.id": "session-a30-demo",
+      "langfuse.trace.metadata.taskId": "\"A30-compare\"",
+      "langfuse.trace.metadata.runId": "\"234e4d79-8cab-4b30-970d-732264289867\"",
+      "langfuse.trace.metadata.attempt": "\"2\"",
+      "langfuse.trace.metadata.fixtureVersion": "\"atlas-fixture-01\"",
+      "langfuse.observation.type": "tool",
+      "langfuse.observation.input": "{\"component\":\"AtlasTable\",\"version\":\"2.0\"}",
+      "langfuse.observation.output": "{\"status\":\"succeeded\",\"buildId\":\"build-demo-20\",\"observedAt\":\"2026-10-26T00:00:00Z\"}"
+    },
+    "status": {
+      "code": 0
+    },
+    "startTimeUnixNano": "1793018266671000000",
+    "endTimeUnixNano": "1793018266671079807",
+    "durationMs": 0.079807
+  },
+  {
+    "name": "prompt.resolve",
+    "traceId": "55cf53229ffb5125c9e7de07d2c65309",
+    "spanId": "0a9984736707b49e",
+    "parentSpanId": "9c67285658e476e6",
+    "attributes": {
+      "langfuse.environment": "atlas-local-demo",
+      "langfuse.release": "atlas-observability-1",
+      "user.id": "reader-a",
+      "session.id": "session-a30-demo",
+      "langfuse.trace.metadata.taskId": "\"A30-compare\"",
+      "langfuse.trace.metadata.runId": "\"55d5063f-efa9-42c4-9087-2b7a2214f471\"",
+      "langfuse.trace.metadata.attempt": "\"1\"",
+      "langfuse.trace.metadata.fixtureVersion": "\"atlas-fixture-01\"",
+      "langfuse.observation.type": "span",
+      "langfuse.observation.output": "{\"name\":\"atlas-answer\",\"version\":1,\"source\":\"langfuse\",\"fallback\":false}"
+    },
+    "status": {
+      "code": 0
+    },
+    "startTimeUnixNano": "1793018266664000000",
+    "endTimeUnixNano": "1793018266684059797",
+    "durationMs": 20.059797
+  },
+  {
+    "name": "prompt.resolve",
+    "traceId": "781f55a4aa499b71707dbf44e092c675",
+    "spanId": "d4021faad8e8a75d",
+    "parentSpanId": "c09659d06a992b4a",
+    "attributes": {
+      "langfuse.environment": "atlas-local-demo",
+      "langfuse.release": "atlas-observability-1",
+      "user.id": "reader-a",
+      "session.id": "session-a30-demo",
+      "langfuse.trace.metadata.taskId": "\"A30-compare\"",
+      "langfuse.trace.metadata.runId": "\"234e4d79-8cab-4b30-970d-732264289867\"",
+      "langfuse.trace.metadata.attempt": "\"2\"",
+      "langfuse.trace.metadata.fixtureVersion": "\"atlas-fixture-01\"",
+      "langfuse.observation.type": "span",
+      "langfuse.observation.output": "{\"name\":\"atlas-answer\",\"version\":2,\"source\":\"langfuse\",\"fallback\":false}"
+    },
+    "status": {
+      "code": 0
+    },
+    "startTimeUnixNano": "1793018266671000000",
+    "endTimeUnixNano": "1793018266689185668",
+    "durationMs": 18.185668
+  },
+  {
+    "name": "answer.validate",
+    "traceId": "781f55a4aa499b71707dbf44e092c675",
+    "spanId": "79470d9efe972271",
+    "parentSpanId": "c09659d06a992b4a",
+    "attributes": {
+      "langfuse.environment": "atlas-local-demo",
+      "langfuse.release": "atlas-observability-1",
+      "user.id": "reader-a",
+      "session.id": "session-a30-demo",
+      "langfuse.trace.metadata.taskId": "\"A30-compare\"",
+      "langfuse.trace.metadata.runId": "\"234e4d79-8cab-4b30-970d-732264289867\"",
+      "langfuse.trace.metadata.attempt": "\"2\"",
+      "langfuse.trace.metadata.fixtureVersion": "\"atlas-fixture-01\"",
+      "langfuse.observation.type": "span",
+      "langfuse.observation.output": "{\"pass\":true,\"errors\":[],\"ruleVersion\":\"a30-rule-1\",\"method\":\"bounded synthetic assertions; human review required\"}"
+    },
+    "status": {
+      "code": 0
+    },
+    "startTimeUnixNano": "1793018266693000000",
+    "endTimeUnixNano": "1793018266693231699",
+    "durationMs": 0.231699
+  },
+  {
+    "name": "assistant.task",
+    "traceId": "781f55a4aa499b71707dbf44e092c675",
+    "spanId": "c09659d06a992b4a",
+    "parentSpanId": null,
+    "attributes": {
+      "langfuse.environment": "atlas-local-demo",
+      "langfuse.release": "atlas-observability-1",
+      "langfuse.internal.is_app_root": true,
+      "langfuse.observation.type": "span",
+      "user.id": "reader-a",
+      "session.id": "session-a30-demo",
+      "langfuse.trace.metadata.taskId": "\"A30-compare\"",
+      "langfuse.trace.metadata.runId": "\"234e4d79-8cab-4b30-970d-732264289867\"",
+      "langfuse.trace.metadata.attempt": "\"2\"",
+      "langfuse.trace.metadata.fixtureVersion": "\"atlas-fixture-01\"",
+      "langfuse.observation.input": "{\"caseId\":\"A30-unsupported-capability\",\"targetVersion\":\"2.0\"}",
+      "langfuse.observation.metadata.deadlineAt": "1793018271661",
+      "langfuse.observation.metadata.ruleVersion": "\"a30-rule-1\"",
+      "langfuse.observation.output": "{\"resultKind\":\"insufficient_evidence\",\"qualityStatus\":\"passed\",\"qualityPassed\":true}"
+    },
+    "status": {
+      "code": 0
+    },
+    "startTimeUnixNano": "1793018266661000000",
+    "endTimeUnixNano": "1793018266693353772",
+    "durationMs": 32.353772
+  },
+  {
+    "name": "model.answer",
+    "traceId": "781f55a4aa499b71707dbf44e092c675",
+    "spanId": "0911b09cbf35651b",
+    "parentSpanId": "c09659d06a992b4a",
+    "attributes": {
+      "langfuse.environment": "atlas-local-demo",
+      "langfuse.release": "atlas-observability-1",
+      "user.id": "reader-a",
+      "session.id": "session-a30-demo",
+      "langfuse.trace.metadata.taskId": "\"A30-compare\"",
+      "langfuse.trace.metadata.runId": "\"234e4d79-8cab-4b30-970d-732264289867\"",
+      "langfuse.trace.metadata.attempt": "\"2\"",
+      "langfuse.trace.metadata.fixtureVersion": "\"atlas-fixture-01\"",
+      "langfuse.observation.type": "generation",
+      "langfuse.observation.input": "{\"caseId\":\"A30-unsupported-capability\",\"sourceIds\":[\"C-T20\"]}",
+      "langfuse.observation.model.name": "atlas-http-mock",
+      "langfuse.observation.model.parameters": "{\"max_completion_tokens\":300}",
+      "langfuse.observation.prompt.name": "atlas-answer",
+      "langfuse.observation.prompt.version": 2,
+      "langfuse.observation.metadata.promptSource": "\"langfuse\"",
+      "langfuse.observation.metadata.promptVersion": "2",
+      "langfuse.observation.metadata.diagnostic": "\"[REDACTED]\"",
+      "langfuse.observation.output": "{\"parameterResult\":\"insufficient_evidence\",\"buildStatus\":\"succeeded\",\"buildId\":\"build-demo-20\",\"sourceIds\":[\"C-T20\"],\"answer\":\"资料未说明 virtual 参数，无法确认；构建 build-demo-20 在 2026-10-26T00:00:00Z 为 succeeded。\"}",
+      "langfuse.observation.metadata.usageKnown": "false",
+      "langfuse.observation.metadata.costKnown": "false"
+    },
+    "status": {
+      "code": 0
+    },
+    "startTimeUnixNano": "1793018266690000000",
+    "endTimeUnixNano": "1793018266693516191",
+    "durationMs": 3.516191
+  },
+  {
+    "name": "answer.validate",
+    "traceId": "55cf53229ffb5125c9e7de07d2c65309",
+    "spanId": "d4b56ca6df3c63ea",
+    "parentSpanId": "9c67285658e476e6",
+    "attributes": {
+      "langfuse.environment": "atlas-local-demo",
+      "langfuse.release": "atlas-observability-1",
+      "user.id": "reader-a",
+      "session.id": "session-a30-demo",
+      "langfuse.trace.metadata.taskId": "\"A30-compare\"",
+      "langfuse.trace.metadata.runId": "\"55d5063f-efa9-42c4-9087-2b7a2214f471\"",
+      "langfuse.trace.metadata.attempt": "\"1\"",
+      "langfuse.trace.metadata.fixtureVersion": "\"atlas-fixture-01\"",
+      "langfuse.observation.type": "span",
+      "langfuse.observation.level": "ERROR",
+      "langfuse.observation.status_message": "quality_failed",
+      "langfuse.observation.output": "{\"pass\":false,\"errors\":[\"unsupported_parameter_claim\",\"unsupported_text\"],\"ruleVersion\":\"a30-rule-1\",\"method\":\"bounded synthetic assertions; human review required\"}"
+    },
+    "status": {
+      "code": 0
+    },
+    "startTimeUnixNano": "1793018266695000000",
+    "endTimeUnixNano": "1793018266695281445",
+    "durationMs": 0.281445
+  },
+  {
+    "name": "assistant.task",
+    "traceId": "55cf53229ffb5125c9e7de07d2c65309",
+    "spanId": "9c67285658e476e6",
+    "parentSpanId": null,
+    "attributes": {
+      "langfuse.environment": "atlas-local-demo",
+      "langfuse.release": "atlas-observability-1",
+      "langfuse.internal.is_app_root": true,
+      "langfuse.observation.type": "span",
+      "user.id": "reader-a",
+      "session.id": "session-a30-demo",
+      "langfuse.trace.metadata.taskId": "\"A30-compare\"",
+      "langfuse.trace.metadata.runId": "\"55d5063f-efa9-42c4-9087-2b7a2214f471\"",
+      "langfuse.trace.metadata.attempt": "\"1\"",
+      "langfuse.trace.metadata.fixtureVersion": "\"atlas-fixture-01\"",
+      "langfuse.observation.input": "{\"caseId\":\"A30-unsupported-capability\",\"targetVersion\":\"2.0\"}",
+      "langfuse.observation.metadata.deadlineAt": "1793018271658",
+      "langfuse.observation.metadata.ruleVersion": "\"a30-rule-1\"",
+      "langfuse.observation.output": "{\"resultKind\":null,\"qualityStatus\":\"failed\",\"qualityPassed\":false}"
+    },
+    "status": {
+      "code": 0
+    },
+    "startTimeUnixNano": "1793018266659000000",
+    "endTimeUnixNano": "1793018266694821535",
+    "durationMs": 35.821535
+  },
+  {
+    "name": "model.answer",
+    "traceId": "55cf53229ffb5125c9e7de07d2c65309",
+    "spanId": "7cb39ee03bceef3f",
+    "parentSpanId": "9c67285658e476e6",
+    "attributes": {
+      "langfuse.environment": "atlas-local-demo",
+      "langfuse.release": "atlas-observability-1",
+      "user.id": "reader-a",
+      "session.id": "session-a30-demo",
+      "langfuse.trace.metadata.taskId": "\"A30-compare\"",
+      "langfuse.trace.metadata.runId": "\"55d5063f-efa9-42c4-9087-2b7a2214f471\"",
+      "langfuse.trace.metadata.attempt": "\"1\"",
+      "langfuse.trace.metadata.fixtureVersion": "\"atlas-fixture-01\"",
+      "langfuse.observation.type": "generation",
+      "langfuse.observation.input": "{\"caseId\":\"A30-unsupported-capability\",\"sourceIds\":[\"C-T20\"]}",
+      "langfuse.observation.model.name": "atlas-http-mock",
+      "langfuse.observation.model.parameters": "{\"max_completion_tokens\":300}",
+      "langfuse.observation.prompt.name": "atlas-answer",
+      "langfuse.observation.prompt.version": 1,
+      "langfuse.observation.metadata.promptSource": "\"langfuse\"",
+      "langfuse.observation.metadata.promptVersion": "1",
+      "langfuse.observation.metadata.diagnostic": "\"[REDACTED]\"",
+      "langfuse.observation.output": "{\"parameterResult\":\"supported\",\"buildStatus\":\"succeeded\",\"buildId\":\"build-demo-20\",\"sourceIds\":[\"C-T20\"],\"answer\":\"构建成功，因此 AtlasTable 2.0 支持 virtual，可以直接使用。\"}",
+      "langfuse.observation.metadata.usageKnown": "false",
+      "langfuse.observation.metadata.costKnown": "false"
+    },
+    "status": {
+      "code": 0
+    },
+    "startTimeUnixNano": "1793018266686000000",
+    "endTimeUnixNano": "1793018266694545557",
+    "durationMs": 8.545557
+  }
+]

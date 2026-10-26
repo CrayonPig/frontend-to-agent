@@ -1,0 +1,41 @@
+{
+  "runId": "fd3a5d63-83e2-4fc4-9a3d-eca1eb5ca366",
+  "taskId": "A30-agent",
+  "attempt": 1,
+  "traceId": "20dcdf6f7e0e9dfba5a545f60738c1b9",
+  "caseId": "A30-unsupported-capability",
+  "fixtureVersion": "atlas-fixture-01",
+  "ruleVersion": "a30-rule-1",
+  "environment": "atlas-local-demo",
+  "selector": "script",
+  "policy": "repeat-build",
+  "deadlineAt": 1793018273355,
+  "limits": {
+    "maxSteps": 4,
+    "maxToolCalls": 2,
+    "maxCostUnits": 4
+  },
+  "steps": 3,
+  "toolCalls": 2,
+  "syntheticCostUnits": 3,
+  "cost": null,
+  "usage": null,
+  "stopReason": "tool_budget",
+  "history": [
+    {
+      "step": 1,
+      "action": "build_status",
+      "result": "succeeded"
+    },
+    {
+      "step": 2,
+      "action": "build_status",
+      "result": "succeeded"
+    }
+  ],
+  "candidateAnswer": null,
+  "quality": null,
+  "durationMs": 6.560604000000012,
+  "sourceRevisions": [],
+  "resumeSupported": false
+}

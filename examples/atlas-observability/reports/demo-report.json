@@ -1,0 +1,343 @@
+{
+  "mode": "local-http",
+  "seeded": [
+    {
+      "version": 1,
+      "created": false
+    },
+    {
+      "version": 2,
+      "created": false
+    }
+  ],
+  "comparison": {
+    "fixtureVersion": "atlas-fixture-01",
+    "ruleVersion": "a30-rule-1",
+    "caseCount": 1,
+    "modelQualityMeasured": false,
+    "execution": {
+      "modelMode": "local-http-mock",
+      "model": "atlas-http-mock"
+    },
+    "runs": [
+      {
+        "runId": "133e271f-39ef-40a2-87ec-dbf4e2c31986",
+        "taskId": "A30-compare",
+        "attempt": 1,
+        "traceId": "8a5e545aafb4ffeaf4be5fa214a9009f",
+        "environment": "atlas-local-demo",
+        "sdkVersions": {
+          "langfuse": "6.0.2",
+          "otelApi": "1.9.0",
+          "otelSdkNode": "0.208.0"
+        },
+        "modelMode": "local-http-mock",
+        "caseId": "A30-unsupported-capability",
+        "fixtureVersion": "atlas-fixture-01",
+        "ruleVersion": "a30-rule-1",
+        "candidateIds": [
+          "C-T20"
+        ],
+        "sourceRevisions": [
+          "C-T20@r1"
+        ],
+        "prompt": {
+          "name": "atlas-answer",
+          "version": 1,
+          "label": null,
+          "source": "langfuse",
+          "fallback": false,
+          "fallbackVersion": null,
+          "contentHash": "a9ea6d9b681a98fd99eab1efeaeeb3ac0ebad8933bcfb0938b1dfcae13b65c68",
+          "configHash": "1bc972e2cd1ad08515ed5cc9f30ea8bc874b73a645e079d7a7988aa4d7429e23"
+        },
+        "appliedModel": "atlas-http-mock",
+        "maxCompletionTokens": 300,
+        "tool": {
+          "component": "AtlasTable",
+          "version": "2.0",
+          "buildId": "build-demo-20",
+          "status": "succeeded",
+          "observedAt": "2026-10-26T00:00:00Z",
+          "synthetic": true
+        },
+        "candidateAnswer": {
+          "parameterResult": "supported",
+          "buildStatus": "succeeded",
+          "buildId": "build-demo-20",
+          "sourceIds": [
+            "C-T20"
+          ],
+          "answer": "构建成功，因此 AtlasTable 2.0 支持 virtual，可以直接使用。"
+        },
+        "quality": {
+          "pass": false,
+          "errors": [
+            "unsupported_parameter_claim",
+            "unsupported_text"
+          ],
+          "ruleVersion": "a30-rule-1",
+          "method": "bounded synthetic assertions; human review required"
+        },
+        "durationMs": 20.077458000000007,
+        "usage": null,
+        "cost": null,
+        "resultKind": null,
+        "qualityStatus": "failed"
+      },
+      {
+        "runId": "bf213f6b-379d-414f-986e-adeada6c2328",
+        "taskId": "A30-compare",
+        "attempt": 2,
+        "traceId": "fe1425d73bb9753e871344858b51e66f",
+        "environment": "atlas-local-demo",
+        "sdkVersions": {
+          "langfuse": "6.0.2",
+          "otelApi": "1.9.0",
+          "otelSdkNode": "0.208.0"
+        },
+        "modelMode": "local-http-mock",
+        "caseId": "A30-unsupported-capability",
+        "fixtureVersion": "atlas-fixture-01",
+        "ruleVersion": "a30-rule-1",
+        "candidateIds": [
+          "C-T20"
+        ],
+        "sourceRevisions": [
+          "C-T20@r1"
+        ],
+        "prompt": {
+          "name": "atlas-answer",
+          "version": 2,
+          "label": null,
+          "source": "langfuse",
+          "fallback": false,
+          "fallbackVersion": null,
+          "contentHash": "0f60b24bab75f06f4c3fd4e144237a1f865655f0114e0791af8baf0e0deb61bd",
+          "configHash": "1bc972e2cd1ad08515ed5cc9f30ea8bc874b73a645e079d7a7988aa4d7429e23"
+        },
+        "appliedModel": "atlas-http-mock",
+        "maxCompletionTokens": 300,
+        "tool": {
+          "component": "AtlasTable",
+          "version": "2.0",
+          "buildId": "build-demo-20",
+          "status": "succeeded",
+          "observedAt": "2026-10-26T00:00:00Z",
+          "synthetic": true
+        },
+        "candidateAnswer": {
+          "parameterResult": "insufficient_evidence",
+          "buildStatus": "succeeded",
+          "buildId": "build-demo-20",
+          "sourceIds": [
+            "C-T20"
+          ],
+          "answer": "资料未说明 virtual 参数，无法确认；构建 build-demo-20 在 2026-10-26T00:00:00Z 为 succeeded。"
+        },
+        "quality": {
+          "pass": true,
+          "errors": [],
+          "ruleVersion": "a30-rule-1",
+          "method": "bounded synthetic assertions; human review required"
+        },
+        "durationMs": 18.17317700000001,
+        "usage": null,
+        "cost": null,
+        "resultKind": "insufficient_evidence",
+        "qualityStatus": "passed"
+      }
+    ],
+    "summary": [
+      {
+        "version": 1,
+        "pass": false,
+        "durationMs": 20.077458000000007,
+        "cost": null,
+        "usage": null
+      },
+      {
+        "version": 2,
+        "pass": true,
+        "durationMs": 18.17317700000001,
+        "cost": null,
+        "usage": null
+      }
+    ],
+    "warning": "One synthetic case; local HTTP model is scripted by prompt text. Not a model-quality benchmark. No automatic label change."
+  },
+  "fallback": {
+    "runId": "46dfe67b-c8ce-4d15-bc0a-e58b777b2ff2",
+    "taskId": "A30-demo",
+    "attempt": 3,
+    "traceId": "e901217bb2a9426208f99ea6162de358",
+    "environment": "atlas-local-demo",
+    "sdkVersions": {
+      "langfuse": "6.0.2",
+      "otelApi": "1.9.0",
+      "otelSdkNode": "0.208.0"
+    },
+    "modelMode": "local-http-mock",
+    "caseId": "A30-unsupported-capability",
+    "fixtureVersion": "atlas-fixture-01",
+    "ruleVersion": "a30-rule-1",
+    "candidateIds": [
+      "C-T20"
+    ],
+    "sourceRevisions": [
+      "C-T20@r1"
+    ],
+    "prompt": {
+      "name": "atlas-answer",
+      "version": null,
+      "label": null,
+      "source": "local-fallback",
+      "fallback": true,
+      "fallbackVersion": "local-v2",
+      "contentHash": "0f60b24bab75f06f4c3fd4e144237a1f865655f0114e0791af8baf0e0deb61bd",
+      "configHash": "1bc972e2cd1ad08515ed5cc9f30ea8bc874b73a645e079d7a7988aa4d7429e23"
+    },
+    "appliedModel": "atlas-http-mock",
+    "maxCompletionTokens": 300,
+    "tool": {
+      "component": "AtlasTable",
+      "version": "2.0",
+      "buildId": "build-demo-20",
+      "status": "succeeded",
+      "observedAt": "2026-10-26T00:00:00Z",
+      "synthetic": true
+    },
+    "candidateAnswer": {
+      "parameterResult": "insufficient_evidence",
+      "buildStatus": "succeeded",
+      "buildId": "build-demo-20",
+      "sourceIds": [
+        "C-T20"
+      ],
+      "answer": "资料未说明 virtual 参数，无法确认；构建 build-demo-20 在 2026-10-26T00:00:00Z 为 succeeded。"
+    },
+    "quality": {
+      "pass": true,
+      "errors": [],
+      "ruleVersion": "a30-rule-1",
+      "method": "bounded synthetic assertions; human review required"
+    },
+    "durationMs": 11.450896000000029,
+    "usage": null,
+    "cost": null,
+    "resultKind": "insufficient_evidence",
+    "qualityStatus": "passed"
+  },
+  "evidenceBoundary": {
+    "runId": "1064e039-18f7-470c-b661-6954c07c8baa",
+    "taskId": "A30-demo",
+    "attempt": 4,
+    "traceId": "e835178a4b1c058bce0ea4a5348a9e37",
+    "environment": "atlas-local-demo",
+    "sdkVersions": {
+      "langfuse": "6.0.2",
+      "otelApi": "1.9.0",
+      "otelSdkNode": "0.208.0"
+    },
+    "modelMode": "local-http-mock",
+    "caseId": "A30-unsupported-capability",
+    "fixtureVersion": "atlas-fixture-01",
+    "ruleVersion": "a30-rule-1",
+    "resultKind": "forbidden",
+    "errorCategory": "evidence_scope",
+    "candidateIds": [
+      "C-T20"
+    ],
+    "sourceRevisions": [
+      "C-T20@r1"
+    ],
+    "quality": {
+      "pass": false,
+      "errors": [
+        "evidence_scope"
+      ]
+    },
+    "durationMs": 0.6231339999999932,
+    "usage": null,
+    "cost": null
+  },
+  "replay": {
+    "recordedReplay": {
+      "sourceRunId": "133e271f-39ef-40a2-87ec-dbf4e2c31986",
+      "traceId": "8a5e545aafb4ffeaf4be5fa214a9009f",
+      "quality": {
+        "pass": false,
+        "errors": [
+          "unsupported_parameter_claim",
+          "unsupported_text"
+        ],
+        "ruleVersion": "a30-rule-1",
+        "method": "bounded synthetic assertions; human review required"
+      },
+      "externalCalls": 0
+    },
+    "regression": {
+      "runId": "b16d6d08-5645-4db2-84e0-f0e554d4b5d5",
+      "taskId": "A30-demo",
+      "attempt": 5,
+      "traceId": "0422cde8da5c08811a897f89f098b860",
+      "environment": "atlas-local-demo",
+      "sdkVersions": {
+        "langfuse": "6.0.2",
+        "otelApi": "1.9.0",
+        "otelSdkNode": "0.208.0"
+      },
+      "modelMode": "local-http-mock",
+      "caseId": "A30-unsupported-capability",
+      "fixtureVersion": "atlas-fixture-01",
+      "ruleVersion": "a30-rule-1",
+      "candidateIds": [
+        "C-T20"
+      ],
+      "sourceRevisions": [
+        "C-T20@r1"
+      ],
+      "prompt": {
+        "name": "atlas-answer",
+        "version": 2,
+        "label": null,
+        "source": "langfuse",
+        "fallback": false,
+        "fallbackVersion": null,
+        "contentHash": "0f60b24bab75f06f4c3fd4e144237a1f865655f0114e0791af8baf0e0deb61bd",
+        "configHash": "1bc972e2cd1ad08515ed5cc9f30ea8bc874b73a645e079d7a7988aa4d7429e23"
+      },
+      "appliedModel": "atlas-http-mock",
+      "maxCompletionTokens": 300,
+      "tool": {
+        "component": "AtlasTable",
+        "version": "2.0",
+        "buildId": "build-demo-20",
+        "status": "succeeded",
+        "observedAt": "2026-10-26T00:00:00Z",
+        "synthetic": true
+      },
+      "candidateAnswer": {
+        "parameterResult": "insufficient_evidence",
+        "buildStatus": "succeeded",
+        "buildId": "build-demo-20",
+        "sourceIds": [
+          "C-T20"
+        ],
+        "answer": "资料未说明 virtual 参数，无法确认；构建 build-demo-20 在 2026-10-26T00:00:00Z 为 succeeded。"
+      },
+      "quality": {
+        "pass": true,
+        "errors": [],
+        "ruleVersion": "a30-rule-1",
+        "method": "bounded synthetic assertions; human review required"
+      },
+      "durationMs": 8.660577999999987,
+      "usage": null,
+      "cost": null,
+      "resultKind": "insufficient_evidence",
+      "qualityStatus": "passed"
+    }
+  },
+  "publication": "not_promoted"
+}

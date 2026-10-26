@@ -1,5 +1,8 @@
 # 42 篇覆盖矩阵
 
+> 此表保留基线章节覆盖，不能据此认定观测完整实践完成。补齐要求见[详细大纲](../outline.md)，缺口见[观测审计](observability-audit.md)，最新验证见[实施记录](progress.md)。
+
+
 本表逐篇关联独立增量、正文和示例/审阅证据。程序文件位于 [examples/atlas](https://github.com/CrayonPig/frontend-to-agent/tree/main/examples/atlas)。概念审阅不等于外部能力实测；mock 基线不能证明模型质量或成本优势。最终命令结果见[实施与验证记录](progress.md)。
 
 | 篇号 | 正文 | 本篇新增能力或认识 | 示例/验证证据 | 状态与范围 |

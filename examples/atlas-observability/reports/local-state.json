@@ -1,0 +1,34 @@
+{
+  "prompts": [
+    {
+      "name": "atlas-answer",
+      "version": 1,
+      "type": "text",
+      "prompt": "Atlas 合成助手。简短组合资料与构建结果，输出 JSON。问题：{{question}}\n资料：{{evidence}}\n状态：{{build}}\nJSON字段：parameterResult、buildStatus、buildId、sourceIds、answer。",
+      "config": {
+        "model": "atlas-http-mock",
+        "maxCompletionTokens": 300
+      },
+      "labels": [
+        "production"
+      ],
+      "tags": [
+        "synthetic-atlas"
+      ]
+    },
+    {
+      "name": "atlas-answer",
+      "version": 2,
+      "type": "text",
+      "prompt": "Atlas 合成助手。分别核对两个子问题：资料未说明 virtual，必须保留未知；构建成功不能证明组件能力。仅用允许的来源。输出 JSON。问题：{{question}}\n资料：{{evidence}}\n状态：{{build}}\nJSON字段：parameterResult(固定 insufficient_evidence)、buildStatus、buildId、sourceIds、answer。",
+      "config": {
+        "model": "atlas-http-mock",
+        "maxCompletionTokens": 300
+      },
+      "labels": [],
+      "tags": [
+        "synthetic-atlas"
+      ]
+    }
+  ]
+}

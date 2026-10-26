@@ -1,0 +1,22 @@
+{
+  "requests": [
+    {
+      "method": "POST",
+      "path": "/v1/chat/completions"
+    },
+    {
+      "method": "POST",
+      "path": "/v1/chat/completions"
+    },
+    {
+      "method": "POST",
+      "path": "/v1/chat/completions"
+    },
+    {
+      "method": "POST",
+      "path": "/api/public/otel/v1/traces"
+    }
+  ],
+  "modelRequestCount": 3,
+  "authorizationHeadersPersisted": false
+}

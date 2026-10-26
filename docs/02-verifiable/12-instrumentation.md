@@ -1,81 +1,105 @@
 # 12 自动埋点之外，还需要记录哪些业务动作
 
-接上一个模型 SDK 的自动埋点后，平台能看到请求和响应。但 Q03 仍可能答错：服务端选了 C-B20，模型只是忠实解释了错误版本的资料。此时 generation 本身没有技术错误，缺少的是“为什么选了这些材料”的业务证据。
+第 11 篇能把模型调用送到 Langfuse，但一条 generation 仍不能解释“为什么拿这些资料回答”。A30 的坏候选有合法 JSON，模型 HTTP 请求也正常结束，却把构建成功当成参数存在的证据。要定位这个错误，必须把授权、候选、工具结果与答案校验放进同一次执行。
 
-自动埋点擅长观察它认识的库调用，手动埋点补上应用自己的决定与检查。两者不是越多越好；一条模型调用被上报两遍，会让调用数与成本统计都失真。
+本篇直接检查 `examples/atlas-observability` 已实现的业务路径，不再另写一组没有实现体的 `prepare()`、`validate()` 片段。目标是能从一条失败回到相应动作，同时证明并发、脱敏与采样没有破坏这份证据。对应范围见[系列大纲中的观测学习支线](../outline.md)。
 
-## 用动作边界命名，不把内容写进名字
+## 先把自动与手动的责任分清
 
-本系列先固定几个名称，后续随功能实际实现再增加：
+当前包通过自写 `fetch` 适配器访问 Chat Completions HTTP 接口，没有安装模型 SDK 自动埋点。因此 `model.answer` generation 由应用手动创建，而不是在自动生成的 generation 外又包一份同名调用。将来若换成带自动集成的模型客户端，应保留外层业务步骤，删除重复的模型 generation，再检查真实调用数与记录数是否一致。
 
-| 动作 | 记录方式 | 需要回答的问题 |
+Langfuse 支持活动范围、包装函数与自动集成组合，但它不会自动理解 Atlas 的权限、版本和质量规则。哪些步骤值得记录，来自业务因果关系。[官方埋点机制](https://langfuse.com/docs/observability/sdk/instrumentation)，核对于 2026-10-26。
+
+| 实际动作 | 记录的业务证据 | 当前实现到哪里 |
 | --- | --- | --- |
-| `request.prepare` | 手动 span | 输入是否完整，身份与版本怎样确定 |
-| `model.answer` | generation，自动或手动选一种 | 哪个模型与 Prompt 产生候选结果 |
-| `answer.validate` | 手动 span | 结构、引用范围和业务检查通过了吗 |
-| `retrieve.docs`、`rerank.docs` | 对应能力实现后再加 | 候选如何变化，哪些允许资料被采用 |
-| `tool.build_status` | 执行工具时记录 | 执行端是否授权，返回是否有效 |
-| `task.transition` | 状态转换记录 | 为什么继续、停止或等待确认 |
+| `authorize` | 允许/拒绝与策略版本 | 检查固定合成主体，不是真实登录系统 |
+| `retrieve.docs` | `candidateIds`、`sourceRevisions` | 为 A30 取得授权 fixture；不是 Elasticsearch 或向量检索 |
+| `select.evidence` | 被选来源或拒绝类别 | 拒绝夹入其他租户资料；不是语义重排器 |
+| `tool.build_status` | 组件、版本、构建 ID、状态和观察时间 | 只读合成回执，observation 类型为 tool |
+| `prompt.resolve` | 实际版本、来源、是否 fallback | 通过真实 LangfuseClient 获取与编译模板 |
+| `model.answer` | model、配置、Prompt 关联、候选与已知用量 | 真实 HTTP 请求；默认请求本地替身 |
+| `answer.validate` | 分项断言、规则版本、质量结论 | 有限合成规则，不是通用语义裁判 |
 
-动作名保持稳定，题目、版本和 task ID 放字段里。不要命名为“reader-a 问了完整问题……”，否则检索、聚合、脱敏都会更困难，名称还可能泄露输入。未实现的检索或工具也不能先写成“已执行”的空 span，制造不存在的链路。
+区分这些限制不是把实现退回提纲，而是让记录对应真实发生的动作。简单候选取得也可以被观察；没有 rerank 算法就不应该凭名称宣称重排效果。
 
-## 父子关系来自活动范围
+## 从候选到答案，记录保留不同阶段
 
-以下是第 11 篇初始化之后的 TypeScript **局部示意**，`prepare`、`adapter`、`validate` 由应用实现，不能独立运行：
+A30 的候选是 C-T20@r1，最终选中也只有它。两处都记录仍然有价值：后续引入更多候选时，能够判断相关文档是在召回时丢失，还是选择时被丢弃。不要只保存最终引用，再把它当作完整检索过程。
+
+`select.evidence` 在组装模型输入之前验证范围。故障注入把其他租户卡片混入内部选择阶段时，该步骤只记录 `rejected: true` 与 `evidence_scope`，不会把隐藏卡片 ID 或正文写进输出。随后直接结束任务，工具、Prompt 和模型节点都不应出现。测试者持有完整夹具，不意味着模型或日志能读取它。
+
+正常路径中，构建回执和 C-T20 分别进入 Prompt 变量；模型拿到的原始业务材料与导出的观测摘要不是同一个对象。generation 的 input 只记录题目 ID 与已授权来源 ID，不复制整份资料；generation 的 output 保留这次合成候选，以便质量核对。真实业务迁移时，需要重新决定哪些候选内容可以保存，而不是照搬明文策略。
+
+下面摘取实际模型埋点中的关键调用，完整函数在 `src/runtime.ts`，片段不单独执行：
 
 ```ts
-await startActiveObservation('assistant.task', async root => {
-  const prepared = await startActiveObservation('request.prepare', async span => {
-    const value = prepare()
-    span.update({ output: { caseId: value.caseId, sourceIds: value.sourceIds } })
-    return value
+await startActiveObservation('model.answer', async gen => {
+  gen.update({
+    ...(prompt.isFallback ? {} : { prompt }),
+    model: actualModel.model,
+    modelParameters: {
+      max_completion_tokens: appliedConfig.maxCompletionTokens
+    },
+    input: { caseId: CASE, sourceIds: selected.map(d => d.id) }
   })
-
-  const candidate = await startActiveObservation('model.answer', async generation => {
-    const value = await adapter.complete(prepared)
-    generation.update({ model: value.modelVersion, output: { finish: value.finish } })
-    return value
-  }, { asType: 'generation' })
-
-  const result = await startActiveObservation('answer.validate', async span => {
-    const value = validate(candidate, prepared)
-    span.update({ output: { resultKind: value.kind } })
-    return value
-  })
-  root.update({ output: { resultKind: result.kind } })
-})
+  const result = await complete(
+    actualModel, input, appliedConfig.maxCompletionTokens, deadlineAt
+  )
+  gen.update({ output: result.answer })
+  return result
+}, { asType: 'generation' })
 ```
 
-这里每个子动作在同一个任务范围内完成，返回值继续走业务路径。若使用已有自动集成，它已经创建 generation，就删掉手动创建同一 generation 的那一层，保留外层业务 span。不能简单把所有 SDK 包装都套上 `observe` 再假设平台会替应用去重。Langfuse 支持手动范围与自动集成组合，但边界由应用设计；API 依据[官方埋点说明](https://langfuse.com/docs/observability/sdk/instrumentation)，核对于 2026-10-26。
+`prompt` 是本次由 SDK 取得的对象，才能把实际模板版本与 generation 关联；不能在 metadata 随手写一个“production”就当作实际版本。fallback 没有远端版本，不伪造这个关联，改用本地来源标记。完整代码还记录可获得的用量和错误类别；外部接口没返回用量时不传入一个虚假的零。
 
-## 异步正常，脱离范围却可能串错
+## 让故障落在它真正发生的位置
 
-在活动回调里 `await` 子操作，可以保留调用范围。把工作丢给一个稍后运行的队列再立刻结束根任务，则不能假装仍是同一段同步嵌套。需要明确队列生产者、消费者和重试尝试的关系：消息携带受控 trace 上下文与业务 task ID，消费者提取后建立执行范围；如果选择新的 trace，就用业务 ID 或链接关联。
+在示例目录执行：
 
-概念流程是 `inject(activeContext, carrier)`、传输 carrier、`extract(carrier)`、在提取的上下文内启动消费者 span。具体代码随 HTTP、队列库和传播器而变，本篇不虚构一个通用队列 SDK。跨服务上下文传播的机制依据 [OpenTelemetry JavaScript 文档](https://opentelemetry.io/docs/languages/js/propagation/)，核对于 2026-10-26。
+```bash
+npm run compare
+```
 
-这份 carrier 不是授权票据。消费者仍需验证身份与任务许可，不能因为上游 trace 写着 `tenantId` 就拥有对应权限；对外发送时也要过滤可传播字段。父子关系只能解释执行归属，不能为执行赋权。
+该命令以 `Promise.all` 并发运行同一个 A30 的两个模板版本，分别建立根 trace。模型替身按模板返回故意错误和符合预期的候选；这不是对真实模型做质量比较，而是在检验链路和判定是否能区别它们。
 
-## 在导出之前缩小信息面
+查看 `reports/compare.json` 和 `reports/compare-spans.json`。每条正常走完整流程的 trace 应有 8 个 observation：一个根，七个直接子项；每个子项的 `parentSpanId` 指向自己那条 trace 的根，而不是另一次运行的根。`runId` 不同，`taskId` 同为 `A30-compare`，用来表达“同题比较”而不是“同一次执行”。
 
-最稳妥的第一步是少采：Q03 只留题号、目标版本、已授权来源 ID 和结果类别，不留整份文档。异常对象也先转换成稳定错误类别，不把 HTTP 请求配置原样塞入 `output`。
+故意错误版本中，`model.answer` 的 HTTP 调用正常结束，`answer.validate` 报 `quality_failed`。候选声称 virtual 存在，但 C-T20 只提供未知；这时问题在证据遵循，不是网络超时。符合预期的版本整体结果为 `insufficient_evidence`，因为参数部分仍未知，同时报告构建状态。准确保留未知可以通过质量检查，不能为了把所有结果变成 `answered` 而补造事实。
 
-如果使用自动埋点，要检查它是否默认捕获完整 Prompt、响应和工具参数。加入 Langfuse 的 `mask` 也不代表所有内容都已安全。以本篇固定的 `@langfuse/otel@6.0.2` 类型说明为准，该钩子处理特定输入、输出与 observation metadata，传播的 trace metadata 不在同一遮蔽范围；另一条独立 OTel exporter 也有自己的导出路径。因此要对原始采集、传播字段、Langfuse 导出、其他 exporter、控制台和本地文件逐条检查，而不是只验证一个字符串替换函数。[数据脱敏官方说明](https://langfuse.com/docs/observability/features/masking)，核对于 2026-10-26。
+报告分别保留 `qualityStatus`、`quality.pass` 与业务 `resultKind`。未通过校验的候选不会被包装成一个新的“成功任务类别”；执行失败、技术错误和业务质量也不要塞进同一个绿色状态。第 30 篇会利用这些记录完成失败复盘，而不是让模型回忆自己的私密思考。
 
-可以使用白名单摘要函数：只构造 `caseId`、允许的 `sourceIds`、`resultKind` 和安全错误类别；其余字段根本不进入遥测对象。本地 `examples/atlas/trace.mjs` 采用字段白名单并校验允许来源，验证的是这种应用级边界，并没有连接 Langfuse。
+## 脱敏要检查 HTTP 出口，不只测一个函数
 
-## 错误状态与质量评分仍分开
+当前实现有两道收缩：业务侧只构造允许字段；`LangfuseSpanProcessor` 的 `mask` 在上报前递归处理敏感键和合成 canary。测试把 `SYNTHETIC_SECRET_CANARY` 写入 generation 的诊断 metadata，然后检查本地采集器收到的**实际 OTLP 正文**：应出现 `[REDACTED]`，不应出现原 canary、合成 secret key 或隐藏来源 ID。
 
-假设 `answer.validate` 发现引用未知文档，可以把该动作记录为校验失败；假设 Q05 正确返回资料不足，执行链路可以正常结束，但结果类别应保留为 `insufficient_evidence`。如果评测确认这个拒答符合题意，任务评分可以通过。这不是矛盾，而是不同层面在回答不同问题。
+这里证明的是这条导出路径和已注入字段。它不是通用敏感信息检测产品，也不能保证任意秘密都能被正则识别。尤其在固定 SDK 6.0.2 中，`propagateAttributes` 产生的 trace metadata 不经过同样的 mask；因此那部分从一开始就只放 task/run/attempt 等合成白名单。不要先传播原始问题，再寄希望于 generation 的遮蔽替它补救。[数据脱敏说明](https://langfuse.com/docs/observability/features/masking)，核对于 2026-10-26。
 
-反过来，模型顺利输出错误参数时，generation 可能技术成功，任务评分失败。不要为了让图表红绿一致，强行把其中一层覆盖掉。每个评分还应记录来源与规则版本，后续修改判定规则才能解释历史差异。
+NodeSDK 还关闭了自动资源检测，避免把宿主机、进程与命令行路径附到遥测资源。这是资源层面的收缩，不属于 observation mask。也要检查其他出口：候选报告、stdout、异常日志、第二个 OTel exporter 和平台导出。SDK 的一个 mask 不会替应用处理所有文件或第三方 exporter。示例本地采集器不持久化认证请求头，但 `reports` 仍可能包含合成候选；替换为真实输入前，应先制定文件访问与删除规则。
 
-## 对两条并发链路做一次检查
+## 采样改变记录数量，不改变任务事实
 
-本篇验收用两个合成请求：一个 Q03 正常回答，一个 Q05 资料不足。检查它们的父子 ID 不串线，任务 ID 不混用，每条模型调用只有一个 generation；错误或停止都能找到原因。再注入一个越权来源 ID，验证它不会进入本地导出记录。
+先确认样本完整，再尝试关闭采样：
 
-本地测试只能证明记录构造与部分父子关系约束。真实 Langfuse 验证还需按第 11 篇步骤实际上报、查看树并检查导出数据；未完成之前不宣称平台接入成功。保留这条限制不是降低标准，而是明确接下来需要补的证据。
+```bash
+npm run run -- --prompt-version 2 --sample-rate 0
+```
 
-到这里，助手不仅能返回结果，也能解释一次执行用了什么允许资料、哪个步骤失败以及如何关联评测。下一部分才开始扩大知识规模，让检索成为一个有输入、输出和验证标准的新动作。
+任务仍应得到结果，但本次 `reports/run-spans.json` 为空。配置使用 `ParentBasedSampler` 包装 `TraceIdRatioBasedSampler`，按根 trace 的选择保持子项一致，不能随机删掉几条子 span 再把残缺树当成完整执行。测试对 rate=0 的行为有断言；其他比率的长期分布不是本次测试结论。[Langfuse 的 OTel 采样说明](https://langfuse.com/docs/observability/features/sampling)。
 
-[学习目录](../README.md)
+不要在调试首次上报时就用低采样率，否则“找不到这条请求”可能只是没被采到。也不能把只保留失败任务的观测样本当作线上成功率分母。任务完成率需要知道全部请求，trace 主要用于解释具体执行；两者可以关联，不能互相替代。
+
+## 同进程继承，不等于跨服务自动继承
+
+两个比较任务在各自活动回调内 `await` 子动作，SDK 能沿异步上下文保持归属。当前包没有跨服务队列，不把它画成已验证能力。加入队列时，需要在发送端注入受控追踪上下文，在消费者提取并开启新范围，或建立新 trace 后使用 task ID/链接关联；业务状态和授权仍需独立验证。
+
+更不能把 `sessionId` 当作访问凭证，或让外部提供的 metadata 改变租户。trace 的作用是解释调用关系，不能赋予工具权限。采集、查看和导出也各有边界：在平台上只给确有需要的人项目权限，使用独立演练项目，不因环境筛选器存在就认为不同租户已隔离。Langfuse 的项目角色与 API key 能访问的范围需按实际部署核对；环境标签不是 RBAC。[官方访问控制说明](https://langfuse.com/docs/administration/rbac)。
+
+本教程建议演练数据采用短保留期，并明确谁能导出、如何删除本地报告与平台数据。设置期限是操作约定，不代表包已自动清理平台；测试也没有创建平台成员或验证真实项目角色。外部平台的权限、入库与 UI 验收应按第 11 篇另行完成。
+
+## 把验收落在可重复的证据上
+
+运行 `npm test`，检查真实 SDK 是否把两个并发 trace 分开、Prompt 关联是否正确、canary 是否在 HTTP 出口消失、越权证据是否在模型调用前被拒绝、rate=0 是否只影响导出。测试通过后，再读一条坏候选的 trace，确认能够从最终失败沿记录回到 C-T20 与构建回执。
+
+本地采集通过说明链路结构和出口边界可检查；在 Langfuse 中查到同一条 trace，才完成平台接入验证；真实模型任务质量还要由独立评测确认。这三个结论各有证据，组合起来才是一条可以继续扩展的观测路径。
+
+[下一篇：13 文档放进 Prompt 就够了吗](../03-knowledge/13-knowledge-strategy.md) · [学习目录](../README.md)

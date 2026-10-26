@@ -1,0 +1,102 @@
+{
+  "meaning": "Separate executions with corrected selection policy; not checkpoint recovery or a model benchmark.",
+  "runs": [
+    {
+      "runId": "96184555-711a-4522-bf4c-303775b6a54d",
+      "taskId": "A30-agent",
+      "attempt": 1,
+      "traceId": "9c0ffe3ce04c8e34be307984ea7efb68",
+      "caseId": "A30-unsupported-capability",
+      "fixtureVersion": "atlas-fixture-01",
+      "ruleVersion": "a30-rule-1",
+      "environment": "atlas-local-demo",
+      "selector": "script",
+      "policy": "repeat-build",
+      "deadlineAt": 1793018273631,
+      "limits": {
+        "maxSteps": 4,
+        "maxToolCalls": 2,
+        "maxCostUnits": 4
+      },
+      "steps": 3,
+      "toolCalls": 2,
+      "syntheticCostUnits": 3,
+      "cost": null,
+      "usage": null,
+      "stopReason": "tool_budget",
+      "history": [
+        {
+          "step": 1,
+          "action": "build_status",
+          "result": "succeeded"
+        },
+        {
+          "step": 2,
+          "action": "build_status",
+          "result": "succeeded"
+        }
+      ],
+      "candidateAnswer": null,
+      "quality": null,
+      "durationMs": 7.284559999999999,
+      "sourceRevisions": [],
+      "resumeSupported": false
+    },
+    {
+      "runId": "f661ac78-6e9d-4839-8531-1a3cf955d998",
+      "taskId": "A30-agent",
+      "attempt": 2,
+      "traceId": "5bc61b7a6333d3e6559956dacad4bff8",
+      "caseId": "A30-unsupported-capability",
+      "fixtureVersion": "atlas-fixture-01",
+      "ruleVersion": "a30-rule-1",
+      "environment": "atlas-local-demo",
+      "selector": "script",
+      "policy": "evidence-first",
+      "deadlineAt": 1793018273636,
+      "limits": {
+        "maxSteps": 4,
+        "maxToolCalls": 2,
+        "maxCostUnits": 4
+      },
+      "steps": 3,
+      "toolCalls": 2,
+      "syntheticCostUnits": 3,
+      "cost": null,
+      "usage": null,
+      "stopReason": "completed",
+      "history": [
+        {
+          "step": 1,
+          "action": "read_docs",
+          "result": "succeeded"
+        },
+        {
+          "step": 2,
+          "action": "build_status",
+          "result": "succeeded"
+        }
+      ],
+      "candidateAnswer": {
+        "parameterResult": "insufficient_evidence",
+        "buildStatus": "succeeded",
+        "buildId": "build-demo-20",
+        "sourceIds": [
+          "C-T20"
+        ],
+        "answer": "资料未说明 virtual 参数，无法确认；构建 build-demo-20 在 2026-10-26T00:00:00Z 为 succeeded。"
+      },
+      "quality": {
+        "pass": true,
+        "errors": [],
+        "ruleVersion": "a30-rule-1",
+        "method": "bounded synthetic assertions; human review required"
+      },
+      "durationMs": 5.398078999999996,
+      "sourceRevisions": [
+        "C-T20@r1"
+      ],
+      "resumeSupported": false
+    }
+  ]
+}

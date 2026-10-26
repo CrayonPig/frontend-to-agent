@@ -1,6 +1,6 @@
 # 可观测性：请求轨迹与质量反馈
 
-> 本页保留旧 URL 与原导读练习，作为迁移入口。完整正文已迁至：[10 Trace、Observation、Session：一次任务如何串起来](../02-verifiable/10-trace-model.md)、[11 接入 Langfuse：从平台配置到第一条观测链路](../02-verifiable/11-langfuse.md)、[12 自动埋点之外，还需要记录哪些业务动作](../02-verifiable/12-instrumentation.md)、[30 复盘一次失败的 Agent 任务](../06-agent/30-failure-review.md)。以下是历史导读，不代表当前示例的覆盖范围；运行与验收以新正文为准。
+> 本页保留旧 URL 与原导读练习，作为迁移入口。完整正文已迁至：[10 Trace、Observation、Session：一次任务如何串起来](../02-verifiable/10-trace-model.md)、[11 接入 Langfuse：从平台配置到第一条观测链路](../02-verifiable/11-langfuse.md)、[12 自动埋点之外，还需要记录哪些业务动作](../02-verifiable/12-instrumentation.md)、[30 复盘一次失败的 Agent 任务](../06-agent/30-failure-review.md)。另见[39 Prompt版本治理](../08-operations/39-prompt-versions.md)与[完整观测实践路线](../outline.md)。以下是历史导读，不代表当前示例的覆盖范围；运行与验收以新正文为准。
 
 ## 场景与目标
 

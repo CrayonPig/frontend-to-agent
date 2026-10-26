@@ -9,6 +9,9 @@ hero:
       text: 开始学习
       link: /README
     - theme: alt
+      text: 详细大纲与观测路线
+      link: /outline
+    - theme: alt
       text: 运行与验收
       link: /09-integration/42-handoff
 features:

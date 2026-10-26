@@ -1,0 +1,56 @@
+{
+  "runId": "b3a56a31-aada-49ff-be59-9bd5a048a92e",
+  "taskId": "A30-agent",
+  "attempt": 1,
+  "traceId": "62a5dd33506bf2f30ed5387830970edc",
+  "caseId": "A30-unsupported-capability",
+  "fixtureVersion": "atlas-fixture-01",
+  "ruleVersion": "a30-rule-1",
+  "environment": "atlas-local-demo",
+  "selector": "http",
+  "policy": "evidence-first",
+  "deadlineAt": 1793018273964,
+  "limits": {
+    "maxSteps": 4,
+    "maxToolCalls": 2,
+    "maxCostUnits": 4
+  },
+  "steps": 3,
+  "toolCalls": 2,
+  "syntheticCostUnits": 3,
+  "cost": null,
+  "usage": null,
+  "stopReason": "completed",
+  "history": [
+    {
+      "step": 1,
+      "action": "read_docs",
+      "result": "succeeded"
+    },
+    {
+      "step": 2,
+      "action": "build_status",
+      "result": "succeeded"
+    }
+  ],
+  "candidateAnswer": {
+    "parameterResult": "insufficient_evidence",
+    "buildStatus": "succeeded",
+    "buildId": "build-demo-20",
+    "sourceIds": [
+      "C-T20"
+    ],
+    "answer": "资料未说明 virtual 参数，无法确认；构建 build-demo-20 在 2026-10-26T00:00:00Z 为 succeeded。"
+  },
+  "quality": {
+    "pass": true,
+    "errors": [],
+    "ruleVersion": "a30-rule-1",
+    "method": "bounded synthetic assertions; human review required"
+  },
+  "durationMs": 49.62316299999998,
+  "sourceRevisions": [
+    "C-T20@r1"
+  ],
+  "resumeSupported": false
+}

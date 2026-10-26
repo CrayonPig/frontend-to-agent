@@ -1,0 +1,79 @@
+{
+  "recordedReplay": {
+    "sourceRunId": "857d61b3-fecc-4af2-a205-762982fad421",
+    "traceId": "692b440e5fe5ccd7dc267bd579b27bf4",
+    "quality": {
+      "pass": false,
+      "errors": [
+        "unsupported_parameter_claim",
+        "unsupported_text"
+      ],
+      "ruleVersion": "a30-rule-1",
+      "method": "bounded synthetic assertions; human review required"
+    },
+    "externalCalls": 0
+  },
+  "regression": {
+    "runId": "b2d899c7-0a93-474c-8c76-3aab34fd46ff",
+    "taskId": "A30-demo",
+    "attempt": 2,
+    "traceId": "d370bd1fd5776999716522ee1122736a",
+    "environment": "atlas-local-demo",
+    "sdkVersions": {
+      "langfuse": "6.0.2",
+      "otelApi": "1.9.0",
+      "otelSdkNode": "0.208.0"
+    },
+    "modelMode": "local-http-mock",
+    "caseId": "A30-unsupported-capability",
+    "fixtureVersion": "atlas-fixture-01",
+    "ruleVersion": "a30-rule-1",
+    "candidateIds": [
+      "C-T20"
+    ],
+    "sourceRevisions": [
+      "C-T20@r1"
+    ],
+    "prompt": {
+      "name": "atlas-answer",
+      "version": 2,
+      "label": null,
+      "source": "langfuse",
+      "fallback": false,
+      "fallbackVersion": null,
+      "contentHash": "0f60b24bab75f06f4c3fd4e144237a1f865655f0114e0791af8baf0e0deb61bd",
+      "configHash": "1bc972e2cd1ad08515ed5cc9f30ea8bc874b73a645e079d7a7988aa4d7429e23"
+    },
+    "appliedModel": "atlas-http-mock",
+    "maxCompletionTokens": 300,
+    "tool": {
+      "component": "AtlasTable",
+      "version": "2.0",
+      "buildId": "build-demo-20",
+      "status": "succeeded",
+      "observedAt": "2026-10-26T00:00:00Z",
+      "synthetic": true
+    },
+    "candidateAnswer": {
+      "parameterResult": "insufficient_evidence",
+      "buildStatus": "succeeded",
+      "buildId": "build-demo-20",
+      "sourceIds": [
+        "C-T20"
+      ],
+      "answer": "资料未说明 virtual 参数，无法确认；构建 build-demo-20 在 2026-10-26T00:00:00Z 为 succeeded。"
+    },
+    "quality": {
+      "pass": true,
+      "errors": [],
+      "ruleVersion": "a30-rule-1",
+      "method": "bounded synthetic assertions; human review required"
+    },
+    "durationMs": 30.704169999999976,
+    "usage": null,
+    "cost": null,
+    "resultKind": "insufficient_evidence",
+    "qualityStatus": "passed"
+  },
+  "meaning": "Rescore stored output, then execute a separate fixed-version regression. Not replaying hidden reasoning."
+}

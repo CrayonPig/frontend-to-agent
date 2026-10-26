@@ -1,0 +1,65 @@
+{
+  "runId": "857d61b3-fecc-4af2-a205-762982fad421",
+  "taskId": "A30-demo",
+  "attempt": 1,
+  "traceId": "692b440e5fe5ccd7dc267bd579b27bf4",
+  "environment": "atlas-local-demo",
+  "sdkVersions": {
+    "langfuse": "6.0.2",
+    "otelApi": "1.9.0",
+    "otelSdkNode": "0.208.0"
+  },
+  "modelMode": "local-http-mock",
+  "caseId": "A30-unsupported-capability",
+  "fixtureVersion": "atlas-fixture-01",
+  "ruleVersion": "a30-rule-1",
+  "candidateIds": [
+    "C-T20"
+  ],
+  "sourceRevisions": [
+    "C-T20@r1"
+  ],
+  "prompt": {
+    "name": "atlas-answer",
+    "version": 1,
+    "label": null,
+    "source": "langfuse",
+    "fallback": false,
+    "fallbackVersion": null,
+    "contentHash": "a9ea6d9b681a98fd99eab1efeaeeb3ac0ebad8933bcfb0938b1dfcae13b65c68",
+    "configHash": "1bc972e2cd1ad08515ed5cc9f30ea8bc874b73a645e079d7a7988aa4d7429e23"
+  },
+  "appliedModel": "atlas-http-mock",
+  "maxCompletionTokens": 300,
+  "tool": {
+    "component": "AtlasTable",
+    "version": "2.0",
+    "buildId": "build-demo-20",
+    "status": "succeeded",
+    "observedAt": "2026-10-26T00:00:00Z",
+    "synthetic": true
+  },
+  "candidateAnswer": {
+    "parameterResult": "supported",
+    "buildStatus": "succeeded",
+    "buildId": "build-demo-20",
+    "sourceIds": [
+      "C-T20"
+    ],
+    "answer": "构建成功，因此 AtlasTable 2.0 支持 virtual，可以直接使用。"
+  },
+  "quality": {
+    "pass": false,
+    "errors": [
+      "unsupported_parameter_claim",
+      "unsupported_text"
+    ],
+    "ruleVersion": "a30-rule-1",
+    "method": "bounded synthetic assertions; human review required"
+  },
+  "durationMs": 34.042439,
+  "usage": null,
+  "cost": null,
+  "resultKind": null,
+  "qualityStatus": "failed"
+}

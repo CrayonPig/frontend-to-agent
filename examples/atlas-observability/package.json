@@ -1,0 +1,39 @@
+{
+  "dependencies": {
+    "@langfuse/otel": "6.0.2",
+    "@langfuse/tracing": "6.0.2",
+    "@opentelemetry/api": "1.9.0",
+    "@opentelemetry/core": "2.2.0",
+    "@opentelemetry/exporter-trace-otlp-http": "0.208.0",
+    "@opentelemetry/otlp-exporter-base": "0.208.0",
+    "@opentelemetry/sdk-node": "0.208.0",
+    "@opentelemetry/sdk-trace-base": "2.2.0",
+    "@langfuse/client": "6.0.2"
+  },
+  "name": "atlas-observability-demo",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "devDependencies": {
+    "typescript": "5.9.3",
+    "@types/node": "22.15.30"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "test": "npm run build && node --test build/test/*.test.js",
+    "demo": "npm run build && node build/src/cli.js",
+    "run": "node build/src/cli.js run",
+    "compare": "node build/src/cli.js compare",
+    "seed-prompts": "node build/src/cli.js seed-prompts",
+    "promote": "node build/src/cli.js promote",
+    "failure": "node build/src/cli.js failure",
+    "replay": "node build/src/cli.js replay",
+    "rollback": "node build/src/cli.js rollback",
+    "agent-failure": "npm run build && node build/src/cli.js agent-failure",
+    "agent-compare": "npm run build && node build/src/cli.js agent-compare",
+    "agent-run": "npm run build && node build/src/cli.js agent-run"
+  }
+}

@@ -1,0 +1,45 @@
+
+> atlas-observability-demo@1.0.0 test
+> npm run build && node --test build/test/*.test.js
+
+
+> atlas-observability-demo@1.0.0 build
+> tsc -p tsconfig.json
+
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.1
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.1
+npm notice To update run: npm install -g npm@12.2.1
+npm notice
+▶ real Langfuse SDK over local Prompt API and OTLP HTTP
+  ✔ create, retrieve, compile use SDK HTTP and exact versions (48.206313ms)
+  ✔ same task versions produces scoped failure and corrected response; missing usage stays null (0.426038ms)
+  ✔ SDK serializes complete OTLP parent tree, actual prompt object, masks data before HTTP (1.123633ms)
+  ✔ confirmation and review gate required; label mutation via real SDK PATCH (16.684458ms)
+  ✔ promotion binds prompt identity and execution mode/model before PATCH (0.801256ms)
+  ✔ credential-bearing model requests require TLS outside loopback before fetch (0.920597ms)
+  ✔ version immutable while label rollback does not approve its quality (6.638755ms)
+  ✔ another client label cache can lag; explicit fresh read resolves moved label (10.125735ms)
+  ✔ SDK fallback has local provenance and no false remote prompt association (11.543101ms)
+  ✔ unauthorized evidence is stopped before tool/model and never exported (3.555868ms)
+  ✔ transport deadlines and egress policy prevent unintended calls (2.134421ms)
+  ✔ prompt config is applied and invalid config rejected (12.238558ms)
+  ✔ bounded Agent stops repeated tools and corrected state-driven policy completes with nested observations (13.497892ms)
+  ✔ Agent enforces all budgets and action allowlist before execution (6.10951ms)
+  ✔ external error bodies headers malformed JSON and stack paths never reach complete OTLP payload (37.626017ms)
+✔ real Langfuse SDK over local Prompt API and OTLP HTTP (223.992565ms)
+✔ sample rate zero exports no spans while task output remains available (580.801944ms)
+✔ all keeps per-command reports paired with their own spans (1274.455046ms)
+ℹ tests 18
+ℹ suites 0
+ℹ pass 18
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 2313.696945
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.1
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.1
+npm notice To update run: npm install -g npm@12.2.1
+npm notice

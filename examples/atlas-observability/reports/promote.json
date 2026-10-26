@@ -1,0 +1,12 @@
+{
+  "operation": "promote",
+  "promptName": "atlas-answer",
+  "modelMode": "local-http-mock",
+  "model": "atlas-http-mock",
+  "contentHash": "0f60b24bab75f06f4c3fd4e144237a1f865655f0114e0791af8baf0e0deb61bd",
+  "configHash": "1bc972e2cd1ad08515ed5cc9f30ea8bc874b73a645e079d7a7988aa4d7429e23",
+  "version": 2,
+  "confirmed": true,
+  "reportRunId": "234e4d79-8cab-4b30-970d-732264289867",
+  "qualityPassed": true
+}

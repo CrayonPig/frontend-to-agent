@@ -10,6 +10,7 @@ export default defineConfig({
     siteTitle: 'Frontend → Agent',
     nav: [
       { text: '开始学习', link: '/README' },
+      { text: '详细大纲', link: '/outline' },
       { text: '运行与验收', link: '/09-integration/42-handoff' },
       { text: '覆盖矩阵', link: '/reviews/coverage' }
     ],
@@ -20,6 +21,10 @@ export default defineConfig({
           {
             "text": "完整学习目录",
             "link": "/README"
+          },
+          {
+            "text": "详细大纲与观测路线",
+            "link": "/outline"
           }
         ]
       },

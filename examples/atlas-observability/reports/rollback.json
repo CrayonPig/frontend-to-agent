@@ -1,0 +1,7 @@
+{
+  "operation": "rollback",
+  "version": 1,
+  "confirmed": true,
+  "qualityNotApproved": true,
+  "warning": "Explicit configuration rollback, not approval of version quality. Re-run the case."
+}

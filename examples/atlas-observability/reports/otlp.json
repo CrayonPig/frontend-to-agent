@@ -1,0 +1,1082 @@
+[
+  {
+    "resourceSpans": [
+      {
+        "resource": {
+          "attributes": [
+            {
+              "key": "service.name",
+              "value": {
+                "stringValue": "unknown_service:node"
+              }
+            },
+            {
+              "key": "telemetry.sdk.language",
+              "value": {
+                "stringValue": "nodejs"
+              }
+            },
+            {
+              "key": "telemetry.sdk.name",
+              "value": {
+                "stringValue": "opentelemetry"
+              }
+            },
+            {
+              "key": "telemetry.sdk.version",
+              "value": {
+                "stringValue": "2.2.0"
+              }
+            }
+          ],
+          "droppedAttributesCount": 0
+        },
+        "scopeSpans": [
+          {
+            "scope": {
+              "name": "langfuse-sdk",
+              "version": "6.0.2"
+            },
+            "spans": [
+              {
+                "traceId": "62a5dd33506bf2f30ed5387830970edc",
+                "spanId": "29f528af8fd5edd5",
+                "parentSpanId": "ddba4fc724455d92",
+                "name": "tool.read_docs",
+                "kind": 1,
+                "startTimeUnixNano": "1793018269001000000",
+                "endTimeUnixNano": "1793018269001387803",
+                "attributes": [
+                  {
+                    "key": "langfuse.environment",
+                    "value": {
+                      "stringValue": "atlas-local-demo"
+                    }
+                  },
+                  {
+                    "key": "langfuse.release",
+                    "value": {
+                      "stringValue": "atlas-observability-1"
+                    }
+                  },
+                  {
+                    "key": "user.id",
+                    "value": {
+                      "stringValue": "reader-a"
+                    }
+                  },
+                  {
+                    "key": "langfuse.trace.metadata.taskId",
+                    "value": {
+                      "stringValue": "\"A30-agent\""
+                    }
+                  },
+                  {
+                    "key": "langfuse.trace.metadata.runId",
+                    "value": {
+                      "stringValue": "\"b3a56a31-aada-49ff-be59-9bd5a048a92e\""
+                    }
+                  },
+                  {
+                    "key": "langfuse.trace.metadata.attempt",
+                    "value": {
+                      "stringValue": "\"1\""
+                    }
+                  },
+                  {
+                    "key": "langfuse.trace.metadata.fixtureVersion",
+                    "value": {
+                      "stringValue": "\"atlas-fixture-01\""
+                    }
+                  },
+                  {
+                    "key": "langfuse.observation.type",
+                    "value": {
+                      "stringValue": "tool"
+                    }
+                  },
+                  {
+                    "key": "langfuse.observation.input",
+                    "value": {
+                      "stringValue": "{\"type\":\"read_docs\",\"version\":\"2.0\"}"
+                    }
+                  },
+                  {
+                    "key": "langfuse.observation.output",
+                    "value": {
+                      "stringValue": "{\"sourceIds\":[\"C-T20\"],\"sourceRevisions\":[\"C-T20@r1\"]}"
+                    }
+                  }
+                ],
+                "droppedAttributesCount": 0,
+                "events": [],
+                "droppedEventsCount": 0,
+                "status": {
+                  "code": 0
+                },
+                "links": [],
+                "droppedLinksCount": 0,
+                "flags": 257
+              },
+              {
+                "traceId": "62a5dd33506bf2f30ed5387830970edc",
+                "spanId": "ddba4fc724455d92",
+                "parentSpanId": "b05a07cb4b3bcc1e",
+                "name": "agent.step",
+                "kind": 1,
+                "startTimeUnixNano": "1793018268969000000",
+                "endTimeUnixNano": "1793018269001666428",
+                "attributes": [
+                  {
+                    "key": "langfuse.environment",
+                    "value": {
+                      "stringValue": "atlas-local-demo"
+                    }
+                  },
+                  {
+                    "key": "langfuse.release",
+                    "value": {
+                      "stringValue": "atlas-observability-1"
+                    }
+                  },
+                  {
+                    "key": "user.id",
+                    "value": {
+                      "stringValue": "reader-a"
+                    }
+                  },
+                  {
+                    "key": "langfuse.trace.metadata.taskId",
+                    "value": {
+                      "stringValue": "\"A30-agent\""
+                    }
+                  },
+                  {
+                    "key": "langfuse.trace.metadata.runId",
+                    "value": {
+                      "stringValue": "\"b3a56a31-aada-49ff-be59-9bd5a048a92e\""
+                    }
+                  },
+                  {
+                    "key": "langfuse.trace.metadata.attempt",
+                    "value": {
+                      "stringValue": "\"1\""
+                    }
+                  },
+                  {
+                    "key": "langfuse.trace.metadata.fixtureVersion",
+                    "value": {
+                      "stringValue": "\"atlas-fixture-01\""
+                    }
+                  },
+                  {
+                    "key": "langfuse.observation.type",
+                    "value": {
+                      "stringValue": "span"
+                    }
+                  },
+                  {
+                    "key": "langfuse.observation.input",
+                    "value": {
+                      "stringValue": "{\"hasEvidence\":false,\"hasBuild\":false,\"steps\":1,\"toolCalls\":0,\"costUnits\":1,\"deadlineAt\":1793018273964}"
+                    }
+                  },
+                  {
+                    "key": "langfuse.observation.metadata.step",
+                    "value": {
+                      "stringValue": "1"
+                    }
+                  },
+                  {
+                    "key": "langfuse.observation.output",
+                    "value": {
+                      "stringValue": "{\"action\":\"read_docs\",\"toolCalls\":1}"
+                    }
+                  }
+                ],
+                "droppedAttributesCount": 0,
+                "events": [],
+                "droppedEventsCount": 0,
+                "status": {
+                  "code": 0
+                },
+                "links": [],
+                "droppedLinksCount": 0,
+                "flags": 257
+              },
+              {
+                "traceId": "62a5dd33506bf2f30ed5387830970edc",
+                "spanId": "32c3e1964cae7cb4",
+                "parentSpanId": "ddba4fc724455d92",
+                "name": "agent.choose",
+                "kind": 1,
+                "startTimeUnixNano": "1793018268970000000",
+                "endTimeUnixNano": "1793018269000900871",
+                "attributes": [
+                  {
+                    "key": "langfuse.environment",
+                    "value": {
+                      "stringValue": "atlas-local-demo"
+                    }
+                  },
+                  {
+                    "key": "langfuse.release",
+                    "value": {
+                      "stringValue": "atlas-observability-1"
+                    }
+                  },
+                  {
+                    "key": "user.id",
+                    "value": {
+                      "stringValue": "reader-a"
+                    }
+                  },
+                  {
+                    "key": "langfuse.trace.metadata.taskId",
+                    "value": {
+                      "stringValue": "\"A30-agent\""
+                    }
+                  },
+                  {
+                    "key": "langfuse.trace.metadata.runId",
+                    "value": {
+                      "stringValue": "\"b3a56a31-aada-49ff-be59-9bd5a048a92e\""
+                    }
+                  },
+                  {
+                    "key": "langfuse.trace.metadata.attempt",
+                    "value": {
+                      "stringValue": "\"1\""
+                    }
+                  },
+                  {
+                    "key": "langfuse.trace.metadata.fixtureVersion",
+                    "value": {
+                      "stringValue": "\"atlas-fixture-01\""
+                    }
+                  },
+                  {
+                    "key": "langfuse.observation.type",
+                    "value": {
+                      "stringValue": "generation"
+                    }
+                  },
+                  {
+                    "key": "langfuse.observation.input",
+                    "value": {
+                      "stringValue": "{\"history\":[],\"sourceIds\":[],\"hasBuild\":false}"
+                    }
+                  },
+                  {
+                    "key": "langfuse.observation.metadata.selector",
+                    "value": {
+                      "stringValue": "\"http\""
+                    }
+                  },
+                  {
+                    "key": "langfuse.observation.metadata.policy",
+                    "value": {
+                      "stringValue": "\"evidence-first\""
+                    }
+                  },
+                  {
+                    "key": "langfuse.observation.metadata.syntheticCostUnits",
+                    "value": {
+                      "stringValue": "1"
+                    }
+                  },
+                  {
+                    "key": "langfuse.observation.model.name",
+                    "value": {
+                      "stringValue": "atlas-http-mock"
+                    }
+                  },
+                  {
+                    "key": "langfuse.observation.metadata.usageKnown",
+                    "value": {
+                      "stringValue": "false"
+                    }
+                  },
+                  {
+                    "key": "langfuse.observation.metadata.costKnown",
+                    "value": {
+                      "stringValue": "false"
+                    }
+                  },
+                  {
+                    "key": "langfuse.observation.output",
+                    "value": {
+                      "stringValue": "{\"type\":\"read_docs\",\"version\":\"2.0\"}"
+                    }
+                  }
+                ],
+                "droppedAttributesCount": 0,
+                "events": [],
+                "droppedEventsCount": 0,
+                "status": {
+                  "code": 0
+                },
+                "links": [],
+                "droppedLinksCount": 0,
+                "flags": 257
+              },
+              {
+                "traceId": "62a5dd33506bf2f30ed5387830970edc",
+                "spanId": "c41667c57de96bb6",
+                "parentSpanId": "8d5bb856bdbbff7e",
+                "name": "tool.build_status",
+                "kind": 1,
+                "startTimeUnixNano": "1793018269008000000",
+                "endTimeUnixNano": "1793018269008156850",
+                "attributes": [
+                  {
+                    "key": "langfuse.environment",
+                    "value": {
+                      "stringValue": "atlas-local-demo"
+                    }
+                  },
+                  {
+                    "key": "langfuse.release",
+                    "value": {
+                      "stringValue": "atlas-observability-1"
+                    }
+                  },
+                  {
+                    "key": "user.id",
+                    "value": {
+                      "stringValue": "reader-a"
+                    }
+                  },
+                  {
+                    "key": "langfuse.trace.metadata.taskId",
+                    "value": {
+                      "stringValue": "\"A30-agent\""
+                    }
+                  },
+                  {
+                    "key": "langfuse.trace.metadata.runId",
+                    "value": {
+                      "stringValue": "\"b3a56a31-aada-49ff-be59-9bd5a048a92e\""
+                    }
+                  },
+                  {
+                    "key": "langfuse.trace.metadata.attempt",
+                    "value": {
+                      "stringValue": "\"1\""
+                    }
+                  },
+                  {
+                    "key": "langfuse.trace.metadata.fixtureVersion",
+                    "value": {
+                      "stringValue": "\"atlas-fixture-01\""
+                    }
+                  },
+                  {
+                    "key": "langfuse.observation.type",
+                    "value": {
+                      "stringValue": "tool"
+                    }
+                  },
+                  {
+                    "key": "langfuse.observation.input",
+                    "value": {
+                      "stringValue": "{\"type\":\"build_status\",\"component\":\"AtlasTable\",\"version\":\"2.0\"}"
+                    }
+                  },
+                  {
+                    "key": "langfuse.observation.output",
+                    "value": {
+                      "stringValue": "{\"component\":\"AtlasTable\",\"version\":\"2.0\",\"buildId\":\"build-demo-20\",\"status\":\"succeeded\",\"observedAt\":\"2026-10-26T00:00:00Z\",\"synthetic\":true}"
+                    }
+                  }
+                ],
+                "droppedAttributesCount": 0,
+                "events": [],
+                "droppedEventsCount": 0,
+                "status": {
+                  "code": 0
+                },
+                "links": [],
+                "droppedLinksCount": 0,
+                "flags": 257
+              },
+              {
+                "traceId": "62a5dd33506bf2f30ed5387830970edc",
+                "spanId": "8d5bb856bdbbff7e",
+                "parentSpanId": "b05a07cb4b3bcc1e",
+                "name": "agent.step",
+                "kind": 1,
+                "startTimeUnixNano": "1793018269002000000",
+                "endTimeUnixNano": "1793018269008405447",
+                "attributes": [
+                  {
+                    "key": "langfuse.environment",
+                    "value": {
+                      "stringValue": "atlas-local-demo"
+                    }
+                  },
+                  {
+                    "key": "langfuse.release",
+                    "value": {
+                      "stringValue": "atlas-observability-1"
+                    }
+                  },
+                  {
+                    "key": "user.id",
+                    "value": {
+                      "stringValue": "reader-a"
+                    }
+                  },
+                  {
+                    "key": "langfuse.trace.metadata.taskId",
+                    "value": {
+                      "stringValue": "\"A30-agent\""
+                    }
+                  },
+                  {
+                    "key": "langfuse.trace.metadata.runId",
+                    "value": {
+                      "stringValue": "\"b3a56a31-aada-49ff-be59-9bd5a048a92e\""
+                    }
+                  },
+                  {
+                    "key": "langfuse.trace.metadata.attempt",
+                    "value": {
+                      "stringValue": "\"1\""
+                    }
+                  },
+                  {
+                    "key": "langfuse.trace.metadata.fixtureVersion",
+                    "value": {
+                      "stringValue": "\"atlas-fixture-01\""
+                    }
+                  },
+                  {
+                    "key": "langfuse.observation.type",
+                    "value": {
+                      "stringValue": "span"
+                    }
+                  },
+                  {
+                    "key": "langfuse.observation.input",
+                    "value": {
+                      "stringValue": "{\"hasEvidence\":true,\"hasBuild\":false,\"steps\":2,\"toolCalls\":1,\"costUnits\":2,\"deadlineAt\":1793018273964}"
+                    }
+                  },
+                  {
+                    "key": "langfuse.observation.metadata.step",
+                    "value": {
+                      "stringValue": "2"
+                    }
+                  },
+                  {
+                    "key": "langfuse.observation.output",
+                    "value": {
+                      "stringValue": "{\"action\":\"build_status\",\"toolCalls\":2}"
+                    }
+                  }
+                ],
+                "droppedAttributesCount": 0,
+                "events": [],
+                "droppedEventsCount": 0,
+                "status": {
+                  "code": 0
+                },
+                "links": [],
+                "droppedLinksCount": 0,
+                "flags": 257
+              },
+              {
+                "traceId": "62a5dd33506bf2f30ed5387830970edc",
+                "spanId": "442d78e962edcb36",
+                "parentSpanId": "8d5bb856bdbbff7e",
+                "name": "agent.choose",
+                "kind": 1,
+                "startTimeUnixNano": "1793018269002000000",
+                "endTimeUnixNano": "1793018269007670523",
+                "attributes": [
+                  {
+                    "key": "langfuse.environment",
+                    "value": {
+                      "stringValue": "atlas-local-demo"
+                    }
+                  },
+                  {
+                    "key": "langfuse.release",
+                    "value": {
+                      "stringValue": "atlas-observability-1"
+                    }
+                  },
+                  {
+                    "key": "user.id",
+                    "value": {
+                      "stringValue": "reader-a"
+                    }
+                  },
+                  {
+                    "key": "langfuse.trace.metadata.taskId",
+                    "value": {
+                      "stringValue": "\"A30-agent\""
+                    }
+                  },
+                  {
+                    "key": "langfuse.trace.metadata.runId",
+                    "value": {
+                      "stringValue": "\"b3a56a31-aada-49ff-be59-9bd5a048a92e\""
+                    }
+                  },
+                  {
+                    "key": "langfuse.trace.metadata.attempt",
+                    "value": {
+                      "stringValue": "\"1\""
+                    }
+                  },
+                  {
+                    "key": "langfuse.trace.metadata.fixtureVersion",
+                    "value": {
+                      "stringValue": "\"atlas-fixture-01\""
+                    }
+                  },
+                  {
+                    "key": "langfuse.observation.type",
+                    "value": {
+                      "stringValue": "generation"
+                    }
+                  },
+                  {
+                    "key": "langfuse.observation.input",
+                    "value": {
+                      "stringValue": "{\"history\":[{\"step\":1,\"action\":\"read_docs\",\"result\":\"succeeded\"}],\"sourceIds\":[\"C-T20\"],\"hasBuild\":false}"
+                    }
+                  },
+                  {
+                    "key": "langfuse.observation.metadata.selector",
+                    "value": {
+                      "stringValue": "\"http\""
+                    }
+                  },
+                  {
+                    "key": "langfuse.observation.metadata.policy",
+                    "value": {
+                      "stringValue": "\"evidence-first\""
+                    }
+                  },
+                  {
+                    "key": "langfuse.observation.metadata.syntheticCostUnits",
+                    "value": {
+                      "stringValue": "1"
+                    }
+                  },
+                  {
+                    "key": "langfuse.observation.model.name",
+                    "value": {
+                      "stringValue": "atlas-http-mock"
+                    }
+                  },
+                  {
+                    "key": "langfuse.observation.metadata.usageKnown",
+                    "value": {
+                      "stringValue": "false"
+                    }
+                  },
+                  {
+                    "key": "langfuse.observation.metadata.costKnown",
+                    "value": {
+                      "stringValue": "false"
+                    }
+                  },
+                  {
+                    "key": "langfuse.observation.output",
+                    "value": {
+                      "stringValue": "{\"type\":\"build_status\",\"component\":\"AtlasTable\",\"version\":\"2.0\"}"
+                    }
+                  }
+                ],
+                "droppedAttributesCount": 0,
+                "events": [],
+                "droppedEventsCount": 0,
+                "status": {
+                  "code": 0
+                },
+                "links": [],
+                "droppedLinksCount": 0,
+                "flags": 257
+              },
+              {
+                "traceId": "62a5dd33506bf2f30ed5387830970edc",
+                "spanId": "0494581ef30a6b69",
+                "parentSpanId": "95b1ca5828fc5b81",
+                "name": "answer.validate",
+                "kind": 1,
+                "startTimeUnixNano": "1793018269013000000",
+                "endTimeUnixNano": "1793018269013346339",
+                "attributes": [
+                  {
+                    "key": "langfuse.environment",
+                    "value": {
+                      "stringValue": "atlas-local-demo"
+                    }
+                  },
+                  {
+                    "key": "langfuse.release",
+                    "value": {
+                      "stringValue": "atlas-observability-1"
+                    }
+                  },
+                  {
+                    "key": "user.id",
+                    "value": {
+                      "stringValue": "reader-a"
+                    }
+                  },
+                  {
+                    "key": "langfuse.trace.metadata.taskId",
+                    "value": {
+                      "stringValue": "\"A30-agent\""
+                    }
+                  },
+                  {
+                    "key": "langfuse.trace.metadata.runId",
+                    "value": {
+                      "stringValue": "\"b3a56a31-aada-49ff-be59-9bd5a048a92e\""
+                    }
+                  },
+                  {
+                    "key": "langfuse.trace.metadata.attempt",
+                    "value": {
+                      "stringValue": "\"1\""
+                    }
+                  },
+                  {
+                    "key": "langfuse.trace.metadata.fixtureVersion",
+                    "value": {
+                      "stringValue": "\"atlas-fixture-01\""
+                    }
+                  },
+                  {
+                    "key": "langfuse.observation.type",
+                    "value": {
+                      "stringValue": "span"
+                    }
+                  },
+                  {
+                    "key": "langfuse.observation.output",
+                    "value": {
+                      "stringValue": "{\"pass\":true,\"errors\":[],\"ruleVersion\":\"a30-rule-1\",\"method\":\"bounded synthetic assertions; human review required\"}"
+                    }
+                  }
+                ],
+                "droppedAttributesCount": 0,
+                "events": [],
+                "droppedEventsCount": 0,
+                "status": {
+                  "code": 0
+                },
+                "links": [],
+                "droppedLinksCount": 0,
+                "flags": 257
+              },
+              {
+                "traceId": "62a5dd33506bf2f30ed5387830970edc",
+                "spanId": "d1c9644c4ade92d0",
+                "parentSpanId": "b05a07cb4b3bcc1e",
+                "name": "task.stop",
+                "kind": 1,
+                "startTimeUnixNano": "1793018269014000000",
+                "endTimeUnixNano": "1793018269014237477",
+                "attributes": [
+                  {
+                    "key": "langfuse.environment",
+                    "value": {
+                      "stringValue": "atlas-local-demo"
+                    }
+                  },
+                  {
+                    "key": "langfuse.release",
+                    "value": {
+                      "stringValue": "atlas-observability-1"
+                    }
+                  },
+                  {
+                    "key": "user.id",
+                    "value": {
+                      "stringValue": "reader-a"
+                    }
+                  },
+                  {
+                    "key": "langfuse.trace.metadata.taskId",
+                    "value": {
+                      "stringValue": "\"A30-agent\""
+                    }
+                  },
+                  {
+                    "key": "langfuse.trace.metadata.runId",
+                    "value": {
+                      "stringValue": "\"b3a56a31-aada-49ff-be59-9bd5a048a92e\""
+                    }
+                  },
+                  {
+                    "key": "langfuse.trace.metadata.attempt",
+                    "value": {
+                      "stringValue": "\"1\""
+                    }
+                  },
+                  {
+                    "key": "langfuse.trace.metadata.fixtureVersion",
+                    "value": {
+                      "stringValue": "\"atlas-fixture-01\""
+                    }
+                  },
+                  {
+                    "key": "langfuse.observation.type",
+                    "value": {
+                      "stringValue": "span"
+                    }
+                  },
+                  {
+                    "key": "langfuse.observation.output",
+                    "value": {
+                      "stringValue": "{\"stopReason\":\"completed\",\"steps\":3,\"toolCalls\":2,\"costUnits\":3}"
+                    }
+                  }
+                ],
+                "droppedAttributesCount": 0,
+                "events": [],
+                "droppedEventsCount": 0,
+                "status": {
+                  "code": 0
+                },
+                "links": [],
+                "droppedLinksCount": 0,
+                "flags": 257
+              },
+              {
+                "traceId": "62a5dd33506bf2f30ed5387830970edc",
+                "spanId": "95b1ca5828fc5b81",
+                "parentSpanId": "b05a07cb4b3bcc1e",
+                "name": "agent.step",
+                "kind": 1,
+                "startTimeUnixNano": "1793018269008000000",
+                "endTimeUnixNano": "1793018269013113723",
+                "attributes": [
+                  {
+                    "key": "langfuse.environment",
+                    "value": {
+                      "stringValue": "atlas-local-demo"
+                    }
+                  },
+                  {
+                    "key": "langfuse.release",
+                    "value": {
+                      "stringValue": "atlas-observability-1"
+                    }
+                  },
+                  {
+                    "key": "user.id",
+                    "value": {
+                      "stringValue": "reader-a"
+                    }
+                  },
+                  {
+                    "key": "langfuse.trace.metadata.taskId",
+                    "value": {
+                      "stringValue": "\"A30-agent\""
+                    }
+                  },
+                  {
+                    "key": "langfuse.trace.metadata.runId",
+                    "value": {
+                      "stringValue": "\"b3a56a31-aada-49ff-be59-9bd5a048a92e\""
+                    }
+                  },
+                  {
+                    "key": "langfuse.trace.metadata.attempt",
+                    "value": {
+                      "stringValue": "\"1\""
+                    }
+                  },
+                  {
+                    "key": "langfuse.trace.metadata.fixtureVersion",
+                    "value": {
+                      "stringValue": "\"atlas-fixture-01\""
+                    }
+                  },
+                  {
+                    "key": "langfuse.observation.type",
+                    "value": {
+                      "stringValue": "span"
+                    }
+                  },
+                  {
+                    "key": "langfuse.observation.input",
+                    "value": {
+                      "stringValue": "{\"hasEvidence\":true,\"hasBuild\":true,\"steps\":3,\"toolCalls\":2,\"costUnits\":3,\"deadlineAt\":1793018273964}"
+                    }
+                  },
+                  {
+                    "key": "langfuse.observation.metadata.step",
+                    "value": {
+                      "stringValue": "3"
+                    }
+                  },
+                  {
+                    "key": "langfuse.observation.output",
+                    "value": {
+                      "stringValue": "{\"stopReason\":\"completed\"}"
+                    }
+                  }
+                ],
+                "droppedAttributesCount": 0,
+                "events": [],
+                "droppedEventsCount": 0,
+                "status": {
+                  "code": 0
+                },
+                "links": [],
+                "droppedLinksCount": 0,
+                "flags": 257
+              },
+              {
+                "traceId": "62a5dd33506bf2f30ed5387830970edc",
+                "spanId": "48d78deb434b4046",
+                "parentSpanId": "95b1ca5828fc5b81",
+                "name": "agent.choose",
+                "kind": 1,
+                "startTimeUnixNano": "1793018269008000000",
+                "endTimeUnixNano": "1793018269012413896",
+                "attributes": [
+                  {
+                    "key": "langfuse.environment",
+                    "value": {
+                      "stringValue": "atlas-local-demo"
+                    }
+                  },
+                  {
+                    "key": "langfuse.release",
+                    "value": {
+                      "stringValue": "atlas-observability-1"
+                    }
+                  },
+                  {
+                    "key": "user.id",
+                    "value": {
+                      "stringValue": "reader-a"
+                    }
+                  },
+                  {
+                    "key": "langfuse.trace.metadata.taskId",
+                    "value": {
+                      "stringValue": "\"A30-agent\""
+                    }
+                  },
+                  {
+                    "key": "langfuse.trace.metadata.runId",
+                    "value": {
+                      "stringValue": "\"b3a56a31-aada-49ff-be59-9bd5a048a92e\""
+                    }
+                  },
+                  {
+                    "key": "langfuse.trace.metadata.attempt",
+                    "value": {
+                      "stringValue": "\"1\""
+                    }
+                  },
+                  {
+                    "key": "langfuse.trace.metadata.fixtureVersion",
+                    "value": {
+                      "stringValue": "\"atlas-fixture-01\""
+                    }
+                  },
+                  {
+                    "key": "langfuse.observation.type",
+                    "value": {
+                      "stringValue": "generation"
+                    }
+                  },
+                  {
+                    "key": "langfuse.observation.input",
+                    "value": {
+                      "stringValue": "{\"history\":[{\"step\":1,\"action\":\"read_docs\",\"result\":\"succeeded\"},{\"step\":2,\"action\":\"build_status\",\"result\":\"succeeded\"}],\"sourceIds\":[\"C-T20\"],\"hasBuild\":true}"
+                    }
+                  },
+                  {
+                    "key": "langfuse.observation.metadata.selector",
+                    "value": {
+                      "stringValue": "\"http\""
+                    }
+                  },
+                  {
+                    "key": "langfuse.observation.metadata.policy",
+                    "value": {
+                      "stringValue": "\"evidence-first\""
+                    }
+                  },
+                  {
+                    "key": "langfuse.observation.metadata.syntheticCostUnits",
+                    "value": {
+                      "stringValue": "1"
+                    }
+                  },
+                  {
+                    "key": "langfuse.observation.model.name",
+                    "value": {
+                      "stringValue": "atlas-http-mock"
+                    }
+                  },
+                  {
+                    "key": "langfuse.observation.metadata.usageKnown",
+                    "value": {
+                      "stringValue": "false"
+                    }
+                  },
+                  {
+                    "key": "langfuse.observation.metadata.costKnown",
+                    "value": {
+                      "stringValue": "false"
+                    }
+                  },
+                  {
+                    "key": "langfuse.observation.output",
+                    "value": {
+                      "stringValue": "{\"type\":\"finish\",\"answer\":{\"parameterResult\":\"insufficient_evidence\",\"buildStatus\":\"succeeded\",\"buildId\":\"build-demo-20\",\"sourceIds\":[\"C-T20\"],\"answer\":\"资料未说明 virtual 参数，无法确认；构建 build-demo-20 在 2026-10-26T00:00:00Z 为 succeeded。\"}}"
+                    }
+                  }
+                ],
+                "droppedAttributesCount": 0,
+                "events": [],
+                "droppedEventsCount": 0,
+                "status": {
+                  "code": 0
+                },
+                "links": [],
+                "droppedLinksCount": 0,
+                "flags": 257
+              },
+              {
+                "traceId": "62a5dd33506bf2f30ed5387830970edc",
+                "spanId": "b05a07cb4b3bcc1e",
+                "name": "agent.task",
+                "kind": 1,
+                "startTimeUnixNano": "1793018268965000000",
+                "endTimeUnixNano": "1793018269014694147",
+                "attributes": [
+                  {
+                    "key": "langfuse.environment",
+                    "value": {
+                      "stringValue": "atlas-local-demo"
+                    }
+                  },
+                  {
+                    "key": "langfuse.release",
+                    "value": {
+                      "stringValue": "atlas-observability-1"
+                    }
+                  },
+                  {
+                    "key": "langfuse.internal.is_app_root",
+                    "value": {
+                      "boolValue": true
+                    }
+                  },
+                  {
+                    "key": "langfuse.observation.type",
+                    "value": {
+                      "stringValue": "span"
+                    }
+                  },
+                  {
+                    "key": "user.id",
+                    "value": {
+                      "stringValue": "reader-a"
+                    }
+                  },
+                  {
+                    "key": "langfuse.trace.metadata.taskId",
+                    "value": {
+                      "stringValue": "\"A30-agent\""
+                    }
+                  },
+                  {
+                    "key": "langfuse.trace.metadata.runId",
+                    "value": {
+                      "stringValue": "\"b3a56a31-aada-49ff-be59-9bd5a048a92e\""
+                    }
+                  },
+                  {
+                    "key": "langfuse.trace.metadata.attempt",
+                    "value": {
+                      "stringValue": "\"1\""
+                    }
+                  },
+                  {
+                    "key": "langfuse.trace.metadata.fixtureVersion",
+                    "value": {
+                      "stringValue": "\"atlas-fixture-01\""
+                    }
+                  },
+                  {
+                    "key": "langfuse.observation.input",
+                    "value": {
+                      "stringValue": "{\"caseId\":\"A30-unsupported-capability\"}"
+                    }
+                  },
+                  {
+                    "key": "langfuse.observation.metadata.selector",
+                    "value": {
+                      "stringValue": "\"http\""
+                    }
+                  },
+                  {
+                    "key": "langfuse.observation.metadata.policy",
+                    "value": {
+                      "stringValue": "\"evidence-first\""
+                    }
+                  },
+                  {
+                    "key": "langfuse.observation.metadata.deadlineAt",
+                    "value": {
+                      "stringValue": "1793018273964"
+                    }
+                  },
+                  {
+                    "key": "langfuse.observation.metadata.maxSteps",
+                    "value": {
+                      "stringValue": "4"
+                    }
+                  },
+                  {
+                    "key": "langfuse.observation.metadata.maxToolCalls",
+                    "value": {
+                      "stringValue": "2"
+                    }
+                  },
+                  {
+                    "key": "langfuse.observation.metadata.maxCostUnits",
+                    "value": {
+                      "stringValue": "4"
+                    }
+                  },
+                  {
+                    "key": "langfuse.observation.output",
+                    "value": {
+                      "stringValue": "{\"stopReason\":\"completed\",\"qualityPassed\":true}"
+                    }
+                  }
+                ],
+                "droppedAttributesCount": 0,
+                "events": [],
+                "droppedEventsCount": 0,
+                "status": {
+                  "code": 0
+                },
+                "links": [],
+                "droppedLinksCount": 0,
+                "flags": 257
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+]

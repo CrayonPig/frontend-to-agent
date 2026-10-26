@@ -1,63 +1,94 @@
 # 10 Trace、Observation、Session：一次任务如何串起来
 
-Q03 最后答对了，但用户等了很久。日志里分别有“请求收到”“模型完成”“输出校验通过”，没有共同标识；同一秒还有其他用户在调用。此时增加更多日志文本未必有用，缺少的是动作之间的归属关系。
+助手回答：“构建通过了，因此 AtlasTable 2.0 支持 virtual。”这句话的问题不在网络，也不在 JSON：C-T20 根本没有说明 `virtual`，构建状态不能证明组件参数存在。要调查它，不能只看最后一句话，还要找出当时用了哪份资料、工具返回什么、哪一版 Prompt 组织了答案，以及校验有没有发现这个越界推断。
 
-Trace（链路）用来组织一次逻辑执行；observation（观测项）记录其中一个动作，例如 span（时间范围）或 generation（模型生成）。Session（会话）把多轮交互关联起来。它们不是三个随意互换的 ID，也不是模型的思考过程。
+本篇建立一套能在下一篇实际运行的观测关系，对应[系列大纲的观测学习支线](../outline.md)。案例编号为 `A30-unsupported-capability`，沿用 `atlas-fixture-01`，问题是“AtlasTable 2.0 有 virtual 参数吗？演示构建通过了吗？”它不是给 AtlasTable 新增能力，而是把 Q05 的未知问题和一个合成只读状态查询放在一起。检索、工具和 Agent 的完整实现仍在后续章节展开；这里先用有限业务步骤学会读执行证据。
 
-## 一棵树描述一次执行，几个标识描述业务关系
+## 一次执行是一棵树，会话是多棵树的分组
 
-先把本系列的一次只读任务画成树，名称都是业务约定：
+Trace 是一次执行的关联范围。Observation 是其中一个被观察的动作：普通 span 记录时间范围，generation 额外表达模型调用、模型参数和用量。一个任务根 span 与其子项共享 `traceId`，每个子项有自己的 `spanId`，`parentSpanId` 表示它属于谁。
+
+`examples/atlas-observability` 的真实执行路径会产生下面这棵树。这里列的是源码中的名称，不是预想中尚未执行的模块：
 
 ```text
-assistant.task                         trace 根范围
-├─ request.prepare                     span：身份、版本、材料选择
-├─ model.answer                        generation：第一次模型调用
-├─ answer.validate                     span：结构、引用检查
-└─ response.finalize                   span：结果类别与响应
+assistant.task
+├─ authorize           确认固定演练主体的范围
+├─ retrieve.docs       取得本题可访问的候选 C-T20
+├─ select.evidence     再检查进入模型的证据范围
+├─ tool.build_status   读取合成构建回执
+├─ prompt.resolve      解析本次实际使用的 Prompt 版本
+├─ model.answer        generation：通过 HTTP 调用模型适配器
+└─ answer.validate     检查两个子问题、来源和事实边界
 ```
 
-如果模型请求发生一次重试，可以在调用范围下记录两个有序尝试，或者记录两个 generation 并带上尝试序号。必须保留它们属于同一个任务，不能让第二次成功覆盖第一次失败。并行动作作为同一父级的子项，不应画成一个动作依次包含另一个，制造假的耗时因果。
+同级节点都直接属于 `assistant.task`，没有因为调用顺序相邻就互为父子。若授权或证据检查提前拒绝，后面的节点不应该出现：没有发生的动作不能用空 span 补齐成一棵漂亮的树。真实系统日后加入重排，再记录真正的重排过程，不能把当前简单候选选择写成已实现的 reranker。
 
-业务关联则另有作用：`requestId` 表示一次入口请求，`taskId` 表示逻辑任务，`attemptId` 表示执行尝试，`sessionId` 表示多轮会话，`userId` 是受控的合成用户标识。用户补充版本后发起第二轮，可以属于同一个 session，但通常是新的 trace；任务中断后恢复，也可以通过 task ID 关联两条 trace，而不是制造一条持续几天的巨型链路。
+Session 用于分组多轮 trace；task ID 用于关联同一个业务任务的不同尝试。用户补充版本可以产生新的 trace，任务中断恢复也可以产生新的 trace，而 session/task 保留原关联。它们都不应该覆盖为同一个长期不变的 trace ID。[Langfuse Session 与 trace 标识说明](https://langfuse.com/docs/observability/features/sessions)，[ID 与分布式追踪](https://langfuse.com/docs/observability/features/trace-ids-and-distributed-tracing)，核对日期 2026-10-26。
 
-Langfuse 的 session 用于分组多条 trace；其 trace/observation ID 有专门格式，不能直接把 `task-demo-01` 当作 OTel trace ID。业务 ID 放元数据或相应关联字段。相关定义核对于 2026-10-26：[Session](https://langfuse.com/docs/observability/features/sessions)、[Trace 标识](https://langfuse.com/docs/observability/features/trace-ids-and-distributed-tracing)。
+## 把业务标识映射到真实字段
 
-## 一条记录应该回答一个排查问题
+在 `src/runtime.ts` 中，`startActiveObservation` 建立活动范围，`getActiveTraceId()` 取回 SDK 生成的 trace ID；`propagateAttributes` 传递允许的用户、会话与业务关联信息。以下是源码关系的摘录，不是另一个独立程序：
 
-不要从“平台支持多少字段”开始设计。先问需要解释什么，再确定字段：
+```ts
+await startActiveObservation('assistant.task', async root =>
+  await propagateAttributes({
+    userId: principal.userId,
+    sessionId: 'session-a30-demo',
+    metadata: {
+      taskId,
+      runId,
+      attempt: String(attempt),
+      fixtureVersion: 'atlas-fixture-01'
+    }
+  }, async () => {
+    const traceId = getActiveTraceId()
+    // 本范围内执行授权、检索、工具、模型与校验。
+  })
+)
+```
 
-| 排查问题 | 最少记录 | 不需要记录 |
+完整程序和 import 在示例包内；不要把省略的业务部分当成已上报动作。导出到 OTLP 后，可以按下面的映射核对：
+
+| 业务含义 | 程序中的值 | 采集数据或平台中的对应位置 |
 | --- | --- | --- |
-| 这次执行对应哪套输入规则 | task、attempt、Prompt/fixture/模型版本 | 完整系统凭证 |
-| 哪一步慢 | 动作名、开始/结束时间或耗时、父子关系 | 私密推理文本 |
-| 用过哪些允许资料 | 文档 ID、修订、目标版本 | 不可访问文档名称或原文 |
-| 为什么没答完 | 执行错误类别、停止原因、结果类别 | 任意原始异常对象 |
-| 结果是否合格 | 评分来源、规则版本、判定与候选引用 | 把 HTTP 成功直接写成 task_success |
+| 一次执行关联 | SDK 生成的 trace ID | OTLP `traceId`，平台 trace ID |
+| 一个动作及父级 | SDK 生成的 span ID | `spanId`、`parentSpanId` |
+| 会话分组 | `session-a30-demo` | `session.id` / Session |
+| 合成用户 | `reader-a` | `user.id` / User |
+| 同一业务任务 | `taskId` | trace metadata 的 `taskId` |
+| 本次运行与尝试 | 随机 `runId`、`attempt` | trace metadata |
+| 模型调用类别 | `{ asType: 'generation' }` | observation type / generation |
+| 当时采用的资料 | `C-T20@r1` | 检索输出及报告的 `sourceRevisions` |
 
-输入输出摘要也应使用白名单。教程中的 `caseId: Q03` 已足够定位合成输入，不一定还要复制整份题目。真实问题则可能含个人或内部信息，不能因为做观测就默认长期保存。文档 ID 本身也可能敏感，应先确认当前记录通道允许保存它。
+OTLP 的属性名以实际 SDK 导出为准，报告工具把 `resourceSpans → scopeSpans → spans` 展平后保留了原属性键，便于对照。本次实际采集的 generation 包含 `langfuse.observation.type=generation`、`langfuse.observation.prompt.name=atlas-answer`、版本 2，以及 `langfuse.trace.metadata.runId`；后者在原始属性中是 JSON 编码字符串，读取时不要把外层引号当作业务 ID 的一部分。Langfuse trace ID 通常为 32 位十六进制，span ID 为 16 位十六进制；`A30-demo` 是业务标签，不能直接塞进 trace ID 字段。它们的格式有效也不表示身份可信。
 
-## 耗时、用量与质量各自有分母
+前端 request ID 仍有用：它标记一次入口请求。当前观测示例是 CLI，没有 HTTP 浏览器入口，因此没有编造一个“真实前端请求 ID”；接回第 04 篇服务时，再把入口 request ID 作为受控关联字段加入。
 
-一条 generation 记录 token 用量，能解释某次调用的规模；它不包括检索、工具、基础设施和重复尝试的全部成本。单条 trace 能展示本次任务用了多久，却不能给出 p95。统计分位数需要一组样本、明确时间窗和过滤条件。
+## 先跑本地采集，再用同一个 ID 阅读
 
-同样，observation 没有错误只说明动作按技术契约完成。Q03 的答案可能依然用了错误参数。评测中的 `task_success` 必须来自第 07 篇的判定规则，并注明人工、规则或模型评价来源。trace 是评分的证据入口，不是评分的替身。
+从仓库根目录进入示例：
 
-观测还可能抽样。例如更多保存失败请求有助于排障，但这份样本的失败比例不能直接当作线上失败率。报告必须写清总请求数、保留策略和统计口径。先记录少量但解释清楚的字段，比全量收集再凭图表猜含义更可靠。
+```bash
+cd examples/atlas-observability
+npm ci
+npm run build
+npm run demo -- all
+```
 
-## 上下文传播不是共享一个全局变量
+这会运行真实 SDK，但模型与采集端均为本地 HTTP 替身，不需要账号或密钥。打开 `reports/demo-report.json`，选择一个运行，记下它的 trace ID、任务 ID、Prompt 版本和质量判定；然后在 `reports/otlp.json` 中找同一个 trace ID，检查所有子项的父级。
 
-在同一 Node 进程里，异步上下文机制可以让子调用继承当前 trace；不能把“当前请求 ID”放进一个全局可变变量，否则两个并发请求会互相覆盖。跨服务或队列时，上下文不会自动跟着业务 JSON 走，需要显式传递受控的追踪上下文并在接收端恢复。
+按这个顺序读，会比从第一行 Prompt 开始翻更有效：先看 `answer.validate` 是否通过，再看 `model.answer` 的候选；有无依据断言时，回看 `select.evidence` 与 `retrieve.docs`；涉及构建事实时，再看 `tool.build_status` 的回执。一个“HTTP 请求完成”的 generation 和一个“业务校验失败”的 span 可以同时存在，因为它们描述的不是同一种成功。
 
-追踪头只表达关联，不提供授权。来自外部客户端的 trace 标识也不能变成可信用户身份。向第三方发送请求前，还要决定哪些关联字段可以跨边界，不能把用户信息或机密内容放进会随请求传播的 baggage。
+默认 mock 故意能产生“由构建成功推导 virtual 存在”的坏候选。这个失败不是让模型自行回忆原因，而是由外部可记录的输入、工具结果和候选答案重建：C-T20 没有参数依据，构建回执只说明合成构建状态，候选跨越了证据边界。trace 不需要也不应收集模型私密推理。
 
-[OpenTelemetry JavaScript 上下文传播文档](https://opentelemetry.io/docs/languages/js/propagation/)解释了进程内活动上下文与跨进程注入、提取机制；本篇核对日期为 2026-10-26。第 12 篇再用业务步骤检查父子关系，当前先建立数据模型。
+## 一个 ID 不能承担所有职责
 
-## 一份最小保留约定
+`runId` 在报告中定位这份候选，`traceId` 在观测系统定位动作，`taskId` 把重试或恢复关联起来。实际复现还需要 fixture、Prompt、模型配置、规则版本和工具状态，不能只保存一个 trace 链接。trace 可能被采样或过期删除，也不能代替任务状态库。
 
-本教程的练习记录只使用合成身份与题目，建议为演示设置短保留期限，例如 7 天；这只是教学选择，不是通用合规期限。记录谁能查看、谁能导出、怎样删除，并在删除时考虑文件、副本与外部平台。持久化任务恢复数据则由任务状态库负责，不能因为 trace 会被保留就省掉业务状态。
+并发时同样不能把当前 trace ID 存入全局变量。两个 `runTask` 同时运行，各自的异步范围要继承自己的父节点；第 12 篇用本地采集断言验证是否串线。跨服务或队列则需要显式传播 trace 上下文，业务身份仍由接收端重新验证。[OTel JavaScript 上下文传播](https://opentelemetry.io/docs/languages/js/propagation/)，核对日期 2026-10-26。
 
-练习可以把一个 Q03 正常执行和一个重试执行画成树，逐条写出父 ID 与任务 ID。再并发运行两个合成请求，检查它们是否串线、是否有孤立子项、是否含未授权资料。验收时，每条记录应能解释一个问题，而不会泄露新的内容。
+最后留意统计边界：一条 trace 能解释本次耗时，不能给出可信 p95；generation 用量不等于任务总成本；抽样后的错误比例不一定等于全部请求的失败率。当前 HTTP 模型替身不提供用量，报告的 usage 与 cost 均保持未知。只要把这些分母分开，链路就能帮助回答“发生了什么”，而不会被误当作“系统已经可靠”的证明。
 
-链路模型确定后，选择平台才有标准：它应帮助查询这些关系，不应反过来规定助手必须收集所有输入。下一篇把同一模型接到 Langfuse，并明确哪些步骤实际验证、哪些需要读者自己的环境。
+本篇的完成条件很具体：在本地报告与 OTLP 数据之间定位同一次执行，解释任意一个子项的父级、业务任务与候选来源，并指出它能证明与不能证明的事。下一篇把同一份程序接到 Langfuse 平台，验证记录真正可查询。
 
 [下一篇：11 接入 Langfuse：从平台配置到第一条观测链路](11-langfuse.md) · [学习目录](../README.md)

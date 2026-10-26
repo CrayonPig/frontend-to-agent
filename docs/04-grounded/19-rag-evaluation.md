@@ -64,13 +64,56 @@ Q03 又答成了 `pending`。如果只保留最终答案，很容易把下一步
 
 开发题可以帮助调整规则，独立检查题用于发现过拟合。只有 14 题的小集合不能估计所有线上问题的成功率，也不应凭一题改写就声称泛化。可以逐步加入新措辞、相似组件、版本缺失和已知错误回归，但新增题必须有明确资料与标准。
 
-## 从仓库基线读取真实记录
+## 先保留规则基线，再检查 SDK 集成链路
 
 在仓库根目录执行 `node examples/atlas/evaluate.mjs`，会生成 `examples/atlas/reports/baseline.json`。每题包含候选答案、格式结果、有限规则评分、检索信息和 trace；实际调用的适配器标为 `atlas-rule-mock-1`。它不会连接模型，也不会产生模型费用。
 
 阅读报告时先看单题的 `retrieval`，再看 `candidateAnswer` 和评分，不只看汇总通过数。权限拒绝发生在检索之前的请求，不应该伪造一段检索候选或耗时来填满报表。来源修订必须来自本次实际文档对象，不能统一写死为 r1 后宣称可追溯。
 
-仓库目前没有真实重排阶段，因此也没有重排质量和远端生成耗时。要形成完整外部 RAG 报告，需要接入后补齐这些记录，并保持缺失值为未知。独立检查划分虽与开发题分开，但资料与规则公开可读，不是盲测基准；不能从合成题全部通过推导生产准确率。
+上述规则基线保留为无依赖的业务检查。新增的 `examples/atlas-observability` 则使用相同 Atlas 事实边界，以 A30 联合任务接到真实 Langfuse/OpenTelemetry SDK：默认经回环 HTTP 调用本地模型替身，使用本地 Prompt API 替身，并由本地 OTLP 接收端捕获 SDK 实际序列化的观测数据。两条路径验证的对象不同，不能用其中一份报告覆盖另一份。
+
+独立检查划分虽与开发题分开，但资料与规则公开可读，不是盲测基准；不能从合成题全部通过推导生产准确率。新路径同样没有真实 embedding 或重排服务。候选选择只是授权与上下文装配中的确定性步骤，不能把 `select` 改名为 `rerank` 后宣称实现模型重排。
+
+## 让评分沿实际业务步骤找到原因
+
+A30 问的是：“AtlasTable 2.0 有 virtual 参数吗？演示构建通过了吗？”C-T20 不能确认 virtual 参数，合成构建工具却可以返回指定演示构建的状态。这个任务特意把“文档未知”和“工具已知”放在一起，检验生成器是否把后者的成功错误扩展成前者的能力保证。它是新观测包的聚焦实验，不代表已经把 Q01–Q14 全部搬进 SDK 路径。
+
+只把一次模型调用包成 generation，还不能解释 RAG 失败。对集成路径，需要将 `authorize`、`retrieve.docs`、`select.evidence`、`tool.build_status`、`prompt.resolve`、`model.answer` 和 `answer.validate` 放在同一逻辑任务的 trace 中，并让记录来自实际执行结果，而不是写作时补造一棵树。
+
+| 业务步骤 | 应记录的外部证据 | 对评分的作用 |
+| --- | --- | --- |
+| `authorize` | 合成主体、允许范围、策略版本和是否放行 | 越权拒绝不能因未回答而判成普通质量失败 |
+| `retrieve.docs` | 实际候选 ID、修订和顺序 | 判断所需资料是否被召回 |
+| `select.evidence` | 真正进入模型输入的证据集合 | 判断候选是否在预算或过滤阶段丢失 |
+| `model.answer`（generation） | 实际 Prompt 版本、模型配置、受控输入和候选输出 | 把生成错误关联到确切配置 |
+| `tool.build_status` | 参数、执行结果与状态 | 工具成功不能证明文档中不存在的能力 |
+| `answer.validate` | 格式、允许引用、关键断言与最终任务结果 | 区分结构有效、业务步骤完成与任务通过 |
+
+这里检查的是固定 A30 工作流；同包另有受限 Agent SDK 循环，动作选择与停止证据见第 27、30 篇，不把固定链路的通过结果当成循环已通过。
+
+这次 A30 实现的 `retrieve.docs` 是从授权合成源确定性取出 C-T20，`select.evidence` 再检查材料范围，不是新增搜索引擎或重排器。`tool.build_status` 先返回合成构建结果，`prompt.resolve` 获取模板，之后 `model.answer` 才装配两类材料进行 HTTP 调用。生成阶段既保留 Prompt 版本，也通过 SDK 传入实际取得的 Prompt 对象，不能只写一个任意字符串标签。
+
+不是每个任务都必须执行全部步骤。Q08 应在授权拒绝后结束，不能为凑齐树形图虚构检索或 generation；不需要实时状态的问题，也不应制造一个工具调用。若发生工具调用，它返回构建成功，只能支持构建状态，不能把 Q05 的虚拟滚动未知改成确定支持。
+
+评分在本地报告的 `quality` 与 `answer.validate` observation 中保存，通过本次 `traceId`、`caseId`、`ruleVersion` 和 `candidateAnswer` 关联回运行证据；当前没有额外创建 Langfuse 平台 Score 对象。阶段 span 无错误只是执行层信号，不是 `task_success` 的默认值。A30 的输出将 `parameterResult`、`buildStatus`、`buildId`、`sourceIds` 和解释文本分别保存；校验分别检查未知参数、正确构建、允许引用与解释限制。不要因为最后一个 JSON 有这些字段就自动判为任务通过。当前本地模型替身没有提供真实 token 用量，报告保留未知；即使以后补上合成协议用量，也不能把它当成供应商真实消耗。缺少真实费用时仍标为未知。OTLP 接收成功证明 SDK 导出数据到达了本地接收端，不等于这些数据已被 Langfuse 云端接收、索引并显示。
+
+## 从报告跳回 SDK 导出的同一条链路
+
+先在 `examples/atlas-observability` 目录执行：
+
+```bash
+npm ci
+npm test
+npm run demo -- all
+```
+
+`all` 是本地闭环演练，会建立合成 Prompt 版本、比较 v1/v2、演练 fallback 和越权材料拒绝，并保存失败与回归记录；它不会移动 production 标签。主报告为 `reports/demo-report.json`，其中 `comparison` 保存两版本结果；单独运行 `npm run compare` 才生成独立的 `reports/compare.json`。本次完整演练的 SDK 导出包为 `reports/all-otlp.json`，便于阅读的 span 提取结果为 `reports/all-spans.json`。
+
+从 `comparison.runs` 中选 v1，先检查 `candidateIds` 为 C-T20、`sourceRevisions` 为 C-T20@r1，再看 `tool` 的 succeeded 与 `candidateAnswer` 中错误的 supported。`quality.errors` 应指出 `unsupported_parameter_claim` 和 `unsupported_text`。这能说明本次错误不是没取到资料，而是把工具结果扩展成了文档能力。v2 则保留参数未知并给出合成构建状态，有限规则检查通过。
+
+这两个输出由本地 HTTP 替身按提示词内容脚本化生成，因此差异证明的是版本获取、执行、评分与追踪闭环，不是一次真实模型优化实验。用量和费用都是 `null`。任务 `durationMs` 来自本次真实本地执行，阶段起止可从原始 OTLP 时间戳核对；提取后的 `spans.json` 主要用于关系与属性检查。它们都不能外推为供应商延迟或生产 p95。
+
+用该运行的 `traceId` 关联 `all-spans.json`，检查根 observation 是 `assistant.task`，业务步骤的 `parentSpanId` 指向它，`model.answer` 的 Langfuse 类型是 generation。包内测试直接核对这些标识及 `langfuse.observation.prompt.name`、`langfuse.observation.prompt.version`，而不是仅凭页面上看见一个 Prompt 名称判断关联成功。每个命令还保存对应的 `<command>-spans.json` 和 `<command>-otlp.json`；通用 `spans.json`、`otlp.json` 则指向最近一次执行。再次运行同一命令会更新同名文件，应把一组运行报告与对应导出一起归档，避免拿新 spans 解释旧答案。
 
 ## 从一次故障得到下一条回归
 

@@ -12,6 +12,12 @@
 
 先运行无需密钥的[合成示例](examples/atlas/README.md)，检查任务与边界；再按需求选择真实模型、Elasticsearch、Langfuse 或 MCP 接入。代码与资料全部原创合成，不读取真实用户或公司数据。
 
+## 观测实践如何贯穿
+
+[详细大纲与观测路线](docs/outline.md)把42篇的操作、观察结果和验收连起来。观测从10的记录关系进入11的模型HTTP调用与Langfuse SDK上报，12补业务步骤，再沿19的分层评测、27–28的执行与恢复、30的故障演练，到36/38的延迟与成本、39的Prompt版本比较和40的发布回退。
+
+基础合成程序与独立的[TypeScript观测实践工程](examples/atlas-observability/README.md)分别运行。后者提供真实适配路径与本地HTTP测试；SDK序列化测试通过不代表外部平台已收到，也不代表真实模型质量通过。精确证据以[验证记录](docs/reviews/progress.md)为准。
+
 ## 从熟悉的问题开始
 
 | 前端工程经验 | AI Engineering 中的对应问题 | 新增边界 |

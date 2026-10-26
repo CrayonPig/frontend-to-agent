@@ -58,3 +58,10 @@
 - 完整程序、源码节选、伪代码、预期输出与未执行的外部调用分别标注；mock 不证明真实模型质量、延迟或成本优势。
 - 任务结果、工具执行状态、传输状态和人工判定分离；trace 不是业务恢复状态库。
 - 修改章节后运行 `node scripts/check-docs.mjs`、对应示例测试与 `npm run docs:build`。修改目录后运行 `node scripts/sync-navigation.mjs`，保留旧链接。
+
+## 观测实践与完成判定
+
+- `docs/outline.md` 是逐篇操作、观察结果和验收的详细大纲；`scripts/chapters.json` 负责编号及导航，两者改动需核对一致。
+- 观测路线为10–12、19、27–28、30、36、38–42。不得用标题齐全、概念解释或自定义mock记录替代已承诺的SDK与Prompt实际接入步骤。
+- `examples/atlas-observability` 是可选独立TypeScript工程。区分代码可执行、本地HTTP替身/真实SDK序列化通过、真实平台可查询、真实模型质量合格四层证据。
+- 外部配置仅提供占位与操作方法；没有实际执行的平台送达、Docker启动、模型效果不得写成通过。未知用量和费用不得补零；Prompt对比不得自动授权发布标签。
